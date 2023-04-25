@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+    <style>
+        #users {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        #user-card{
+            display: flex;
+            flex-direction: row;
+            width: 70%;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        #card-info {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        #info p {
+            margin-bottom: 10px;
+            font-size: 14px;
+            color: #333;
+            line-height: 1.5;
+        }
+
+        #profile-pic{
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin-left: 150px;
+            float: right;        
+        }
+
+        #tabla-materias table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        #tabla-materias th, #tabla-materias td {
+            padding: 0.5rem;
+            text-align: left;
+            border: 1px solid black;
+        }
+        
+
+
+
+    </style>
+ </head>
+  <body>
+
+     <!-- busca el snippet b4-navbar -->
+     <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+        <a class="navbar-brand" href="./profesorPerfil.html">DASW</a>
+        <button
+          class="navbar-toggler d-lg-none"
+          type="button"
+          data-toggle="collapse"
+          data-target="#collapsibleNavId"
+          aria-controls="collapsibleNavId"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        ></button>
+        <div class="collapse navbar-collapse" id="collapsibleNavId">
+          
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+              <li class="nav-item active">
+                <div class="form-group m-1">
+                  <input
+                    type="text"
+                    class="form-control"
+                    name=""
+                    id=""
+                    aria-describedby="helpId"
+                    placeholder="Encuentra fotos y fondos"
+                  />
+                </div>
+              </li>
+              <li class="nav-item">
+                <div class="m-1">
+                  <a
+                    name="buscar"
+                    id="buscar"
+                    class="btn btn-dark border border-white"
+                    href="#"
+                    role="button"
+                    >Buscar</a
+                  >
+                </div>
+              </li>
+            </ul>
+            <div>
+  
+              <a name="" id="" class="btn btn-dark" href="administrador_p.html" role="button"><i class="fa fa-edit"></i>Admin. Productos</a>
+          </div>
+          <div class="dropdown">
+            <button
+              type="button"
+              class="btn btn-dark dropdown-toggle"
+              data-toggle="dropdown"
+            >
+              Mi Cuenta
+            </button>
+            <div class="dropdown-menu">
+              <a
+                class="dropdown-item"
+                href="#"
+                id="btnLogin"
+                data-toggle="modal"
+                
+                >Ingresar</a
+              >
+              <a class="dropdown-item" href="#" data-toggle="modal"
+              data-target="#modalReg">Registro</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="orders.html">Mis pedidos</a>
+            </div>
+          </div>
+          <div>
+              <a name="" id="" class="btn btn-dark" href="shopping_cart.html" role="button"><i class="fa fa-shopping-cart"></i></a>
+          </div>
+        </div>
+      </nav>
+
+      <!-- coordinadores -->
+
+    <div id="users-section">
+        <div class="container w-100 p-2">
+            <div class="row">
+                <div class="col-12">
+                <h1 class="text-center">Coordinadores</h1>
+                </div>
+            </div>
+
+            <div id = "users">
+                <div class="card" id="user-card">
+                    <div class="row" id= card-info>
+                            <div class="col-lg-4" id="info">
+                                <p><b>ID:</b> 73476854</p>
+                                <p><b>NOMBRE:</b> Luis Fernando Gutierrez Preciado</p>
+                                <p><b>EMAIL:</b> LGUTIERREZ@iteso.mx </p>
+                                <P> <b>TEL:</b> 33 3354 2255 </P>
+                                <p> <b> CARRERAS:</b> Ing. Ciberseguridad, Ing. Sistemas computacionales</p>
+                                <p><b>OFICINA:</b> T237</p>
+                                <div class="row " id="user-buttons">
+                                    <button type="button" class="btn btn-dark border border-white" data-toggle="modal" href="#materias">MATERIAS</button>
+                                    <button type="button" class="btn btn-dark border border-white"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                                </div>
+                            </div>
+                            <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png" alt="" id="profile-pic">
+                        </div>
+                    </div>
+            </div>
+
+
+            <div id="users">
+                <div class="card" id="user-card">
+                    <div class="row" id= card-info>
+                            <div class="col-lg-4" id="info">
+                                <p><b>ID:</b> 5464654</p>
+                                <p><b>NOMBRE:</b> Jose Luis Pizano Escalante</p>
+                                <p><b>EMAIL:</b> electronica@iteso.mx </p>
+                                <P> <b>TEL:</b> 33 3354 2255 </P>
+                                <p> <b> CARRERAS:</b> Ing. en Electronica</p>
+                                <p><b>OFICINA:</b> T330</p>
+
+                                <div class="row" id="user-buttons">
+                                    <button type="button" class="btn btn-dark border border-white" data-toggle="modal" href="#materias">MATERIAS</button>
+                                    <button type="button" class="btn btn-dark border border-white"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                                </div>
+
+                            </div>
+                            <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png" alt="" id="profile-pic">
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+        
+
+      <!-- coordinadores -->
+      <!-- modal materias -->
+
+      
+      <!-- Modal -->
+      <div class="modal fade" id="materias" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Materias</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                </div>
+                <div class="modal-body" id="tabla-materias">
+                    <table>
+                        <thead>
+                          <tr>
+                            <th>MATERIA</th>
+                            <th>CODIGO</th>
+                            <th>DEPARTAMENTO</th>
+                            <th>CREDITOS</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>Desarrollo de Aplicaciones y Servicios Web</td>
+                            <td>ESI1545</td>
+                            <td>DESI</td>
+                            <td>8</td>
+                          </tr>
+                          <tr>
+                            <td>Interconexion de redes</td>
+                            <td>ESI1545</td>
+                            <td>DESI</td>
+                            <td>8</td>
+                          </tr>
+                          <tr>
+                            <td>Programacion Orientada a Objetos</td>
+                            <td>ESI1545</td>
+                            <td>DESI</td>
+                            <td>8</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-dark border border-white" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+      </div>
+
+
+
+      <!-- modal materias -->
+      
+  
+      
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>
