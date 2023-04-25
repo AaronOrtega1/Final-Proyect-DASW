@@ -1,32 +1,39 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Act Calificar</title>
+    <title>Reg Evidencias</title>
     <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
 
     <link
-    rel="stylesheet"
-    href="https://use.fontawesome.com/releases/v5.1.1/css/all.css"
-    integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ"
-    crossorigin="anonymous"
-  />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Noto+Serif+Khojki&display=swap"
-    rel="stylesheet"
-  />
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.1.1/css/all.css"
+      integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ"
+      crossorigin="anonymous"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Serif+Khojki&display=swap"
+      rel="stylesheet"
+    />
 
     <!-- Bootstrap CSS -->
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link
+      href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
+      rel="stylesheet"
+      id="bootstrap-css"
+    />
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
     <style>
       body {
-        font-family: 'Open Sans', sans-serif;
+        font-family: "Open Sans", sans-serif;
         color: #353535;
       }
       .content h1 {
@@ -44,7 +51,7 @@
         margin: 15px 0 30px;
       }
       .panel .btn-group .btn {
-        transition: background-color .3s ease;
+        transition: background-color 0.3s ease;
       }
       .table-filter {
         background-color: #fff;
@@ -81,7 +88,7 @@
         user-select: none;
       }
       .ckbox label:before {
-        content: '';
+        content: "";
         top: 1px;
         left: 0;
         width: 18px;
@@ -93,16 +100,16 @@
         background-color: #fff;
       }
       .ckbox input[type="checkbox"]:checked + label:before {
-        border-color: #2BBCDE;
-        background-color: #2BBCDE;
+        border-color: #2bbcde;
+        background-color: #2bbcde;
       }
       .ckbox input[type="checkbox"]:checked + label:after {
         top: 3px;
         left: 3.5px;
-        content: '\e013';
+        content: "\e013";
         color: #fff;
         font-size: 11px;
-        font-family: 'Glyphicons Halflings';
+        font-family: "Glyphicons Halflings";
         position: absolute;
       }
       .table-filter .star {
@@ -111,34 +118,34 @@
         display: block;
       }
       .table-filter .star.star-checked {
-        color: #F0AD4E;
+        color: #f0ad4e;
       }
       .table-filter .star:hover {
         color: #ccc;
       }
       .table-filter .star.star-checked:hover {
-        color: #F0AD4E;
+        color: #f0ad4e;
       }
       .table-filter .media-photo {
         width: 35px;
       }
       .table-filter .media-body {
-          display: block;
-          /* Had to use this style to force the div to expand (wasn't necessary with my bootstrap version 3.3.6) */
+        display: block;
+        /* Had to use this style to force the div to expand (wasn't necessary with my bootstrap version 3.3.6) */
       }
       .table-filter .media-meta {
         font-size: 11px;
         color: #999;
       }
       .table-filter .media .title {
-        color: #2BBCDE;
+        color: #2bbcde;
         font-size: 14px;
         font-weight: bold;
         line-height: normal;
         margin: 0;
       }
       .table-filter .media .title span {
-        font-size: .8em;
+        font-size: 0.8em;
         margin-right: 20px;
       }
       .table-filter .media .title span.entregada {
@@ -154,10 +161,8 @@
         font-size: 14px;
       }
     </style>
-
   </head>
   <body>
-
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
       <a class="navbar-brand" href="./profesorPerfil.html">DASW</a>
       <button
@@ -170,61 +175,107 @@
         aria-label="Toggle navigation"
       ></button>
       <div class="collapse navbar-collapse" id="collapsibleNavId">
-        
-          <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-            <li class="nav-item active">
-              <div class="form-group m-1">
-                <input
-                  type="text"
-                  class="form-control"
-                  name="searchBar"
-                  id="searchBar"
-                  aria-describedby="helpId"
-                  placeholder="Buscar elemento"
-                />
-              </div>
-            </li>
-            <li class="nav-item">
-              <div class="m-1">
-                <a
-                  name="buscar"
-                  id="buscar"
-                  class="btn btn-dark border border-white"
-                  href="#"
-                  role="button"
-                  >Buscar</a
-                >
-              </div>
-            </li>
-          </ul>
-          <div>
-
-            <a name="" id="" class="btn btn-dark" href="administracion_coordinadores.html" role="button"><i class="fa fa-edit"></i> Coordinadores</a>
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+          <li class="nav-item active">
+            <div class="form-group m-1">
+              <input
+                type="text"
+                class="form-control"
+                name="searchBar"
+                id="searchBar"
+                aria-describedby="helpId"
+                placeholder="Buscar elemento"
+              />
+            </div>
+          </li>
+          <li class="nav-item">
+            <div class="m-1">
+              <a
+                name="buscar"
+                id="buscar"
+                class="btn btn-dark border border-white"
+                href="#"
+                role="button"
+                >Buscar</a
+              >
+            </div>
+          </li>
+        </ul>
+        <div>
+          <a
+            name=""
+            id=""
+            class="btn btn-dark"
+            href="administracion_coordinadores.html"
+            role="button"
+            ><i class="fa fa-edit"></i> Coordinadores</a
+          >
         </div>
         <div>
-            <a name="" id="" class="btn btn-dark" href="asignaturas.html" role="button"><i class="fas fa-list"></i> Asignaturas</a>
+          <a
+            name=""
+            id=""
+            class="btn btn-dark"
+            href="asignaturas.html"
+            role="button"
+            ><i class="fas fa-list"></i> Asignaturas</a
+          >
         </div>
         <div>
-            <a name="" id="" class="btn btn-dark" href="profesorPerfil.html" role="button"><i class="fas fa-user"></i></a>
+          <a
+            name=""
+            id=""
+            class="btn btn-dark"
+            href="profesorPerfil.html"
+            role="button"
+            ><i class="fas fa-user"></i
+          ></a>
         </div>
       </div>
     </nav>
 
-    
     <div class="container">
       <div class="row">
-    
         <section class="content">
-          <h1><a href="./profesorPerfil.html">Registro de Evidencias de Actividades</a></h1><!-- conexión provisional para checar todo -->
+          <h1>
+            <a href="./profesorPerfil.html"
+              >Registro de Evidencias de Actividades</a
+            >
+          </h1>
+          <!-- conexión provisional para checar todo -->
           <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
               <div class="panel-body">
                 <div class="pull-right">
                   <div class="btn-group">
-                    <button type="button" class="btn btn-success btn-filter" data-target="entregada">Entregada</button>
-                    <button type="button" class="btn btn-warning btn-filter" data-target="pendiente">Pendiente</button>
-                    <button type="button" class="btn btn-danger btn-filter" data-target="sin-asignar">Sin Asignar</button>
-                    <button type="button" class="btn btn-default btn-filter" data-target="all">Todos</button>
+                    <button
+                      type="button"
+                      class="btn btn-success btn-filter"
+                      data-target="entregada"
+                    >
+                      Entregada
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-warning btn-filter"
+                      data-target="pendiente"
+                    >
+                      Pendiente
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-danger btn-filter"
+                      data-target="sin-asignar"
+                    >
+                      Sin Asignar
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-default btn-filter"
+                      data-target="all"
+                    >
+                      Todos
+                    </button>
                   </div>
                 </div>
                 <div class="table-container">
@@ -233,7 +284,7 @@
                       <tr data-status="entregada">
                         <td>
                           <div class="ckbox">
-                            <input type="checkbox" id="checkbox1">
+                            <input type="checkbox" id="checkbox1" />
                             <label for="checkbox1"></label>
                           </div>
                         </td>
@@ -245,15 +296,25 @@
                         <td>
                           <div class="media">
                             <a href="#" class="pull-left">
-                              <img src="https://s3.amazonaws.com/uifaces/faces/twitter/fffabs/128.jpg" class="media-photo">
+                              <img
+                                src="https://s3.amazonaws.com/uifaces/faces/twitter/fffabs/128.jpg"
+                                class="media-photo"
+                              />
                             </a>
                             <div class="media-body">
-                              <span class="media-meta pull-right">Febrero 13, 2016</span>
+                              <span class="media-meta pull-right"
+                                >Febrero 13, 2016</span
+                              >
                               <h4 class="title">
                                 Lorem Impsum
-                                <span class="pull-right entregada">(Entregada)</span>
+                                <span class="pull-right entregada"
+                                  >(Entregada)</span
+                                >
                               </h4>
-                              <p class="summary">Ut enim ad minim veniam, quis nostrud exercitation...</p>
+                              <p class="summary">
+                                Ut enim ad minim veniam, quis nostrud
+                                exercitation...
+                              </p>
                             </div>
                           </div>
                         </td>
@@ -261,7 +322,7 @@
                       <tr data-status="pendiente">
                         <td>
                           <div class="ckbox">
-                            <input type="checkbox" id="checkbox3">
+                            <input type="checkbox" id="checkbox3" />
                             <label for="checkbox3"></label>
                           </div>
                         </td>
@@ -273,15 +334,25 @@
                         <td>
                           <div class="media">
                             <a href="#" class="pull-left">
-                              <img src="https://s3.amazonaws.com/uifaces/faces/twitter/fffabs/128.jpg" class="media-photo">
+                              <img
+                                src="https://s3.amazonaws.com/uifaces/faces/twitter/fffabs/128.jpg"
+                                class="media-photo"
+                              />
                             </a>
                             <div class="media-body">
-                              <span class="media-meta pull-right">Febrero 13, 2016</span>
+                              <span class="media-meta pull-right"
+                                >Febrero 13, 2016</span
+                              >
                               <h4 class="title">
                                 Lorem Impsum
-                                <span class="pull-right pendiente">(Pendiente)</span>
+                                <span class="pull-right pendiente"
+                                  >(Pendiente)</span
+                                >
                               </h4>
-                              <p class="summary">Ut enim ad minim veniam, quis nostrud exercitation...</p>
+                              <p class="summary">
+                                Ut enim ad minim veniam, quis nostrud
+                                exercitation...
+                              </p>
                             </div>
                           </div>
                         </td>
@@ -289,7 +360,7 @@
                       <tr data-status="sin-asignar">
                         <td>
                           <div class="ckbox">
-                            <input type="checkbox" id="checkbox2">
+                            <input type="checkbox" id="checkbox2" />
                             <label for="checkbox2"></label>
                           </div>
                         </td>
@@ -301,15 +372,25 @@
                         <td>
                           <div class="media">
                             <a href="#" class="pull-left">
-                              <img src="https://s3.amazonaws.com/uifaces/faces/twitter/fffabs/128.jpg" class="media-photo">
+                              <img
+                                src="https://s3.amazonaws.com/uifaces/faces/twitter/fffabs/128.jpg"
+                                class="media-photo"
+                              />
                             </a>
                             <div class="media-body">
-                              <span class="media-meta pull-right">Febrero 13, 2016</span>
+                              <span class="media-meta pull-right"
+                                >Febrero 13, 2016</span
+                              >
                               <h4 class="title">
                                 Lorem Impsum
-                                <span class="pull-right sin-asignar">(Sin Asignar)</span>
+                                <span class="pull-right sin-asignar"
+                                  >(Sin Asignar)</span
+                                >
                               </h4>
-                              <p class="summary">Ut enim ad minim veniam, quis nostrud exercitation...</p>
+                              <p class="summary">
+                                Ut enim ad minim veniam, quis nostrud
+                                exercitation...
+                              </p>
                             </div>
                           </div>
                         </td>
@@ -317,7 +398,7 @@
                       <tr data-status="entregada" class="selected">
                         <td>
                           <div class="ckbox">
-                            <input type="checkbox" id="checkbox4" checked>
+                            <input type="checkbox" id="checkbox4" checked />
                             <label for="checkbox4"></label>
                           </div>
                         </td>
@@ -329,15 +410,25 @@
                         <td>
                           <div class="media">
                             <a href="#" class="pull-left">
-                              <img src="https://s3.amazonaws.com/uifaces/faces/twitter/fffabs/128.jpg" class="media-photo">
+                              <img
+                                src="https://s3.amazonaws.com/uifaces/faces/twitter/fffabs/128.jpg"
+                                class="media-photo"
+                              />
                             </a>
                             <div class="media-body">
-                              <span class="media-meta pull-right">Febrero 13, 2016</span>
+                              <span class="media-meta pull-right"
+                                >Febrero 13, 2016</span
+                              >
                               <h4 class="title">
                                 Lorem Impsum
-                                <span class="pull-right entregada">(Entregada)</span>
+                                <span class="pull-right entregada"
+                                  >(Entregada)</span
+                                >
                               </h4>
-                              <p class="summary">Ut enim ad minim veniam, quis nostrud exercitation...</p>
+                              <p class="summary">
+                                Ut enim ad minim veniam, quis nostrud
+                                exercitation...
+                              </p>
                             </div>
                           </div>
                         </td>
@@ -345,7 +436,7 @@
                       <tr data-status="pendiente">
                         <td>
                           <div class="ckbox">
-                            <input type="checkbox" id="checkbox5">
+                            <input type="checkbox" id="checkbox5" />
                             <label for="checkbox5"></label>
                           </div>
                         </td>
@@ -357,15 +448,25 @@
                         <td>
                           <div class="media">
                             <a href="#" class="pull-left">
-                              <img src="https://s3.amazonaws.com/uifaces/faces/twitter/fffabs/128.jpg" class="media-photo">
+                              <img
+                                src="https://s3.amazonaws.com/uifaces/faces/twitter/fffabs/128.jpg"
+                                class="media-photo"
+                              />
                             </a>
                             <div class="media-body">
-                              <span class="media-meta pull-right">Febrero 13, 2016</span>
+                              <span class="media-meta pull-right"
+                                >Febrero 13, 2016</span
+                              >
                               <h4 class="title">
                                 Lorem Impsum
-                                <span class="pull-right pendiente">(Pendiente)</span>
+                                <span class="pull-right pendiente"
+                                  >(Pendiente)</span
+                                >
                               </h4>
-                              <p class="summary">Ut enim ad minim veniam, quis nostrud exercitation...</p>
+                              <p class="summary">
+                                Ut enim ad minim veniam, quis nostrud
+                                exercitation...
+                              </p>
                             </div>
                           </div>
                         </td>
@@ -377,15 +478,25 @@
             </div>
           </div>
         </section>
-        
       </div>
     </div>
 
-      
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
   </body>
 </html>
