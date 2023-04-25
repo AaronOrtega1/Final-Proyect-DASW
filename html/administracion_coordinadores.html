@@ -164,7 +164,7 @@
 
             <div class="row text-center" id="buttons">
                 <div class="col-12 mx-auto">
-                  <button type="button" class="btn btn-dark border border-white" id="btn-add">+ Añadir Usuario</button>
+                  <button type="button" class="btn btn-dark border border-white" id="btn-add" data-toggle="modal" href = "#añadir-usuario">+ Añadir Usuario</button>
                   <button type="button" class="btn btn-dark border border-white" id="btn-edit">+ Asignar Materia </button>
                   <button type="button" class="btn btn-dark border border-white" id="btn-delete">- Eliminar Materias</button>
                   <button type="button" class="btn btn-dark border border-white" id="btn-delete">- Eliminar Usuario</button>
@@ -220,6 +220,69 @@
         
 
       <!-- coordinadores -->
+      <!-- modal añadir usuario -->
+      <div class="modal fade" id="añadir-usuario" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">AÑADIR USUARIO</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+              <form action="">
+                <div>
+                    <label for="nombreProducto">Nombre Coordinador </label>
+                    <input type="text" class="form-control" id="nombreProducto" placeholder="Nombre">
+                </div>
+                <br>
+                <div>
+                    <div class="form-group">
+                      <label for="descripcionProducto">EMAIL</label>
+                      <input type="text" class="form-control" id="nombreProducto" placeholder="EMAIL">
+
+                    </div>
+                </div>
+                <br>
+                <div>
+                    <label for="nombreProducto">Telefono </label>
+                    <input type="text" class="form-control" id="nombreProducto" placeholder="TEL">
+                </div>
+                
+                <br>
+                <br>
+                <div>
+                    <div class="form-group">
+                      <label for="descripcionProducto">Carreras</label>
+                      <textarea class="form-control" name="descripcionProducto" id="descripcionProducto" rows="3"></textarea>
+                    </div>
+                </div>
+                <br>
+                <br>
+                <div>
+                    <label for="nombreProducto">Oficina </label>
+                    <input type="text" class="form-control" id="nombreProducto" placeholder="Oficina">
+                <br>
+                <div class="d-flex align-items-center">
+                    <button type="button" name="addGroup" id="addGroup" class="btn btn-dark btn-lg btn-block" data-toggle="modal" data-target="#modalAddGroup">Agregar usuario</button>
+                </div>
+            </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- modal asignar materia -->
+
+      
+
+
+
 
  
 
