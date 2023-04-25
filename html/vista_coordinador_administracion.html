@@ -8,7 +8,7 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/5.1.0/css/bootstrap.min.css" integrity="sha384-lZCszjI2/2udPvLy8hGJnv1N4wNcoIV8+PTWk5P5WyXYJGp0rX8+m+DVCvQBvGwQ" crossorigin="anonymous">
     <link rel="stylesheet"href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
 
 
@@ -83,6 +83,17 @@
             margin-top: 20px;
         }
 
+        #tabla-profesores table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        #tabla-profesores th, #tabla-profesores td {
+            padding: 0.5rem;
+            text-align: left;
+            border: 1px solid black;
+        }
+
 
  
 
@@ -151,115 +162,145 @@
      
     
 
-    <div id="container">  
-        <div class="row-profile">
-            <div class="col-md-3">
-                <div class="profile-sidebar">
-                    <!-- SIDEBAR USERPIC -->
-                    <div class="profile-pic-container"> 
-                        <div class="profile-pic" id="user-pic">
-                            <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png" alt="" id="profile-pic" alt="">
-                        </div>
-                    </div>
-                    <!-- END SIDEBAR USERPIC -->
-                    <!-- SIDEBAR USER TITLE -->
-                    <div class="profile-usertitle">
-                        <div class="profile-usertitle-name">
-                            <p>Luis Fernando Gutierrez Preciado</p>
-                            
-                        </div>
-                        <div class="profile-usertitle-job">
-                            Coordinador
-                        </div>
-                     
-                    </div>
-                    <!-- END SIDEBAR USER TITLE -->
-
- 
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-3">
+            <div class="profile-sidebar">
+              <!-- SIDEBAR USERPIC -->
+              <div class="profile-pic-container"> 
+                <div class="profile-pic" id="user-pic">
+                  <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png" alt="" id="profile-pic" alt="">
                 </div>
-            </div>
-            <div class="col-md-9">
-                <div class="profile-content">
-                    <div class="container-carreras">
-                        <h3>Carreras</h3>
-                        <div id="tabla-carreras">
-                            <table>
-                                <thead>
-                                    <tr>
-                                      <th>CODIGO</th>
-                                      <th>CARRERA</th>
-                                      <th>PLAN</th>
-                                    </tr>
-                                  </thead>
-                                  <Tbody>
-                                    <tr>
-                                        <td>ESI1146</td>
-                                        <td>INGENIERIA EN SISTEMAS COMPUTACIONALES</td>
-                                        <td>ISC2016</td>
-                                    </tr>
-                                    <tr>
-                                        <td>ESI545</td>
-                                        <td>INGENIERIA EN CIBERSEGURIDAD</td>
-                                        <td>ICS2023</td>
-                                    </tr>
-                                  </Tbody>
-                            </table>
-
-                        </div>
-
-
-
-                    </div>
-
-                    <div class="container-materias">
-                        <h3>Asignaturas gestionadas</h3>
-
-                        <div  id="tabla-materias">
-                            <table>
-                                <thead>
-                                  <tr>
-                                    <th>MATERIA</th>
-                                    <th>CODIGO</th>
-                                    <th>DEPARTAMENTO</th>
-                                    <th>CREDITOS</th>
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                  <tr>
-                                    <td>Desarrollo de Aplicaciones y Servicios Web</td>
-                                    <td>ESI1545</td>
-                                    <td>DESI</td>
-                                    <td>8</td>
-                                  </tr>
-                                  <tr>
-                                    <td>Interconexion de redes</td>
-                                    <td>ESI1545</td>
-                                    <td>DESI</td>
-                                    <td>8</td>
-                                  </tr>
-                                  <tr>
-                                    <td>Programacion Orientada a Objetos</td>
-                                    <td>ESI1545</td>
-                                    <td>DESI</td>
-                                    <td>8</td>
-                                  </tr>
-                                </tbody>
-                              </table>
-                        </div>
-
-
-                    </div>
+              </div>
+              <!-- END SIDEBAR USERPIC -->
+              <!-- SIDEBAR USER TITLE -->
+              <div class="profile-usertitle">
+                <div class="profile-usertitle-name">
+                  <p>Luis Fernando Gutierrez Preciado</p>
                 </div>
+                <div class="profile-usertitle-job">
+                  Coordinador
+                </div>
+              </div>
+              <!-- END SIDEBAR USER TITLE -->
             </div>
+          </div>
+          <div class="col-md-9">
+            <div class="profile-content">
+              <div class="container-carreras">
+                <h3>Carreras</h3>
+                <div id="tabla-carreras">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>CODIGO</th>
+                        <th>CARRERA</th>
+                        <th>PLAN</th>
+                      </tr>
+                    </thead>
+                    <Tbody>
+                      <tr>
+                        <td>ESI1146</td>
+                        <td>INGENIERIA EN SISTEMAS COMPUTACIONALES</td>
+                        <td>ISC2016</td>
+                      </tr>
+                      <tr>
+                        <td>ESI545</td>
+                        <td>INGENIERIA EN CIBERSEGURIDAD</td>
+                        <td>ICS2023</td>
+                      </tr>
+                    </Tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="container-materias">
+                <br>
+                <h3>Asignaturas gestionadas</h3>
+                <div  id="tabla-materias">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>MATERIA</th>
+                        <th>CODIGO</th>
+                        <th>DEPARTAMENTO</th>
+                        <th>CREDITOS</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Desarrollo de Aplicaciones y Servicios Web</td>
+                        <td>ESI1545</td>
+                        <td>DESI</td>
+                        <td>8</td>
+                      </tr>
+                      <tr>
+                        <td>Interconexion de redes</td>
+                        <td>ESI1545</td>
+                        <td>DESI</td>
+                        <td>8</td>
+                      </tr>
+                      <tr>
+                        <td>Programacion Orientada a Objetos</td>
+                        <td>ESI1545</td>
+                        <td>DESI</td>
+                        <td>8</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div id="profesores">
+                <br>
+                <h3>Profesores</h3>
+                <div  id="tabla-profesores">
+                    <table>
+                      <thead>
+                        <tr>
+                          <th>NOMBRE</th>
+                          <th>ID</th>
+                          <th>DEPARTAMENTO</th>
+                          <th>EMAIL</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>Lorem ipsum dolor sit amet.</td>
+                          <td>dsabdja454</td>
+                          <td>dnsdba</td>
+                          <td>dasdsad</td>
+                        </tr>
+                        <tr>
+                          <td>Lorem ipsum dolor sit amet.</td>
+                          <td>djashdjasn</td>
+                          <td>dasdasdsa</td>
+                          <td>dasdas</td>
+                        </tr>
+                        <tr>
+                          <td>Lorem ipsum dolor sit amet.</td>
+                          <td>Lorem, ipsum dolor.</td>
+                          <td>Lorem.</td>
+                          <td>lorem</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+
+
+
+
+              </div>
+
+            </div>
+          </div>
         </div>
-    </div>
+      </div>
     
 
       
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.3/umd/popper.min.js" integrity="sha512-+zKOzz9X8M2W+Ti3gCTwFsFzaA+ps/n68HeWZcYJIRBi2tIMJkX8gAaJtgPfCw4IV4p4a0iW1cMeyZKff2mS9Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.1.0/js/bootstrap.min.js" integrity="sha384-XwHk1MpK/63V+Uv/6+3nP6UHh6U9L7bEa6jGEGvpUfyxRUInTX+8zvoE6YSSFOBh" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   </body>
 </html>
