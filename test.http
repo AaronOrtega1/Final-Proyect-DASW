@@ -8,5 +8,10 @@ POST {{host}}/api/teachers
 Content-Type: application/json
 
 {
-  // aqui va la info del teacher
+  "fullName":"test",
+  "department":"test department",
+  "birthDate":20001129,
+  "status":true,
+  "userName":"test1",
+  "passWord":"password"
 }
