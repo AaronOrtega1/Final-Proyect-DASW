@@ -3,7 +3,7 @@ const {
   validateBodyTeacher,
   validateBodyGroup,
 } = require("../middleware/validateData.js");
-const { Teacher } = require("../db/teacher.js");
+const { Group } = require("../db/groups.js");
 const nanoid = require("nanoid");
 
 router.get("/", async (req, res) => {
