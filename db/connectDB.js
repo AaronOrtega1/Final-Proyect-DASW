@@ -4,7 +4,7 @@ const config = require("../config/config.js");
 // console.log(config.dbUrl());
 
 mongoose
-  .connect(config.dbUrl(), {
+  .connect(config.dbURL(), {
     useNewUrlParser: true,
   })
   .then(() => {
