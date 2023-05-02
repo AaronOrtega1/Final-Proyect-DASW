@@ -80,4 +80,6 @@ groupSchema.static.deleteGroup = async (groupID) => {
 
 const Groups = mongoose.model("Groups", groupSchema);
 
+Groups.getGroup({});
+
 module.exports = { Groups };

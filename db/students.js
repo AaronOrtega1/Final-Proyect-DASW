@@ -67,4 +67,6 @@ studentSchema.static.deleteStudent = async (studentID) => {
 
 const Student = mongoose.model("Student", studentSchema);
 
+Student.getStudent({});
+
 module.exports = { Student };

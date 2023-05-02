@@ -3,7 +3,7 @@ const {
   validateBodyTeacher,
   validateBodyGroup,
 } = require("../middleware/validateData.js");
-const { Group } = require("../db/groups.js");
+const { Groups } = require("../db/groups.js");
 const nanoid = require("nanoid");
 
 router.get("/", async (req, res) => {
@@ -24,14 +24,14 @@ router.get("/", async (req, res) => {
   if (professor) {
     filter.professor = new RegExp(professor, "i");
   }
-  let group2 = await Group.getGroup(filter);
+  let group2 = await Groups.getGroup(filter);
   res.send(group2);
 });
 
 router.post("/", validateBodyGroup, async (req, res) => {
   let { group, department, status, students, professor } = req.body;
   console.log(nanoid());
-  let newGroup = await Group.createGroup({
+  let newGroup = await Groups.createGroup({
     groupID: nanoid.nanoid(),
     group,
     department,
@@ -44,14 +44,14 @@ router.post("/", validateBodyGroup, async (req, res) => {
 
 router.get("/:groupID", async (req, res) => {
   let { groupID } = req.params;
-  let group = await Group.getGroupByID(groupID);
+  let group = await Groups.getGroupByID(groupID);
   res.send(asignatura);
 });
 
 router.put("/:groupID", validateBodyGroup, async (req, res) => {
   let { groupID } = req.params;
   let { group, department, status, students, professor } = req.body;
-  let updatedGroup = await Group.updateGroup(groupID, {
+  let updatedGroup = await Groups.updateGroup(groupID, {
     group,
     department,
     status,
@@ -63,7 +63,7 @@ router.put("/:groupID", validateBodyGroup, async (req, res) => {
 
 router.delete("/:groupID", async (req, res) => {
   let { groupID } = req.params;
-  let deletedGroup = await Group.deleteGroup(groupID);
+  let deletedGroup = await Groups.deleteGroup(groupID);
   res.send(deletedGroup);
 });
 
