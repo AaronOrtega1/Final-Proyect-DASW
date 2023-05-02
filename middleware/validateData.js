@@ -24,4 +24,26 @@ function validateBodyGroup(req, res, next) {
   res.status(400).send({ error: "Missing atributes, please check" });
 }
 
-module.exports = { validateBodyTeacher, validateBodyGroup };
+function validateSubject(req, res, next) {
+  let {asignaturaCodigo,
+      asignaturaNombre, 
+      asignaturaArea,
+      asignaturaCreditos, 
+      asignaturaDepto, 
+      asignaturaDescripcion} = req.body;
+  let missing = [];
+  if (!asignaturaCodigo) missing.push("asignaturaCodigo");
+  if (!asignaturaNombre) missing.push("asignaturaNombre");
+  if (!asignaturaArea) missing.push("asignaturaArea");
+  if (!asignaturaCreditos) missing.push("asignaturaCreditos");
+  if (!asignaturaDepto) missing.push("asignaturaDepto");
+  if (!asignaturaDescripcion) missing.push("asignaturaDescripcion");
+  
+  if (missing.length > 0) {
+    res.status(400).send({ error: "Faltan atributos: " + missing.join(", ") });
+    return;
+  }
+  next();
+}
+
+module.exports = { validateBodyTeacher, validateBodyGroup, validateSubject };
