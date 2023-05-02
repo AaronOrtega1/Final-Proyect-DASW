@@ -15,7 +15,7 @@ const studentSchema = mongoose.Schema({
     required: true,
   },
   career: {
-    type: Number,
+    type: String,
     required: true,
   },
 });
@@ -44,7 +44,7 @@ studentSchema.statics.createStudent = async (studentData) => {
     "🚀 ~ file: students.js:53 ~ studentSchema.static.createStudent= ~ newStudent:",
     newStudent
   );
-  return newStudent;
+  return await newStudent.save();
 };
 
 studentSchema.statics.updateStudent = async (studentID, studentData) => {

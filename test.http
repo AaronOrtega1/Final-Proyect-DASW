@@ -8,10 +8,32 @@ POST {{host}}/api/teachers
 Content-Type: application/json
 
 {
-  "fullName":"test",
-  "department":"test department",
+  "fullName":"test1",
+  "department":"test1 department",
   "birthDate":20001129,
   "status":true,
   "userName":"test1",
   "passWord":"password"
+}
+
+###
+POST {{host}}/api/groups
+Content-Type: application/json
+
+{
+  "group":"groupTest",
+  "department":"test department",
+  "status":true,
+  "students":[],
+  "professor":[]
+}
+
+###
+POST {{host}}/api/students
+Content-Type: application/json
+
+{
+  "fullName":"test1 Student",
+  "department":"email1@iteso.mx",
+  "carreer": "Carrera1"
 }

@@ -36,9 +36,10 @@ const teacherSchema = mongoose.Schema({
 teacherSchema.statics.getTeacher = async (filters) => {
   let teachers = await Teacher.find(filters);
   console.log(
-    "🚀 ~ file: teacher.js:38 ~ teacherSchema.static.getTeacher= ~ teachers:",
-    teachers
+    "🚀 ~ file: teacher.js:38 ~ teacherSchema.statics.getTeacher= ~ teachers: \n" +
+      teachers
   );
+
   return teachers;
 };
 
@@ -57,7 +58,7 @@ teacherSchema.statics.createTeacher = async (teacherData) => {
     "🚀 ~ file: teacher.js:53 ~ teacherSchema.static.createTeacher= ~ newTeacher:",
     newTeacher
   );
-  return newTeacher;
+  return await newTeacher.save();
 };
 
 teacherSchema.statics.updateTeacher = async (teacherID, teacherData) => {

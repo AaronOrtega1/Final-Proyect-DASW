@@ -53,7 +53,7 @@ groupSchema.statics.createGroup = async (groupData) => {
     "🚀 ~ file: groups.js:50 ~ groupSchema.static.createGroup= ~ newGroup:",
     newGroup
   );
-  return newGroup;
+  return await newGroup.save();
 };
 
 groupSchema.statics.updateGroup = async (groupID, groupData) => {

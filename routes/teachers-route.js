@@ -53,7 +53,7 @@ router.get("/:teacherID", async (req, res) => {
   res.send(teacher);
 });
 
-router.put("/:teacherID", validateBodyGroup, async (req, res) => {
+router.put("/:teacherID", validateBodyTeacher, async (req, res) => {
   let { teacherID } = req.params;
   let { fullName, department, birthDate, status, userName, passWord } =
     req.body;
