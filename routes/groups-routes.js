@@ -8,44 +8,38 @@ const nanoid = require("nanoid");
 
 router.get("/", async (req, res) => {
   let filter = {};
-  let { fullName, department, birthDate, status, userName, passWord } =
-    req.query;
-  if (fullName) {
-    filter.fullName = new RegExp(fullName, "i"); //i = ignore case
+  let { group, department, status, students, professor } = req.query;
+  if (group) {
+    filter.group = new RegExp(group, "i"); //i = ignore case
   }
   if (department) {
     filter.department = new RegExp(department, "i");
   }
-  if (birthDate) {
-    filter.birthDate = new RegExp(birthDate, "i");
-  }
   if (status !== undefined) {
     filter.status = status == "true" ? true : false;
   }
-  if (userName) {
-    filter.userName = new RegExp(userName, "i");
+  if (status) {
+    filter.students = new RegExp(students, "i");
   }
-  if (passWord) {
-    filter.passWord = new RegExp(passWord, "i");
+  if (professor) {
+    filter.professor = new RegExp(professor, "i");
   }
-  let teacher = await Teacher.getTeacher(filter);
-  res.send(teacher);
+  let group2 = await Group.getGroup(filter);
+  res.send(group2);
 });
 
-router.post("/", validateBodyTeacher, async (req, res) => {
-  let { fullName, department, birthDate, status, userName, passWord } =
-    req.body;
+router.post("/", validateBodyGroup, async (req, res) => {
+  let { group, department, status, students, professor } = req.body;
   console.log(nanoid());
-  let newTeacher = await Teacher.createTeacher({
-    teacherID: nanoid.nanoid(),
-    fullName,
+  let newGroup = await Group.createGroup({
+    groupID: nanoid.nanoid(),
+    group,
     department,
-    birthDate,
     status,
-    userName,
-    passWord,
+    students,
+    professor,
   });
-  res.status(201).send(newTeacher);
+  res.status(201).send(newGroup);
 });
 
 module.exports = router;
