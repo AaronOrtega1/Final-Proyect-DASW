@@ -63,7 +63,7 @@ router.put("/:groupID", validateBodyGroup, async (req, res) => {
 
 router.delete("/:groupID", async (req, res) => {
   let { groupID } = req.params;
-  let deletedGroup = await Group.deletedGroup(groupID);
+  let deletedGroup = await Group.deleteGroup(groupID);
   res.send(deletedGroup);
 });
 

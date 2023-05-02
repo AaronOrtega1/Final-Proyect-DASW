@@ -48,4 +48,18 @@ function validateSubject(req, res, next) {
   next();
 }
 
-module.exports = { validateBodyTeacher, validateBodyGroup, validateSubject };
+function validateStudent(req, res, next) {
+  let { fullName, email, carreer } = req.body;
+  if (fullName && email && carreer !== undefined) {
+    next();
+    return;
+  }
+  res.status(400).send({ error: "Missing atributes, please check" });
+}
+
+module.exports = {
+  validateBodyTeacher,
+  validateBodyGroup,
+  validateSubject,
+  validateStudent,
+};
