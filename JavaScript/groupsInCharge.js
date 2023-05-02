@@ -5,9 +5,10 @@ let groupsList = document.getElementById("nav-tabGroups");
 async function loadGroups(queryParams = "") {
   let resp = await fetch("/api/groups" + queryParams);
   groups = await resp.json();
+  showGroups(groups);
 }
 
-function showData(list) {
+function showGroups(list) {
   groupsList.innerHTML = list.map(
     (grp) => /*HTML*/ `
     <a

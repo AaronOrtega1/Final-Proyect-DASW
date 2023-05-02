@@ -18,7 +18,7 @@ router.get("/", async (req, res) => {
   if (status !== undefined) {
     filter.status = status == "true" ? true : false;
   }
-  if (status) {
+  if (students) {
     filter.students = new RegExp(students, "i");
   }
   if (professor) {
