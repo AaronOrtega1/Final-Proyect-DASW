@@ -29,7 +29,7 @@ const groupSchema = mongoose.Schema({
   },
 });
 
-groupSchema.static.getGroup = async (filters) => {
+groupSchema.statics.getGroup = async (filters) => {
   let groups = await Groups.find(filters);
   console.log(
     "🚀 ~ file: groups.js:34 ~ groupSchema.static.getGroup= ~ groups:",
@@ -38,7 +38,7 @@ groupSchema.static.getGroup = async (filters) => {
   return groups;
 };
 
-groupSchema.static.getGroupByID = async (groupID) => {
+groupSchema.statics.getGroupByID = async (groupID) => {
   let groups = await Groups.findOne({ groupID });
   console.log(
     "🚀 ~ file: groups.js:42 ~ groupSchema.static.getGroupByID= ~ groups:",
@@ -47,7 +47,7 @@ groupSchema.static.getGroupByID = async (groupID) => {
   return groups;
 };
 
-groupSchema.static.createGroup = async (groupData) => {
+groupSchema.statics.createGroup = async (groupData) => {
   let newGroup = Groups(groupData);
   console.log(
     "🚀 ~ file: groups.js:50 ~ groupSchema.static.createGroup= ~ newGroup:",
@@ -56,7 +56,7 @@ groupSchema.static.createGroup = async (groupData) => {
   return newGroup;
 };
 
-groupSchema.static.updateGroup = async (groupID, groupData) => {
+groupSchema.statics.updateGroup = async (groupID, groupData) => {
   let updatedGroup = await Groups.findOneAndUpdate(
     { groupID },
     { $set: groupData },
@@ -69,7 +69,7 @@ groupSchema.static.updateGroup = async (groupID, groupData) => {
   return updatedTeacher;
 };
 
-groupSchema.static.deleteGroup = async (groupID) => {
+groupSchema.statics.deleteGroup = async (groupID) => {
   let deletedGroup = await Groups.findOneAndDelete({ groupID });
   console.log(
     "🚀 ~ file: groups.js:72 ~ groupSchema.static.deleteGroup ~ deletedGroup:",
@@ -80,6 +80,6 @@ groupSchema.static.deleteGroup = async (groupID) => {
 
 const Groups = mongoose.model("Groups", groupSchema);
 
-Groups.getGroup({});
-
 module.exports = { Groups };
+
+Groups.getGroup({});

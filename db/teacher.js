@@ -33,7 +33,7 @@ const teacherSchema = mongoose.Schema({
   },
 });
 
-teacherSchema.static.getTeacher = async (filters) => {
+teacherSchema.statics.getTeacher = async (filters) => {
   let teachers = await Teacher.find(filters);
   console.log(
     "🚀 ~ file: teacher.js:38 ~ teacherSchema.static.getTeacher= ~ teachers:",
@@ -42,7 +42,7 @@ teacherSchema.static.getTeacher = async (filters) => {
   return teachers;
 };
 
-teacherSchema.static.getTeacherByID = async (teacherID) => {
+teacherSchema.statics.getTeacherByID = async (teacherID) => {
   let teachers = await Teacher.findOne({ teacherID });
   console.log(
     "🚀 ~ file: teacher.js:47 ~ teacherSchema.static.getTeacherByID= ~ teachers:",
@@ -51,7 +51,7 @@ teacherSchema.static.getTeacherByID = async (teacherID) => {
   return teachers;
 };
 
-teacherSchema.static.createTeacher = async (teacherData) => {
+teacherSchema.statics.createTeacher = async (teacherData) => {
   let newTeacher = Teacher(teacherData);
   console.log(
     "🚀 ~ file: teacher.js:53 ~ teacherSchema.static.createTeacher= ~ newTeacher:",
@@ -60,7 +60,7 @@ teacherSchema.static.createTeacher = async (teacherData) => {
   return newTeacher;
 };
 
-teacherSchema.static.updateTeacher = async (teacherID, teacherData) => {
+teacherSchema.statics.updateTeacher = async (teacherID, teacherData) => {
   let updatedTeacher = await Teacher.findOneAndUpdate(
     { teacherID },
     { $set: teacherData },
@@ -73,7 +73,7 @@ teacherSchema.static.updateTeacher = async (teacherID, teacherData) => {
   return updatedTeacher;
 };
 
-teacherSchema.static.deleteTeacher = async (teacherID) => {
+teacherSchema.statics.deleteTeacher = async (teacherID) => {
   let deletedTeacher = await Teacher.findOneAndDelete({ teacherID });
   return deletedTeacher;
 };

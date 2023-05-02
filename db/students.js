@@ -20,7 +20,7 @@ const studentSchema = mongoose.Schema({
   },
 });
 
-studentSchema.static.getStudent = async (filters) => {
+studentSchema.statics.getStudent = async (filters) => {
   let students = await Student.find(filters);
   console.log(
     "🚀 ~ file: students.js:38 ~ studentSchema.static.getStudent= ~ students:",
@@ -29,7 +29,7 @@ studentSchema.static.getStudent = async (filters) => {
   return students;
 };
 
-studentSchema.static.getStudentByID = async (studentID) => {
+studentSchema.statics.getStudentByID = async (studentID) => {
   let students = await Student.findOne({ studentID });
   console.log(
     "🚀 ~ file: students.js:47 ~ studentSchema.static.getStudentByID= ~ students:",
@@ -38,7 +38,7 @@ studentSchema.static.getStudentByID = async (studentID) => {
   return students;
 };
 
-studentSchema.static.createStudent = async (studentData) => {
+studentSchema.statics.createStudent = async (studentData) => {
   let newStudent = Student(studentData);
   console.log(
     "🚀 ~ file: students.js:53 ~ studentSchema.static.createStudent= ~ newStudent:",
@@ -47,7 +47,7 @@ studentSchema.static.createStudent = async (studentData) => {
   return newStudent;
 };
 
-studentSchema.static.updateStudent = async (studentID, studentData) => {
+studentSchema.statics.updateStudent = async (studentID, studentData) => {
   let updatedStudent = await Student.findOneAndUpdate(
     { studentID },
     { $set: studentData },
@@ -60,13 +60,13 @@ studentSchema.static.updateStudent = async (studentID, studentData) => {
   return updatedStudent;
 };
 
-studentSchema.static.deleteStudent = async (studentID) => {
+studentSchema.statics.deleteStudent = async (studentID) => {
   let deletedStudent = await Student.findOneAndDelete({ studentID });
   return deletedStudent;
 };
 
 const Student = mongoose.model("Student", studentSchema);
 
-Student.getStudent({});
-
 module.exports = { Student };
+
+Student.getStudent({});
