@@ -42,4 +42,29 @@ router.post("/", validateBodyGroup, async (req, res) => {
   res.status(201).send(newGroup);
 });
 
+router.get("/:groupID", async (req, res) => {
+  let { groupID } = req.params;
+  let group = await Group.getGroupByID(groupID);
+  res.send(asignatura);
+});
+
+router.put("/:groupID", validateBodyGroup, async (req, res) => {
+  let { groupID } = req.params;
+  let { group, department, status, students, professor } = req.body;
+  let updatedGroup = await Group.updateGroup(groupID, {
+    group,
+    department,
+    status,
+    students,
+    professor,
+  });
+  res.send(updatedGroup);
+});
+
+router.delete("/:groupID", async (req, res) => {
+  let { groupID } = req.params;
+  let deletedGroup = await Group.deletedGroup(groupID);
+  res.send(deletedGroup);
+});
+
 module.exports = router;

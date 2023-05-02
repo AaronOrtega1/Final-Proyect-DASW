@@ -48,4 +48,31 @@ router.post("/", validateBodyTeacher, async (req, res) => {
   res.status(201).send(newTeacher);
 });
 
+router.get("/:teacherID", async (req, res) => {
+  let { teacherID } = req.params;
+  let teacher = await Teacher.getTeacherByID(teacherID);
+  res.send(teacher);
+});
+
+router.put("/:teacherID", validateBodyGroup, async (req, res) => {
+  let { teacherID } = req.params;
+  let { fullName, department, birthDate, status, userName, passWord } =
+    req.body;
+  let updatedTeacher = await Teacher.updateTeacher(teacherID, {
+    fullName,
+    department,
+    birthDate,
+    status,
+    userName,
+    passWord,
+  });
+  res.send(updatedTeacher);
+});
+
+router.delete("/:teacherID", async (req, res) => {
+  let { teacherID } = req.params;
+  let deletedTeacher = await Teacher.deleteTeacher(teacherID);
+  res.send(deletedTeacher);
+});
+
 module.exports = router;
