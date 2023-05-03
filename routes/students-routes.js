@@ -26,7 +26,6 @@ router.get("/", async (req, res) => {
 
 router.post("/", validateStudent, async (req, res) => {
   let { fullName, email, carreer } = req.body;
-  console.log(nanoid());
   let newStudent = await Student.createStudent({
     studentID: nanoid.nanoid(),
     fullName,

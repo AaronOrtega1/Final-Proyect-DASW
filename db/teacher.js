@@ -81,6 +81,6 @@ teacherSchema.statics.deleteTeacher = async (teacherID) => {
 
 const Teacher = mongoose.model("Teacher", teacherSchema);
 
-Teacher.getTeacher({});
+/* Teacher.getTeacher({}); */
 
 module.exports = { Teacher };

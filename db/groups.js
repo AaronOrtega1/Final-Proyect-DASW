@@ -82,4 +82,4 @@ const Groups = mongoose.model("Groups", groupSchema);
 
 module.exports = { Groups };
 
-Groups.getGroup({});
+/* Groups.getGroup({}); */

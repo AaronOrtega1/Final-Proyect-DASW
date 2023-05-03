@@ -30,7 +30,6 @@ router.get("/", async (req, res) => {
 
 router.post("/", validateBodyGroup, async (req, res) => {
   let { group, department, status, students, professor } = req.body;
-  console.log(nanoid());
   let newGroup = await Groups.createGroup({
     groupID: nanoid.nanoid(),
     group,

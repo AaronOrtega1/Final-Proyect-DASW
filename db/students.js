@@ -14,7 +14,7 @@ const studentSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  career: {
+  carreer: {
     type: String,
     required: true,
   },
@@ -23,7 +23,7 @@ const studentSchema = mongoose.Schema({
 studentSchema.statics.getStudent = async (filters) => {
   let students = await Student.find(filters);
   console.log(
-    "🚀 ~ file: students.js:38 ~ studentSchema.static.getStudent= ~ students:",
+    "🚀 ~ file: students.js:38 ~ studentSchema.static.getStudent= ~ students: \n",
     students
   );
   return students;
@@ -69,4 +69,4 @@ const Student = mongoose.model("Student", studentSchema);
 
 module.exports = { Student };
 
-Student.getStudent({});
+/* Student.getStudent({}); */

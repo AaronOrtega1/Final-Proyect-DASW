@@ -8,32 +8,41 @@ POST {{host}}/api/teachers
 Content-Type: application/json
 
 {
-  "fullName":"test1",
-  "department":"test1 department",
+  "fullName":"test6",
+  "department":"test2 department",
   "birthDate":20001129,
   "status":true,
-  "userName":"test1",
+  "userName":"test6",
   "passWord":"password"
 }
+
+###
+DELETE {{host}}/api/teachers/6451a76a278b33981ffb39c6
+
+###
+GET {{host}}/api/groups
 
 ###
 POST {{host}}/api/groups
 Content-Type: application/json
 
 {
-  "group":"groupTest",
-  "department":"test department",
+  "group":"groupTest2",
+  "department":"test2 department",
   "status":true,
-  "students":[],
-  "professor":[]
+  "students":["getjRpBcKfH9vvRF4r4Kg","RYKuhzcn9WsKHa_TRW5Hj","J81e73UlFmVOBuFlcBmOr"],
+  "professor":"64519476ddfcc66bd7ee92fd"
 }
+
+###
+GET {{host}}/api/students
 
 ###
 POST {{host}}/api/students
 Content-Type: application/json
 
 {
-  "fullName":"test1 Student",
-  "department":"email1@iteso.mx",
+  "fullName":"test6 Student",
+  "email":"email6@iteso.mx",
   "carreer": "Carrera1"
 }
