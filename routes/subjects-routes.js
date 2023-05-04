@@ -7,89 +7,105 @@ const nanoid = require("nanoid");
 router.get("/", async (req, res) => {
   let filter = {};
   let {
-    asignaturaCodigo,
-    asignaturaNombre,
-    asignaturaCreditos,
-    asignaturaDepto,
-    asignaturaArea,
+    codigo,
+    nombre,
+    areaAsig,
+    creditos,
+    depto
   } = req.query;
-  if (asignaturaCodigo) {
-    filter.asignaturaCodigo = new RegExp(asignaturaCodigo, "i");
+  if (codigo) {
+    filter.codigo = new RegExp(codigo, "i");
   }
-  if (asignaturaNombre) {
-    filter.asignaturaNombre = new RegExp(asignaturaNombre, "i");
+  if (nombre) {
+    filter.nombre = new RegExp(nombre, "i");
   }
-  if (asignaturaCreditos) {
-    filter.asignaturaCreditos = new RegExp(asignaturaCreditos, "i");
+  if (creditos) {
+    filter.creditos = new RegExp(creditos, "i");
   }
-  if (asignaturaDepto) {
-    filter.asignaturaDepto = new RegExp(asignaturaDepto, "i");
+  if (depto) {
+    filter.depto = new RegExp(depto, "i");
   }
-  if (asignaturaArea) {
-    filter.asignaturaArea = new RegExp(asignaturaArea, "i");
+  if (areaAsig) {
+    filter.areaAsig = new RegExp(areaAsig, "i");
   }
   let asignatura = await Asignaturas.getAsignaturas(filter);
   res.send(asignatura);
 });
 
-router.get("/:asignaturaCodigo", async (req, res) => {
-  let { asignaturaCodigo } = req.params;
-  let asignatura = await Asignaturas.getAsignaturaXcodigo(asignaturaCodigo);
+router.get("/:codigo", async (req, res) => {
+  let codigo  = req.params.codigo;
+  let asignatura = await Asignaturas.getAsignaturaXcodigo(codigo);
   res.send(asignatura);
 });
 
-router.get("/:asignaturaNombre", async (req, res) => {
-  let { asignaturaNombre } = req.params;
-  let asignatura = await Asignaturas.getAsignaturaXnombre(asignaturaNombre);
+router.get("/:nombre", async (req, res) => {
+  let  nombre  = req.params.nombre;
+  let asignatura = await Asignaturas.getAsignaturaXnombre(nombre);
   res.send(asignatura);
 });
 
 router.post("/", validateSubject, async (req, res) => {
   let {
-    asignaturaCodigo,
-    asignaturaNombre,
-    asignaturaArea,
-    asignaturaCreditos,
-    asignaturaDepto,
-    asignaturaDescripcion,
-    asignaturaGrupos,
+    codigo,
+    nombre,
+    areaAsig,
+    creditos,
+    depto,
+    descripcion,
+    grupos,
   } = req.body;
+  codigo = codigo.toUpperCase();
+  let compararCodigo = await Asignaturas.getAsignaturaXcodigo(codigo);
+  if (compararCodigo) {
+    return res.status(400).send("El codigo ya existe");
+  }
   let newAsignatura = await Asignaturas.createAsignatura({
-    asignaturaCodigo,
-    asignaturaNombre,
-    asignaturaArea,
-    asignaturaCreditos,
-    asignaturaDepto,
-    asignaturaDescripcion,
-    asignaturaGrupos,
+    codigo,
+    nombre,
+    areaAsig,
+    creditos,
+    depto,
+    descripcion,
+    grupos,
   });
   res.status(201).send(newAsignatura);
 });
 
-router.put("/:asignaturaCodigo", validateSubject, async (req, res) => {
-  let { asignaturaCodigo } = req.params;
+router.put("/:codigo", validateSubject, async (req, res) => {
+  let codigo = req.params.codigo;
   let {
-    asignaturaNombre,
-    asignaturaArea,
-    asignaturaCreditos,
-    asignaturaDepto,
-    asignaturaDescripcion,
-    asignaturaGrupos,
+    nombre,
+    areaAsig,
+    creditos,
+    depto,
+    descripcion,
+    grupos,
   } = req.body;
-  let asignatura = await Asignaturas.updateAsignatura(asignaturaCodigo, {
-    asignaturaNombre,
-    asignaturaArea,
-    asignaturaCreditos,
-    asignaturaDepto,
-    asignaturaDescripcion,
-    asignaturaGrupos,
+  codigo = codigo.toUpperCase();
+  let compararCodigo = await Asignaturas.getAsignaturaXcodigo(codigo);
+  if (!compararCodigo) {
+    return res.status(400).send("El codigo no existe");
+  }
+  let asignatura = await Asignaturas.updateAsignatura(codigo, {
+    nombre,
+    areaAsig,
+    creditos,
+    depto,
+    descripcion,
+    grupos,
   });
   res.send(asignatura);
 });
 
-router.delete("/:asignaturaCodigo", async (req, res) => {
-  let { asignaturaCodigo } = req.params;
-  let asignatura = await Asignaturas.deleteAsignatura(asignaturaCodigo);
+router.delete("/:codigo", async (req, res) => {
+  let codigo = req.params.codigo;
+  codigo = codigo.toUpperCase();
+  console.log(codigo);
+  let compararCodigo = await Asignaturas.getAsignaturaXcodigo(codigo);
+  if (!compararCodigo) {
+    return res.status(400).send("El codigo no existe");
+  }
+  let asignatura = await Asignaturas.deleteAsignatura(codigo);
   res.send(asignatura);
 });
 

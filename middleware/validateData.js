@@ -26,20 +26,24 @@ function validateBodyGroup(req, res, next) {
 
 function validateSubject(req, res, next) {
   let {
-    asignaturaCodigo,
-    asignaturaNombre,
-    asignaturaArea,
-    asignaturaCreditos,
-    asignaturaDepto,
-    asignaturaDescripcion,
+    codigo,
+    nombre,
+    areaAsig,
+    creditos,
+    depto,
+    descripcion,
   } = req.body;
   let missing = [];
-  if (!asignaturaCodigo) missing.push("asignaturaCodigo");
-  if (!asignaturaNombre) missing.push("asignaturaNombre");
-  if (!asignaturaArea) missing.push("asignaturaArea");
-  if (!asignaturaCreditos) missing.push("asignaturaCreditos");
-  if (!asignaturaDepto) missing.push("asignaturaDepto");
-  if (!asignaturaDescripcion) missing.push("asignaturaDescripcion");
+  if (!codigo && !req.params.codigo){
+    missing.push("codigo");
+  }else if (!codigo && req.params.codigo){
+    codigo = req.params.codigo;
+  }
+  if (!nombre) missing.push("nombre");
+  if (!areaAsig) missing.push("area");
+  if (!creditos) missing.push("creditos");
+  if (!depto) missing.push("departamento");
+  if (!descripcion) missing.push("descripcion");
 
   if (missing.length > 0) {
     res.status(400).send({ error: "Faltan atributos: " + missing.join(", ") });

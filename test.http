@@ -46,3 +46,41 @@ Content-Type: application/json
   "email":"email6@iteso.mx",
   "carreer": "Carrera1"
 }
+
+
+###
+GET {{host}}/api/asignaturas
+
+###
+GET {{host}}/api/asignaturas/prg001
+
+###
+POST {{host}}/api/asignaturas
+Content-Type: application/json
+
+{
+  "codigo": "PRG001",
+  "nombre": "Algoritmos y Programación",
+  "creditos": 8,
+  "depto": "ESI",
+  "descripcion": "Curso para el diseño de algoritmos y su implementación en un lenguaje de programación",
+  "areaAsig": "Area de programación",
+  "grupos": []
+}
+
+###
+PUT {{host}}/api/asignaturas/MAT005
+Content-Type: application/json
+
+{
+  "nombre": "Trigonometria",
+  "creditos": 6,
+  "depto": "DMF",
+  "descripcion": "Curso intensivo de trigonometria para primer semestre",
+  "areaAsig": "Ciencias Basicas",
+  "grupos": []
+}
+
+###
+DELETE  {{host}}/api/asignaturas/mat002
+
