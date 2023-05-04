@@ -2,32 +2,32 @@ const mongoose = require("mongoose");
 const config = require("../config/config.js");
 
 const asignaturaSchema = mongoose.Schema({
-  codigo: {
+  asignaturaCodigo: {
     type: String,
     unique: true,
     required: true,
   },
-  nombre: {
+  asignaturaNombre: {
     type: String,
     required: true,
   },
-  areaAsig: {
-    type: String,
-    required: true,
-  },
-  creditos: {
+  asignaturaCreditos: {
     type: Number,
     required: true,
   },
-  depto: {
+  asignaturaDepto: {
     type: String,
     required: true,
   },
-  descripcion: {
+  asignaturaDescripcion: {
     type: String,
     required: true,
   },
-  grupos: {
+  asignaturaArea: {
+    type: String,
+    required: true,
+  },
+  asignaturaGrupos: {
     type: Array,
   },
 });
@@ -37,37 +37,32 @@ asignaturaSchema.statics.getAsignaturas = async (filters) => {
   console.log("Asignaturas: \n" + asignaturas);
   return asignaturas;
 };
-
-asignaturaSchema.statics.getAsignaturaXcodigo = async (codigo) => {
-  let asignatura = await Asignaturas.findOne({ codigo });
+asignaturaSchema.statics.getAsignaturaXcodigo = async (asignaturaCodigo) => {
+  let asignatura = await Asignaturas.findOne({ asignaturaCodigo });
   console.log("Asignatura: \n" + asignatura);
   return asignatura;
 };
-
-asignaturaSchema.statics.getAsignaturaXnombre = async (nombre) => {
-  let asignatura = await Asignaturas.findOne({ nombre });
+asignaturaSchema.statics.getAsignaturaXnombre = async (asignaturaNombre) => {
+  let asignatura = await Asignaturas.findOne({ asignaturaNombre });
   console.log("Asignatura: \n" + asignatura);
   return asignatura;
 };
-
 asignaturaSchema.statics.createAsignatura = async (asignaturaData) => {
   let nuevaAsignatura = Asignaturas(asignaturaData);
   console.log("Nueva Asignatura: \n" + nuevaAsignatura);
   return await nuevaAsignatura.save();
 };
-
-asignaturaSchema.statics.updateAsignatura = async (codigo, datos) => {
+asignaturaSchema.statics.updateAsignatura = async (Codigo, datos) => {
   let asignaturaActualizada = await Asignaturas.findOneAndUpdate(
-    codigo,
+    { Codigo },
     { $set: datos },
     { new: true }
   );
   console.log("Asignatura Actualizada: \n" + asignaturaActualizada);
   return asignaturaActualizada;
 };
-
-asignaturaSchema.statics.deleteAsignatura = async (codigo) => {
-  let asignaturaEliminada = await Asignaturas.findOneAndDelete(codigo);
+asignaturaSchema.statics.deleteAsignatura = async (Codigo) => {
+  let asignaturaEliminada = await Asignaturas.findOneAndDelete({ Codigo });
   console.log("Asignatura Eliminada: \n" + asignaturaEliminada);
   return asignaturaEliminada;
 };
@@ -75,6 +70,5 @@ asignaturaSchema.statics.deleteAsignatura = async (codigo) => {
 let Asignaturas = mongoose.model("Asignaturas", asignaturaSchema);
 
 /* Asignaturas.getAsignaturas({}); */
-
 
 module.exports = { Asignaturas };

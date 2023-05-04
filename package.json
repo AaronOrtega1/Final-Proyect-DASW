@@ -21,9 +21,7 @@
   "homepage": "https://github.com/AaronOrtega1/Final-Proyect-DASW#readme",
   "dependencies": {
     "express": "^4.18.2",
-    "jsonwebtoken": "^9.0.0",
     "mongoose": "^7.1.0",
-    "moongose": "^1.0.0",
     "nanoid": "^3.0.0",
     "nodemon": "^2.0.22"
   }
