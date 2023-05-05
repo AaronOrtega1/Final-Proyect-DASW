@@ -52,20 +52,20 @@ Content-Type: application/json
 GET {{host}}/api/asignaturas
 
 ###
-GET {{host}}/api/asignaturas/PRG001
+GET {{host}}/api/asignaturas/CHS001
 
 ###
 POST {{host}}/api/asignaturas
 Content-Type: application/json
 
 {
-  "codigo": "mat005",
-  "nombre": "Ecuaciones Diferenciales",
+  "codigo": "CRR005",
+  "nombre": "Contexto Historico-social",
   "creditos": 8,
-  "depto": "DFM",
-  "descripcion": "Curso de ecuaciones diferenciales para carreras de ingenieria",
-  "areaAsig": "Saberes profesionales",
-  "grupos": []
+  "depto": "CRU",
+  "descripcion": "Curso donde se analizara el contexto historico-social de la epoca actual",
+  "areaAsig": "Curriculum institucional",
+  "grupos": ["Dx06En-h4_az8PwZwgW1b"]
 }
 
 ###
@@ -78,8 +78,8 @@ Content-Type: application/json
   "depto": "DMF",
   "descripcion": "Curso de ecuaciones diferenciales para carreras de ingenieria con temas especializados en el area",
   "areaAsig": "Saberes profesionales",
-  "grupos": []
+  "grupos": ["Dx06En-h4_az8PwZwgW1b"]
 }
 
 ###
-DELETE  {{host}}/api/asignaturas/mat002
+DELETE  {{host}}/api/asignaturas/CRR005
