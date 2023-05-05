@@ -1,5 +1,5 @@
-const mongoose = require("mongoose");
-const config = require("../config/config.js");
+const { mongoose } = require("./connectDB.js");
+
 
 const coordinadorSchema = mongoose.Schema({
     codigo: {
