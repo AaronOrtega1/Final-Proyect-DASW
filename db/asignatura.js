@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const config = require("../config/config.js");
+const { Groups } = require("./groups.js");
 
 const asignaturaSchema = mongoose.Schema({
   codigo: {
@@ -27,9 +28,10 @@ const asignaturaSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  grupos: {
-    type: Array,
-  },
+  grupos: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Groups'
+  }],
 });
 
 asignaturaSchema.statics.getAsignaturas = async (filters) => {
@@ -51,6 +53,16 @@ asignaturaSchema.statics.getAsignaturaXnombre = async (nombre) => {
 };
 
 asignaturaSchema.statics.createAsignatura = async (asignaturaData) => {
+  let grupos = asignaturaData.grupos || [];
+  if (grupos && grupos.length > 0) {
+    for (let i = 0; i < grupos.length; i++) {
+      const grupo = await Groups.findOne({ groupID: grupos[i] });
+      if (grupo) {
+        grupos[i] = grupo._id;
+      }
+    }
+    asignaturaData.grupos = grupos;
+  }
   let nuevaAsignatura = Asignaturas(asignaturaData);
   console.log("Nueva Asignatura: \n" + nuevaAsignatura);
   return await nuevaAsignatura.save();
