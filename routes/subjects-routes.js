@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const { Asignaturas } = require("../db/asignatura.js");
 const { validateSubject } = require("../middleware/validateData.js");
+const { Grupo } = require("../db/groups.js");
 const { validate } = require("../middleware/validateData.js");
 const nanoid = require("nanoid");
 
