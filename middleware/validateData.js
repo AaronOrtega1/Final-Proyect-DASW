@@ -62,9 +62,20 @@ function validateStudent(req, res, next) {
   res.status(400).send({ error: "Missing atributes, please check" });
 }
 
+function validateCoordinator(req, res, next) {
+  let {nombre, rol, materias, departamento, correo, telefono, oficina, imageUrl} = req.body;
+  if (nombre && rol && materias && departamento && correo && telefono && oficina && imageUrl !== undefined) {
+    next();
+    return;
+  }
+  res.status(400).send({ error: "Missing atributes, please check" });
+
+}
+
 module.exports = {
   validateBodyTeacher,
   validateBodyGroup,
   validateSubject,
   validateStudent,
+  validateCoordinator
 };
