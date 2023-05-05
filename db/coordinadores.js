@@ -1,6 +1,5 @@
 const { mongoose } = require("./connectDB.js");
 
-
 const coordinadorSchema = mongoose.Schema({
     codigo: {
         type: String,
@@ -34,6 +33,10 @@ const coordinadorSchema = mongoose.Schema({
     oficina: {
         type: String,
         required: true
+    },
+    imageUrl: {
+        type: String,
+        required: true
     }
 
 });
@@ -52,7 +55,7 @@ coordinadorSchema.statics.getCoordinadorById = async(codigo) => {
 }
 
 coordinadorSchema.statics.createCoordinador = async(coordinadorData) => {
-    let nuevoCoordinador = Coordinador(coordinadorData);
+    let nuevoCoordinador = await Coordinador(coordinadorData);
     return await nuevoCoordinador.save();
 
 }
