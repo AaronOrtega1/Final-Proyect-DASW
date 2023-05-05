@@ -91,3 +91,6 @@ DELETE  {{host}}/api/asignaturas/mat002
 =======
 DELETE  {{host}}/api/asignaturas/CRR005
 >>>>>>> 7ffd81d2a66872594b0bde8f88296b31ce8ee292
+
+###
+GET {{host}}/api/coordinadores
