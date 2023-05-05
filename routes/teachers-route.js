@@ -8,7 +8,7 @@ const nanoid = require("nanoid");
 
 router.get("/", async (req, res) => {
   let filter = {};
-  let { fullName, department, birthDate, status, userName, passWord } =
+  let { fullName, department, birthDate, status, userName, passWord, isCoord } =
     req.query;
   if (fullName) {
     filter.fullName = new RegExp(fullName, "i"); //i = ignore case
@@ -28,12 +28,15 @@ router.get("/", async (req, res) => {
   if (passWord) {
     filter.passWord = new RegExp(passWord, "i");
   }
+  if (isCoord !== undefined){
+    filter.isCoord = isCoord == 'true' ? true:false;
+  }
   let teacher = await Teacher.getTeacher(filter);
   res.send(teacher);
 });
 
 router.post("/", validateBodyTeacher, async (req, res) => {
-  let { fullName, department, birthDate, status, userName, passWord } =
+  let { fullName, department, birthDate, status, userName, passWord, isCoord } =
     req.body;
   let newTeacher = await Teacher.createTeacher({
     teacherID: nanoid.nanoid(),
@@ -43,6 +46,7 @@ router.post("/", validateBodyTeacher, async (req, res) => {
     status,
     userName,
     passWord,
+    isCoord,
   });
   res.status(201).send(newTeacher);
 });
@@ -55,7 +59,7 @@ router.get("/:teacherID", async (req, res) => {
 
 router.put("/:teacherID", validateBodyTeacher, async (req, res) => {
   let { teacherID } = req.params;
-  let { fullName, department, birthDate, status, userName, passWord } =
+  let { fullName, department, birthDate, status, userName, passWord, isCoord } =
     req.body;
   let updatedTeacher = await Teacher.updateTeacher(teacherID, {
     fullName,
@@ -64,6 +68,7 @@ router.put("/:teacherID", validateBodyTeacher, async (req, res) => {
     status,
     userName,
     passWord,
+    isCoord
   });
   res.send(updatedTeacher);
 });

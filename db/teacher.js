@@ -31,6 +31,11 @@ const teacherSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  isCoord:{
+    type: Boolean,
+    default: false,
+    required: true,
+  }
 });
 
 teacherSchema.statics.getTeacher = async (filters) => {

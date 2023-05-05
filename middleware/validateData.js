@@ -1,5 +1,5 @@
 function validateBodyTeacher(req, res, next) {
-  let { fullName, department, birthDate, status, userName, passWord } =
+  let { fullName, department, birthDate, status, userName, passWord, isCoord } =
     req.body;
   if (
     fullName &&
@@ -7,7 +7,8 @@ function validateBodyTeacher(req, res, next) {
     birthDate &&
     status &&
     userName &&
-    passWord !== undefined
+    passWord &&
+    isCoord !== undefined
   ) {
     next();
     return;

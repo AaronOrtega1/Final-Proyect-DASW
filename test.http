@@ -8,12 +8,13 @@ POST {{host}}/api/teachers
 Content-Type: application/json
 
 {
-  "fullName":"test6",
-  "department":"test2 department",
-  "birthDate":20001129,
+  "fullName":"test7",
+  "department":"test7 department",
+  "birthDate":888888888,
   "status":true,
-  "userName":"test6",
-  "passWord":"password"
+  "userName":"test7",
+  "passWord":"password7",
+  "isCoord": true
 }
 
 ###
@@ -83,3 +84,6 @@ Content-Type: application/json
 
 ###
 DELETE  {{host}}/api/asignaturas/mat002
+
+
+  
