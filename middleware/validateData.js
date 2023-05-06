@@ -75,6 +75,7 @@ function validateCoordinator(req, res, next) {
 
 }
 
+<<<<<<< HEAD
 function validarToken(req, res, next){
   let token = req.get('x-token')
   if(!token){
@@ -92,6 +93,15 @@ function validarToken(req, res, next){
     next();
   })
   
+=======
+function validateView(req, res, next) {
+  let { profesores, materias, coordinadorId } = req.body;
+  if (profesores && materias && coordinadorId !== undefined) {
+    next();
+    return;
+  }
+  res.status(400).send({ error: "Missing atributes, please check" });
+>>>>>>> origin
 }
 
 module.exports = {
@@ -100,5 +110,9 @@ module.exports = {
   validateSubject,
   validateStudent,
   validateCoordinator,
+<<<<<<< HEAD
   validarToken
+=======
+  validateView
+>>>>>>> origin
 };
