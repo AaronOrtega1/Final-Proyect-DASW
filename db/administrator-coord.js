@@ -14,10 +14,6 @@ const administratorSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    materias: {
-        type: Array,
-        required: true
-    },
     departamento: {
         type: String,
         required: true
