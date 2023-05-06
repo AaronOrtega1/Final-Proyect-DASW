@@ -10,7 +10,6 @@ router.get("/", async(req, res) => {
     if(codigo) filter.codigo = new RegExp(codigo, "i");
     if(nombre) filter.nombre = new RegExp(nombre, "i");
     if(rol) filter.rol = new RegExp(rol, "i");
-    if(materias) filter.materias = new RegExp(materias, "i");
     if(departamento) filter.departamento = new RegExp(departamento, "i");
     if(correo) filter.correo = new RegExp(correo, "i");
     if(telefono) filter.telefono = telefono;
@@ -28,7 +27,6 @@ router.post("/",validateCoordinator,async(req, res) => {
         codigo: nanoid.nanoid(),
         nombre: coordinadorData.nombre,
         rol: coordinadorData.rol,
-        materias: coordinadorData.materias,
         departamento: coordinadorData.departamento,
         correo: coordinadorData.correo,
         telefono: coordinadorData.telefono,
