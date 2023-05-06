@@ -5,7 +5,7 @@ const nanoid = require("nanoid");
 
 router.get("/", async(req, res) => {
     let filter  = {};
-    let {codigo, nombre, rol, materias, departamento, correo, telefono, oficina} = req.query;
+    let {codigo, nombre, rol, departamento, correo, telefono, oficina} = req.query;
 
     if(codigo) filter.codigo = new RegExp(codigo, "i");
     if(nombre) filter.nombre = new RegExp(nombre, "i");
