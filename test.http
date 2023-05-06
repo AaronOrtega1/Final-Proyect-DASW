@@ -1,4 +1,4 @@
-@host = http://localhost:3000
+@host = http://localhost:4000
 
 ###
 GET {{host}}/api/teachers
@@ -95,4 +95,35 @@ DELETE  {{host}}/api/asignaturas/CRR005
 ###
 POST  {{host}}/api/coordinador?fullName=Horacio&department=DESI&birthDate=9752810&status=false&userName=Ciber12&passWord=7439611&isCoord=false
 ###
-GET {{host}}/api/coordinadores
+GET {{host}}/api/administrator
+
+###
+DELETE {{host}}/api/administrator/SQ2kRdxYNnL-LmVvxIPk-
+
+###
+POST {{host}}/api/view
+Content-Type: application/json
+
+{
+  "profesores":[],
+  "materias":[],
+  "coordinadorId":"6451a76a278b33981ffb39c6"
+}
+
+###
+GET {{host}}/api/view
+
+###
+PUT {{host}}/api/view/yz-U9tb78aF4jsEbr2nsE
+Content-Type: application/json
+
+{
+  "profesores":["64519476ddfcc66bd7ee92fd"],
+  "materias":["CHS001","MAT005"],
+  "coordinadorId":"6451a76a278b33981ffb39c6"
+}
+
+###
+DELETE {{host}}/api/view/yz-U9tb78aF4jsEbr2nsE
+
+
