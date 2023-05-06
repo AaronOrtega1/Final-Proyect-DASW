@@ -5,7 +5,7 @@ const groupsRoute = require("./routes/groups-routes.js");
 const subjectsRoute = require("./routes/subjects-routes.js");
 const studentsRoute = require("./routes/students-routes.js");
 const coordinadorRoute = require('./routes/coordinador-route.js')
-const cordinatorsRoute = require("./routes/coordinadores-routes.js");
+const cordinatorsRoute = require("./routes/administrator-cords-routes.js");
 const { escape } = require("querystring");
 const port = process.env.PORT || 3000;
 const app = express();
@@ -24,6 +24,6 @@ app.use("/api/groups", groupsRoute);
 
 app.use('/api/coordinador', coordinadorRoute)
 
-app.use("/api/coordinadores", cordinatorsRoute);
+app.use("/api/administrator", cordinatorsRoute);
 
 app.listen(port, () => console.log("running on port" + port));
