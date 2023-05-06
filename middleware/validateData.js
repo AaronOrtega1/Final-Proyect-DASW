@@ -63,8 +63,8 @@ function validateStudent(req, res, next) {
 }
 
 function validateCoordinator(req, res, next) {
-  let {nombre, rol, materias, departamento, correo, telefono, oficina, imageUrl} = req.body;
-  if (nombre && rol && materias && departamento && correo && telefono && oficina && imageUrl !== undefined) {
+  let {nombre, rol,departamento, correo, telefono, oficina, imageUrl} = req.body;
+  if (nombre && rol && departamento && correo && telefono && oficina && imageUrl !== undefined) {
     next();
     return;
   }
