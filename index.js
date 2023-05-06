@@ -4,6 +4,7 @@ const teachersRoute = require("./routes/teachers-route.js");
 const groupsRoute = require("./routes/groups-routes.js");
 const subjectsRoute = require("./routes/subjects-routes.js");
 const studentsRoute = require("./routes/students-routes.js");
+const coordinadorRoute = require('./routes/coordinador-route.js')
 const cordinatorsRoute = require("./routes/coordinadores-routes.js");
 const { escape } = require("querystring");
 const port = process.env.PORT || 3000;
@@ -20,6 +21,8 @@ app.use("/api/asignaturas", subjectsRoute);
 app.use("/api/students", studentsRoute);
 
 app.use("/api/groups", groupsRoute);
+
+app.use('/api/coordinador', coordinadorRoute)
 
 app.use("/api/coordinadores", cordinatorsRoute);
 
