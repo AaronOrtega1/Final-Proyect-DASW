@@ -1,4 +1,5 @@
 const router = require("express").Router();
+const {validarToken} = require('../middleware/validateData.js');
 const {
   validateBodyTeacher,
   validateBodyGroup,
@@ -6,7 +7,7 @@ const {
 const { Teacher } = require("../db/teacher.js");
 const nanoid = require("nanoid");
 
-router.get("/", async (req, res) => {
+router.get("/", validarToken, async (req, res) => {
   let filter = {};
   let { fullName, department, birthDate, status, userName, passWord, isCoord } =
     req.query;
@@ -35,7 +36,7 @@ router.get("/", async (req, res) => {
   res.send(teacher);
 });
 
-router.post("/", validateBodyTeacher, async (req, res) => {
+router.post("/",validarToken, validateBodyTeacher, async (req, res) => {
   let { fullName, department, birthDate, status, userName, passWord, isCoord } =
     req.body;
   let newTeacher = await Teacher.createTeacher({
@@ -51,13 +52,13 @@ router.post("/", validateBodyTeacher, async (req, res) => {
   res.status(201).send(newTeacher);
 });
 
-router.get("/:teacherID", async (req, res) => {
+router.get("/:teacherID",validarToken, async (req, res) => {
   let { teacherID } = req.params;
   let teacher = await Teacher.getTeacherByID(teacherID);
   res.send(teacher);
 });
 
-router.put("/:teacherID", validateBodyTeacher, async (req, res) => {
+router.put("/:teacherID",validarToken, validateBodyTeacher, async (req, res) => {
   let { teacherID } = req.params;
   let { fullName, department, birthDate, status, userName, passWord, isCoord } =
     req.body;
@@ -73,7 +74,7 @@ router.put("/:teacherID", validateBodyTeacher, async (req, res) => {
   res.send(updatedTeacher);
 });
 
-router.delete("/:teacherID", async (req, res) => {
+router.delete("/:teacherID",validarToken, async (req, res) => {
   let { teacherID } = req.params;
   let deletedTeacher = await Teacher.deleteTeacher(teacherID);
   res.send(deletedTeacher);

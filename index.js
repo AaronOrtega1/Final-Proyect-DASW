@@ -1,5 +1,6 @@
 const express = require("express");
 const path = require("path");
+const teacherLogin = require('./routes/auth-route.js')
 const teachersRoute = require("./routes/teachers-route.js");
 const groupsRoute = require("./routes/groups-routes.js");
 const subjectsRoute = require("./routes/subjects-routes.js");
@@ -14,6 +15,8 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use(express.json());
 
+app.use('/api/login', teacherLogin);
+
 app.use("/api/teachers", teachersRoute);
 
 app.use("/api/asignaturas", subjectsRoute);
@@ -25,5 +28,6 @@ app.use("/api/groups", groupsRoute);
 app.use('/api/coordinador', coordinadorRoute)
 
 app.use("/api/administrator", cordinatorsRoute);
+
 
 app.listen(port, () => console.log("running on port" + port));

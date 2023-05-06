@@ -1,3 +1,6 @@
+const jwt = require('jsonwebtoken');
+const config = require('../config/config.js');
+
 function validateBodyTeacher(req, res, next) {
   let { fullName, department, birthDate, status, userName, passWord, isCoord } =
     req.body;
@@ -72,10 +75,30 @@ function validateCoordinator(req, res, next) {
 
 }
 
+function validarToken(req, res, next){
+  let token = req.get('x-token')
+  if(!token){
+    res.status(401).send({error: 'No estas autenticado'})
+    return;
+  }
+
+  jwt.verify(token,config.jwtSecret, (error, decoded)=>{
+    if(error){
+      res.status(401).send({erro: error.message})
+      return;
+    }
+
+    req.username = decoded.userName;
+    next();
+  })
+  
+}
+
 module.exports = {
   validateBodyTeacher,
   validateBodyGroup,
   validateSubject,
   validateStudent,
-  validateCoordinator
+  validateCoordinator,
+  validarToken
 };

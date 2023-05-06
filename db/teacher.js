@@ -57,6 +57,13 @@ teacherSchema.statics.getTeacherByID = async (teacherID) => {
   return teachers;
 };
 
+//Lo agregue para usarlo con el login
+teacherSchema.statics.getTeacherByUserName = async (userName) => {
+  let profesor = await Teacher.findOne({userName});
+  // console.log(profesor);
+  return profesor;
+}
+
 teacherSchema.statics.createTeacher = async (teacherData) => {
   let newTeacher = Teacher(teacherData);
   console.log(
@@ -86,6 +93,7 @@ teacherSchema.statics.deleteTeacher = async (teacherID) => {
 
 const Teacher = mongoose.model("Teacher", teacherSchema);
 
-/* Teacher.getTeacher({}); */
+// Teacher.getTeacher({});
+// Teacher.getTeacherByUserName('test6');
 
 module.exports = { Teacher };
