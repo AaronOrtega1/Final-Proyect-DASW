@@ -91,3 +91,7 @@ DELETE  {{host}}/api/asignaturas/mat002
 =======
 DELETE  {{host}}/api/asignaturas/CRR005
 >>>>>>> 7ffd81d2a66872594b0bde8f88296b31ce8ee292
+
+
+###
+POST  {{host}}/api/coordinador?fullName=Jose&department=DESI&birthDate=837282&status=false&userName=Inge64&passWord=123456&isCoord=true
