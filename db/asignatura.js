@@ -36,8 +36,8 @@ const asignaturaSchema = mongoose.Schema({
 
 asignaturaSchema.statics.getAsignaturas = async (filters,  pagina, limite) => {
   let salto = (pagina - 1) * limite;
-  let asignaturas = await Asignaturas.find(filters).exec();
-  asignaturas = asignaturas.slice(salto, salto + limite);
+  let asignaturas = await Asignaturas.find(filters).skip(salto).limit(limite);
+  //asignaturas = asignaturas.slice(salto, salto + limite);
   console.log("Asignaturas: \n" + asignaturas);
   return asignaturas;
 };
