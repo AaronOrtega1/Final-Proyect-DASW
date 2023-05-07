@@ -62,17 +62,26 @@ GET {{host}}/api/asignaturas
 GET {{host}}/api/asignaturas/CHS001
 
 ###
+GET {{host}}/api/asignaturas?nombre=Cálculo
+
+###
+GET {{host}}/api/asignaturas?depto=DMF
+
+###
+GET {{host}}/api/asignaturas?pagina=2&limite=2
+
+###
 POST {{host}}/api/asignaturas
 Content-Type: application/json
 
 {
-  "codigo": "CRR005",
-  "nombre": "Contexto Historico-social",
+  "codigo": "MAT003",
+  "nombre": "Ecuacuiones Diferenciales",
   "creditos": 8,
-  "depto": "CRU",
-  "descripcion": "Curso donde se analizara el contexto historico-social de la epoca actual",
-  "areaAsig": "Curriculum institucional",
-  "grupos": ["Dx06En-h4_az8PwZwgW1b"]
+  "depto": "DMF",
+  "descripcion": "Curso de ecuaiones diferenciales para carreras de ingenieria con temas especializados en el area",
+  "areaAsig": "Saberes profesionales de ingenieria",
+  "grupos": []
 }
 
 ###
@@ -89,7 +98,6 @@ Content-Type: application/json
 }
 
 ###
-
 DELETE  {{host}}/api/asignaturas/mat002
 
 
