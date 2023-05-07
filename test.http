@@ -59,7 +59,16 @@ Content-Type: application/json
 GET {{host}}/api/asignaturas
 
 ###
-GET {{host}}/api/asignaturas/CHS001
+GET {{host}}/api/asignaturas/CRR001
+
+###
+GET {{host}}/api/asignaturas?nombre=Calculo
+
+###
+GET {{host}}/api/asignaturas?depto=DMF
+
+###
+GET {{host}}/api/asignaturas?pagina=2&limite=2
 
 ###
 POST {{host}}/api/asignaturas
@@ -67,16 +76,16 @@ Content-Type: application/json
 
 {
   "codigo": "CRR005",
-  "nombre": "Contexto Historico-social",
+  "nombre": "Contexto Historico-Social",
   "creditos": 8,
-  "depto": "CRU",
-  "descripcion": "Curso donde se analizara el contexto historico-social de la epoca actual",
-  "areaAsig": "Curriculum institucional",
-  "grupos": ["Dx06En-h4_az8PwZwgW1b"]
+  "depto": "DSC",
+  "descripcion": "Curso de contexto historico social donde se analizara la historia de la humanidad desde la perspectiva de las ciencias sociales",
+  "areaAsig": "Curriculum Universitario",
+  "grupos": []
 }
 
 ###
-PUT {{host}}/api/asignaturas/MAT005
+PUT {{host}}/api/asignaturas/MAT003
 Content-Type: application/json
 
 {
@@ -89,7 +98,6 @@ Content-Type: application/json
 }
 
 ###
-
 DELETE  {{host}}/api/asignaturas/mat002
 
 

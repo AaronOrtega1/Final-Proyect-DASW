@@ -12,7 +12,9 @@ router.get("/", async (req, res) => {
     nombre,
     areaAsig,
     creditos,
-    depto
+    depto,
+    pagina,
+    limite
   } = req.query;
   if (codigo) {
     filter.codigo = new RegExp(codigo, "i");
@@ -29,7 +31,14 @@ router.get("/", async (req, res) => {
   if (areaAsig) {
     filter.areaAsig = new RegExp(areaAsig, "i");
   }
-  let asignatura = await Asignaturas.getAsignaturas(filter);
+  if(!pagina) pagina = 1;
+  if(!limite) limite = 6;
+  if(pagina < 1) pagina = 1;
+
+  
+  let finalPag = parseInt(limite);
+  
+  let asignatura = await Asignaturas.getAsignaturas(filter, pagina, finalPag);
   res.send(asignatura);
 });
 
@@ -39,11 +48,11 @@ router.get("/:codigo", async (req, res) => {
   res.send(asignatura);
 });
 
-router.get("/:nombre", async (req, res) => {
-  let  nombre  = req.params.nombre;
-  let asignatura = await Asignaturas.getAsignaturaXnombre(nombre);
-  res.send(asignatura);
-});
+// router.get("/:nombre", async (req, res) => {
+//   let  nombre  = req.params.nombre;
+//   let asignatura = await Asignaturas.getAsignaturaXnombre(nombre);
+//   res.send(asignatura);
+// });
 
 router.post("/", validateSubject, async (req, res) => {
   let {
