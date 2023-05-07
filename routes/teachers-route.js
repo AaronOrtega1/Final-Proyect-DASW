@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const {validarToken} = require('../middleware/validateData.js');
+const bcrypt = require('bcryptjs');
 const {
   validateBodyTeacher,
   validateBodyGroup,
@@ -39,6 +40,10 @@ router.get("/", validarToken, async (req, res) => {
 router.post("/",validarToken, validateBodyTeacher, async (req, res) => {
   let { fullName, department, birthDate, status, userName, passWord, isCoord } =
     req.body;
+
+    let hash = bcrypt.hashSync(passWord,10);
+
+    
   let newTeacher = await Teacher.createTeacher({
     teacherID: nanoid.nanoid(),
     fullName,
@@ -46,7 +51,7 @@ router.post("/",validarToken, validateBodyTeacher, async (req, res) => {
     birthDate,
     status,
     userName,
-    passWord,
+    passWord: hash,
     isCoord,
   });
   res.status(201).send(newTeacher);
@@ -62,13 +67,15 @@ router.put("/:teacherID",validarToken, validateBodyTeacher, async (req, res) => 
   let { teacherID } = req.params;
   let { fullName, department, birthDate, status, userName, passWord, isCoord } =
     req.body;
+
+  let hash = bcrypt.hashSync(passWord,10);
   let updatedTeacher = await Teacher.updateTeacher(teacherID, {
     fullName,
     department,
     birthDate,
     status,
     userName,
-    passWord,
+    passWord: hash,
     isCoord
   });
   res.send(updatedTeacher);

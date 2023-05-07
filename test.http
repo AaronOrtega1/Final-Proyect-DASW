@@ -1,7 +1,7 @@
 @host = http://localhost:4000
 
 ##Recuerden que el token tiene duracion de 5 min
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkluZ2U2NCIsImlhdCI6MTY4MzQwNDg3NiwiZXhwIjoxNjgzNDA1MTc2fQ.qvGOIya86K-3gAkzdbKB-FzXkOuU2vXEYtUeCxDhX9Q
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkluZ2U2NCIsImlhdCI6MTY4MzQxNzYyMywiZXhwIjoxNjgzNDE4NTIzfQ.cUdhtbZxx7WjtzR8mk3CVWuHyYC2-_spIcyTYv-jsaY
 
 ###
 GET {{host}}/api/teachers
@@ -13,17 +13,17 @@ x-token: {{token}}
 Content-Type: application/json
 
 {
-  "fullName":"test7",
-  "department":"test7 department",
-  "birthDate":888888888,
+  "fullName":"test8",
+  "department":"test8 department",
+  "birthDate":382389084,
   "status":true,
-  "userName":"test7",
-  "passWord":"password7",
+  "userName":"test8",
+  "passWord":"password8",
   "isCoord": true
 }
 
 ###
-DELETE {{host}}/api/teachers/6451a76a278b33981ffb39c6
+DELETE {{host}}/api/teachers/VFmJXVHsEBcGDyIfJKdPy
 x-token: {{token}}
 
 ###
@@ -101,7 +101,6 @@ DELETE  {{host}}/api/asignaturas/CRR005
 ###
 POST  {{host}}/api/coordinador?fullName=Horacio&department=DESI&birthDate=9752810&status=false&userName=Ciber12&passWord=7439611&isCoord=false
 ###
-<<<<<<< HEAD
 GET {{host}}/api/coordinadores
 
 ###
@@ -112,8 +111,7 @@ Content-Type: application/json
   "username": "Inge64",
   "password": 123456
 }
-
-=======
+###
 GET {{host}}/api/administrator
 
 ###
@@ -146,4 +144,4 @@ Content-Type: application/json
 DELETE {{host}}/api/view/yz-U9tb78aF4jsEbr2nsE
 
 
->>>>>>> origin
+

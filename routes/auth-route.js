@@ -20,7 +20,7 @@ route.post("/", async (req, res) => {
 
   let token = jwt.sign({ username: user.userName },
                          config.jwtSecret, 
-                         {expiresIn: 60 * 5},);
+                         {expiresIn: 60 * 15},);
   res.send( {token} );
 });
 
