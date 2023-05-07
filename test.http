@@ -68,7 +68,7 @@ GET {{host}}/api/asignaturas?nombre=Calculo
 GET {{host}}/api/asignaturas?depto=DMF
 
 ###
-GET {{host}}/api/asignaturas?pagina=2&limite=2
+GET {{host}}/api/asignaturas?pagina=1&limite=2
 
 ###
 POST {{host}}/api/asignaturas
@@ -150,6 +150,42 @@ Content-Type: application/json
 
 ###
 DELETE {{host}}/api/view/yz-U9tb78aF4jsEbr2nsE
+
+###
+GET {{host}}/api/administrator
+
+###
+POST {{host}}/api/administrator
+Content-Type: application/json
+
+{
+  "nombre":"Luis Fernando Gutiérrez Preciado",
+  "rol":"Coordinador",
+  "departamento":"DESI",
+  "correo":"lgutierrez@iteso.mx",
+  "telefono":333885655,
+  "oficina":"T312",
+  "imageUrl": "testImage"
+}
+
+###
+POST {{host}}/api/administrator
+Content-Type: application/json
+
+{
+  "nombre":"Daniel Alejandro Hernandez",
+  "rol":"Coordinador",
+  "departamento":"DFH",
+  "correo":"daniel@iteso.mx",
+  "telefono":5454545,
+  "oficina":"J523",
+  "imageUrl": "testImage"
+}
+
+###
+GET {{host}}/api/administrator/?pagina=2&limite=1
+
+
 
 
 
