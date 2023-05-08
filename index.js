@@ -9,7 +9,7 @@ const coordinadorRoute = require('./routes/coordinador-route.js')
 const cordinatorsRoute = require("./routes/administrator-cords-routes.js");
 const viewsRoute = require("./routes/view-routes.js");
 const { escape } = require("querystring");
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 3000;
 const app = express();
 
 app.use(express.static(path.join(__dirname, "public")));
