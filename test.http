@@ -304,7 +304,8 @@ Content-Type: application/json
   "urlArchivo":"test",
   "descripcion":"test",
   "teacher": "64519476ddfcc66bd7ee92fd",
-  "comments": "6459e92fe9a88b7467890af7"
+  "comments": "6459e92fe9a88b7467890af7",
+  "fecha": 952023
 }
 
 ###
@@ -318,6 +319,9 @@ Content-Type: application/json
   "teacher": "64519476ddfcc66bd7ee92fd",
   "comment": "6459e92fe9a88b7467890af7"
 }
+
+###
+DELETE {{host}}/api/evidence/8CPY4rFRtuT0KuyUSLI9L
 
 
 
