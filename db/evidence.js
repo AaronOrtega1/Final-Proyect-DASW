@@ -27,6 +27,10 @@ const  evidenceSchema = mongoose.Schema({
     comment: { 
         type: mongoose.Schema.Types.ObjectId,
         ref: "Comment"
+    },
+    fecha: {
+        type: Number,
+        required: true
     }
 });
 
