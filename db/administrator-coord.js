@@ -33,8 +33,11 @@ const administratorSchema = mongoose.Schema({
     imageUrl: {
         type: String,
         required: true
+    },
+    materias: {
+        type: Array,
+        required: true
     }
-
 });
 
 administratorSchema.statics.getCoordinadores = async(filters, pagina, limite) => {
