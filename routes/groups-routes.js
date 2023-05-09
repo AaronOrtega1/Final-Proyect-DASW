@@ -65,6 +65,8 @@ router.put("/:groupID", validateBodyGroup, async (req, res) => {
     status,
     students,
     professor,
+    period,
+    year
   });
   res.send(updatedGroup);
 });
