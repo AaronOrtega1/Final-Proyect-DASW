@@ -20,10 +20,6 @@ const groupSchema = mongoose.Schema({
     default: false,
     required: true,
   },
-  students: {
-    type: Array,
-    required: true,
-  },
   professor: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Teacher"
