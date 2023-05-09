@@ -20,8 +20,8 @@ function validateBodyTeacher(req, res, next) {
 }
 
 function validateBodyGroup(req, res, next) {
-  let { group, department, status, students, professor } = req.body;
-  if (group && department && status && students && professor !== undefined) {
+  let { group, department, status, professor, period, year } = req.body;
+  if (group && department && status && professor && period && year !== undefined) {
     next();
     return;
   }
