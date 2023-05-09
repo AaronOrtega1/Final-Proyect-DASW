@@ -26,8 +26,7 @@ const groupSchema = mongoose.Schema({
   },
   professor: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Teacher",
-    required: true
+    ref: "Teacher"
   },
   period: {
     type: String,
