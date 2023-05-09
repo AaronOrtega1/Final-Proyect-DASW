@@ -1,7 +1,8 @@
 @host = http://localhost:3000
 
 ##Recuerden que el token tiene duracion de 5 min
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkluZ2U2NCIsImlhdCI6MTY4MzQxNzYyMywiZXhwIjoxNjgzNDE4NTIzfQ.cUdhtbZxx7WjtzR8mk3CVWuHyYC2-_spIcyTYv-jsaY
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkluZ2U2NCIsImlhdCI6MTY4MzYwOTg1OCwiZXhwIjoxNjgzNjEwNzU4fQ.sOqOplX5cgt31nWq6DKlh92Mxa78pdvqGse0d-goumA
+
 
 ###
 GET {{host}}/api/teachers
@@ -247,6 +248,23 @@ Content-Type: application/json
 
 ###
 DELETE {{host}}/api/view/ZeosJHjM9orwuE2xuSebm
+
+###
+POST {{host}}/api/evidence
+Content-Type: application/json
+
+{
+  "titulo":"test",
+  "urlArchivo":"test",
+  "descripcion":"test",
+  "teacher": "64519476ddfcc66bd7ee92fd"
+}
+
+###
+DELETE {{host}}/api/evidence/8vw-z7FqX_Ot2ANMWsRTZ
+
+###
+GET {{host}}/api/evidence
 
 
 
