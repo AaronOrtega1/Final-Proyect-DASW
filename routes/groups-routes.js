@@ -24,6 +24,13 @@ router.get("/", async (req, res) => {
   if (professor) {
     filter.professor = new RegExp(professor, "i");
   }
+  if (period) {
+    filter.period = new RegExp(period, "i");
+  }
+  if (year) {
+    filter.year = year;
+  }
+
   let group2 = await Groups.getGroup(filter);
   res.send(group2);
 });
@@ -37,6 +44,8 @@ router.post("/", validateBodyGroup, async (req, res) => {
     status,
     students,
     professor,
+    period,
+    year
   });
   res.status(201).send(newGroup);
 });

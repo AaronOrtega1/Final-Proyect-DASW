@@ -1,4 +1,5 @@
 const { mongoose } = require("./connectDB.js");
+const { Teacher } = require("./teacher.js");
 
 const groupSchema = mongoose.Schema({
   groupID: {
@@ -24,8 +25,17 @@ const groupSchema = mongoose.Schema({
     required: true,
   },
   professor: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Teacher",
+    required: true
+  },
+  period: {
     type: String,
-    required: true,
+    required: true
+  },
+  year: {
+    type: Number,
+    required: true
   },
 });
 
