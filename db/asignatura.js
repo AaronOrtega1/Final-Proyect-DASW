@@ -36,7 +36,8 @@ const asignaturaSchema = mongoose.Schema({
 
 asignaturaSchema.statics.getAsignaturas = async (filters,  pagina, limite) => {
   let salto = (pagina - 1) * limite;
-  let asignaturas = await Asignaturas.find(filters).skip(salto).limit(limite);
+  let asignaturas = await Asignaturas.find(filters).skip(salto).limit(limite)
+  .populate({path: 'grupos', model: 'Groups', select: 'professor period year'}); // 'professor period year
   //asignaturas = asignaturas.slice(salto, salto + limite);
   console.log("Asignaturas: \n" + asignaturas);
   return asignaturas;
