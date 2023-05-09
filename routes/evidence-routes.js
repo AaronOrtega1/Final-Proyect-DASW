@@ -1,15 +1,17 @@
 const router = require("express").Router();
+const e = require("express");
 const { Evidence } = require("../db/evidence.js");
 
 const nanoid = require("nanoid");
 
 router.get("/", async(req, res) => {
     let filter  = {};
-    let {codigo, titulo, teacher, pagina, limite} = req.query;
+    let {codigo, titulo, teacher, fecha,pagina, limite} = req.query;
 
     if(codigo) filter.codigo = new RegExp(codigo, "i");
     if(titulo) filter.titulo = new RegExp(titulo, "i");
     if(teacher) filter.teacher = new RegExp(teacher, "i");
+    if(fecha) filter.fecha = fecha;
 
     if(!pagina) pagina = 1;
     if(!limite) limite = 6;
@@ -31,7 +33,9 @@ router.post("/", async(req, res) => {
         titulo: evidenceData.titulo,
         urlArchivo: evidenceData.urlArchivo,
         descripcion: evidenceData.descripcion,
-        teacher: evidenceData.teacher
+        teacher: evidenceData.teacher,
+        comment: evidenceData.comment,
+        fecha: evidenceData.fecha
     }
 
     let evidence = await Evidence.createEvidencia(newEvidence);
