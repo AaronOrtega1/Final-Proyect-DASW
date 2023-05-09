@@ -266,8 +266,58 @@ DELETE {{host}}/api/evidence/8vw-z7FqX_Ot2ANMWsRTZ
 ###
 GET {{host}}/api/evidence
 
+###
+GET {{host}}/api/comments
 
+###
+POST {{host}}/api/comments
+Content-Type: application/json
 
+{
+  "autor":"test",
+  "fecha": 952023,
+  "mensaje": "Esta es una prueba de comentario"
+}
+
+###
+PUT {{host}}/api/comments/4TYhmqrJLyQ1dmLqu0mnB
+Content-Type: application/json
+
+{
+  "autor":"test",
+  "fecha": 2,
+  "mensaje": "Esta es una prueba de comentario Test"
+}
+
+###
+DELETE {{host}}/api/comments/4TYhmqrJLyQ1dmLqu0mnB
+
+###
+GET {{host}}/api/evidence
+
+###
+POST {{host}}/api/evidence
+Content-Type: application/json
+
+{
+  "titulo":"test",
+  "urlArchivo":"test",
+  "descripcion":"test",
+  "teacher": "64519476ddfcc66bd7ee92fd",
+  "comments": "6459e92fe9a88b7467890af7"
+}
+
+###
+PUT {{host}}/api/evidence/8CPY4rFRtuT0KuyUSLI9L
+Content-Type: application/json
+
+{
+  "titulo":"test",
+  "urlArchivo":"test",
+  "descripcion":"test",
+  "teacher": "64519476ddfcc66bd7ee92fd",
+  "comment": "6459e92fe9a88b7467890af7"
+}
 
 
 
