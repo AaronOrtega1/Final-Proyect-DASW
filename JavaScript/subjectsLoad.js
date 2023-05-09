@@ -1,3 +1,5 @@
+//const { Groups } = require("../db/groups");
+
 let asignaturas = [];
 let asignaturasXmostrar = [];
 let numDeAsignaturas = 0;
@@ -34,16 +36,31 @@ async function muestraAsignaturas(listaXmostrar){
         <td>${a.creditos}</td>
         <td>${a.depto}</td>
         <td>
-            <button class="btn btn-dark" type="button" data-toggle="collapse" data-target="#desc${a.nombre}" aria-expanded="false" aria-controls="desc-Asignatura-1">
+            <button class="btn btn-dark" type="button" data-toggle="collapse" data-target="#desc-${a.codigo}" aria-expanded="false" aria-controls="#desc-${a.codigo}">
             <i class="fas fa-info-circle"></i>
             </button>
             <button class="btn btn-dark" type="button" data-target="#agregarAsignatura" data-toggle="modal">
             <i class="fas fa-edit"></i>
         </button>
         </td>
-        <div class="collapse" id="desc${a.nombre}">
+        <div class="collapse" id="desc-${a.codigo}">
             <div class="card card-body">
             <p>${a.descripcion}</p>
+            <ul>
+                ${a.grupos.map(g => `
+                <li>  <button class="btn btn-light" type="button" data-toggle="collapse" data-target="#desc-${g.groupID}" aria-expanded="false" aria-controls="#desc-${g.groupID}">
+                <i class="fas fa-info-circle">Grupo ${g.professor}</i>
+                </button>
+                <div class="collapse" id="desc-${g.groupID}">
+                    <div class="card card-body">
+                    <p>Profesor: ${g.professor}</p>
+                    <p>Periodo: ${g.period}</p>
+                    <p>Año: ${g.year}</p>
+                </div>
+            </div>
+                `).join('')}
+                
+            </ul>
             </div>
         </div>
     </tr>
