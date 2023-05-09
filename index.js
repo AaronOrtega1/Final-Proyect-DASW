@@ -8,6 +8,7 @@ const studentsRoute = require("./routes/students-routes.js");
 const coordinadorRoute = require('./routes/coordinador-route.js')
 const cordinatorsRoute = require("./routes/administrator-cords-routes.js");
 const viewsRoute = require("./routes/view-routes.js");
+const evidenceRoute = require("./routes/evidence-routes.js");
 const { escape } = require("querystring");
 const port = process.env.PORT || 3000;
 const app = express();
@@ -31,5 +32,7 @@ app.use('/api/coordinador', coordinadorRoute)
 app.use("/api/administrator", cordinatorsRoute);
 
 app.use("/api/view", viewsRoute);
+
+app.use("/api/evidence", evidenceRoute);
 
 app.listen(port, () => console.log("running on port" + port));
