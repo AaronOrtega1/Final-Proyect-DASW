@@ -1,4 +1,5 @@
 const { mongoose } = require("./connectDB.js");
+const { Teacher } = require("./teacher.js");
 
 const  evidenceSchema = mongoose.Schema({
     codigo: {
