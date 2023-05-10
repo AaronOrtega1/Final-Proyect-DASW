@@ -15,7 +15,7 @@ btnSiguiente.addEventListener('click', siguientePagina);
 
 async function cargaAsignaturas () {
     console.log('cargando asignaturas:'+ pagina + ' ' + limite);
-  let asignaturas = await fetch(`http://localhost:4000/api/asignaturas?pagina=${pagina}&limite=${limite}`,{
+  let asignaturas = await fetch(`http://localhost:3000/api/asignaturas?pagina=${pagina}&limite=${limite}`,{
     method: 'GET',
     headers: {
         'Content-Type': 'application/json'
