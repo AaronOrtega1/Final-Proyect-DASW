@@ -10,9 +10,12 @@ const cordinatorsRoute = require("./routes/administrator-cords-routes.js");
 const viewsRoute = require("./routes/view-routes.js");
 const evidenceRoute = require("./routes/evidence-routes.js");
 const commentRoute = require("./routes/comments-route.js");
+const cors = require("cors");
 const { escape } = require("querystring");
 const port = process.env.PORT || 3000;
 const app = express();
+
+app.use(cors());
 
 app.use(express.static(path.join(__dirname, "public")));
 
