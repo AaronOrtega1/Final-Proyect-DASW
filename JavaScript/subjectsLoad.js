@@ -9,6 +9,9 @@ let tablaAsignaturas = document.getElementById('tablaAsignaturas');
 let btnAnterior = document.getElementById('anteriorPag');
 let btnSiguiente = document.getElementById('siguientePag');
 let displayPaginador = document.getElementById('paginador');
+let searchBarNavBar = document.getElementById('searchBar');
+let searchButtonNavBar = document.getElementById('buscarNavBar');
+searchButtonNavBar.addEventListener('click', buscarAsignaturaXcodigo);
 btnAnterior.addEventListener('click', anteriorPagina);
 btnSiguiente.addEventListener('click', siguientePagina);
 
@@ -82,5 +85,26 @@ function siguientePagina(){
     displayPaginador.innerHTML = `<li class="page-item active" id="paginador"><a class="page-link" href="#">${pagina}</a></li>`
     cargaAsignaturas();
 }
+
+async function buscarAsignaturaXcodigo(){
+    let codigo = searchBarNavBar.value;
+    let asignaturas = await fetch(`http://localhost:3000/api/asignaturas/${codigo}`,{
+    method: 'GET',
+    headers: {
+        'Content-Type': 'application/json'
+    }
+    })
+    let datos = await asignaturas.json();
+    if(asignaturasXmostrar.length == 0){
+        asignaturasXmostrar.push(datos);
+    }else{
+        asignaturasXmostrar = [];
+        asignaturasXmostrar.push(datos);
+    }
+    console.log(asignaturasXmostrar)
+    muestraAsignaturas(asignaturasXmostrar);
+}
+
+
 
 cargaAsignaturas();

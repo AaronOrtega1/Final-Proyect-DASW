@@ -1,438 +1,339 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>API Asignaturas</title>
-    <!-- Required meta tags -->
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
-    <link
-      rel="stylesheet"
-      href="https://use.fontawesome.com/releases/v5.1.1/css/all.css"
-      integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ"
-      crossorigin="anonymous"
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Noto+Serif+Khojki&display=swap"
-      rel="stylesheet"
-    />
-    <!-- <link rel="stylesheet" href="styles.css" /> -->
-    <!-- Bootstrap CSS -->
 
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-      crossorigin="anonymous"
-    />
-  </head>
+<head>
+  <title>API Asignaturas</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css"
+    integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Khojki&display=swap" rel="stylesheet" />
+  <!-- <link rel="stylesheet" href="styles.css" /> -->
+  <!-- Bootstrap CSS -->
 
-  <body>
-    <!-- busca el snippet b4-navbar -->
-    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-      <a class="navbar-brand" href="./profesorPerfil.html">DASW</a>
-      <button
-        class="navbar-toggler d-lg-none"
-        type="button"
-        data-toggle="collapse"
-        data-target="#collapsibleNavId"
-        aria-controls="collapsibleNavId"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      ></button>
-      <div class="collapse navbar-collapse" id="collapsibleNavId">
-        
-          <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-            <li class="nav-item active">
-              <div class="form-group m-1">
-                <input
-                  type="text"
-                  class="form-control"
-                  name="searchBar"
-                  id="searchBar"
-                  aria-describedby="helpId"
-                  placeholder="Buscar elemento"
-                />
-              </div>
-            </li>
-            <li class="nav-item">
-              <div class="m-1">
-                <a
-                  name="buscar"
-                  id="buscar"
-                  class="btn btn-dark border border-white"
-                  href="#"
-                  role="button"
-                  >Buscar</a
-                >
-              </div>
-            </li>
-          </ul>
-          <div>
-  
-            <a name="" id="" class="btn btn-dark" href="coordinador.html" role="button"><i class="fa fa-book"></i> Registras Prof</a>
-        </div>
-          <div>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+</head>
 
-            <a name="" id="" class="btn btn-dark" href="administracion_coordinadores.html" role="button"><i class="fa fa-edit"></i> Coordinadores</a>
-        </div>
-        <div>
-            <a name="" id="" class="btn btn-dark" href="asignaturas.html" role="button"><i class="fas fa-list"></i> Asignaturas</a>
-        </div>
-        <div>
-            <a name="" id="" class="btn btn-dark" href="profesorPerfil.html" role="button"><i class="fas fa-user"></i></a>
-        </div>
-      </div>
-    </nav>
+<body>
+  <!-- busca el snippet b4-navbar -->
+  <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+    <a class="navbar-brand" href="./profesorPerfil.html">DASW</a>
+    <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId"
+      aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation"></button>
+    <div class="collapse navbar-collapse" id="collapsibleNavId">
 
-    <!-- Opciones de busqueda -->
-    <div class="container w-100 p-4">
-      <div class="row">
-          <div class="col-3 text-center" id="filtroPeriodo">
-            <!-- periodo   -->
-            <div class="dropdown">
-                  <button
-                    type="button"
-                    class="btn btn-dark dropdown-toggle"
-                    data-toggle="dropdown"
-                  >
-                    Periodo
-                  </button>
-                  <div class="dropdown-menu">
-                    <a
-                      class="dropdown-item"
-                      href="#"
-                      id="firstyear"
-                      >Año más antiguo</a
-                    >
-                    <a 
-                    class="dropdown-item"
-                    href="#">
-                      ...
-                    </a>
-                    <a
-                      class="dropdown-item"
-                      href="#"
-                      id="lastyear"
-                      >Año más reciente</a
-                    >
-                  </div>
-                </div>
-              </div>
-              <!-- filtro por -->
-              <div class="col-3 text-center" id="filtroABS">
-                <div class="dropdown">
-                  <button
-                    type="button"
-                    class="btn btn-dark dropdown-toggle"
-                    data-toggle="dropdown"
-                  >
-                    Filtro por
-                  </button>
-                  <div class="dropdown-menu">
-                    <a
-                      class="dropdown-item"
-                      href="#"
-                      id="area-A"
-                      >Área</a
-                    >
-                    <a 
-                    class="dropdown-item"
-                    href="#"
-                    id="Depto">
-                      Depto.
-                    </a>
-                    <a
-                      class="dropdown-item"
-                      href="#"
-                      id="Credits"
-                      >Créditos</a
-                    >
-                  </div>
-                  
-                </div>
-              </div>
-              <!-- carrera -->
-              <div class="col-3 text-center" id="filtroCarrera">
-                <div class="dropdown">
-                  <button
-                    type="button"
-                    class="btn btn-dark dropdown-toggle"
-                    data-toggle="dropdown"
-                  >
-                    Carrera
-                  </button>
-                  <div class="dropdown-menu">
-                    <a
-                      class="dropdown-item"
-                      href="#"
-                      id="carrera-1"
-                      >Carrera A</a
-                    >
-                    <a 
-                    class="dropdown-item"
-                    href="#"
-                    id="carrera-2">
-                      Carrera B
-                    </a>
-                    <a
-                      class="dropdown-item"
-                      href="#"
-                      id="carrera-n"
-                      >Carrera N</a
-                    >
-                  </div>
-                  
-                </div>
-              </div>
-              <!-- Agregar -->
-              <div class="col-3 text-center" id="agregarProducto" style="display:flex; align-items:center; justify-content:center;">
-                <button type="button" class="btn-dark border rounded p-2 btn btn-primary btn-lg" data-toggle="modal" data-target="#agregarAsignatura" style="font-size: 16px;">
-                  Agregar <i class="fas fa-plus-circle" style="vertical-align: middle;"></i>
-                </button>
-              </div>                
-          </div>         
-      </div>
-
-
-    </div>
-    <br>
-      <div class="container w-100 p-2">
-        <div class="accordion w-100" style="width: 100%;">
-          <table class="table">
-            <thead>
-              <tr>
-                <td>Codigo</td>
-                <td>Nombre</td>
-                <td>Area</td>
-                <td>Depto.</td>
-                <td>Creditos</td>
-                <td>Detalles</td>
-              </tr>
-            </thead>
-            <tbody id="tablaAsignaturas">
-              <tr>
-                <td>MAT001</td>
-                <td>Matematicas</td>
-                <td>Ciencias Básicas</td>
-                <td>DCE</td>
-                <td>8</td>
-                <td>
-                  <button class="btn btn-dark" type="button" data-toggle="collapse" data-target="#desc-Asignatura-1" aria-expanded="false" aria-controls="desc-Asignatura-1">
-                    <i class="fas fa-info-circle"></i>
-                  </button>
-                  <button class="btn btn-dark" type="button" data-target="#agregarAsignatura" data-toggle="modal">
-                    <i class="fas fa-edit"></i>
-                </button>
-                </td>
-                <div class="collapse" id="desc-Asignatura-1">
-                  <div class="card card-body">
-                    <p>Clase de matematicas desde algebra hasta trigonometría</p>
-                    <button class="btn btn-light text-left" type="button" data-toggle="collapse" data-target="#grupoA" aria-expanded="false" aria-controls="grupoA">
-                      Grupo A
-                    </button>
-                    <button class="btn btn-light text-left" type="button" data-toggle="collapse" data-target="#grupoC" aria-expanded="false" aria-controls="grupoC">
-                      Grupo C
-                    </button>
-                      <div class="collapse" id="grupoA">
-                        <div class="card card-body">
-                          <p>Profesor: [Profesor]</p>
-                          <p>Horario: [Horario]</p>
-                          <p>Salón: [Salón]</p>
-                        </div>
-                      </div>
-                      <div class="collapse" id="grupoC">
-                        <div class="card card-body">
-                          <p>Profesor: [Profesor *]</p>
-                          <p>Horario: [Horario *]</p>
-                          <p>Salón: [Salón *]</p>
-                        </div>
-                      </div>
-                  </div>
-                </div>
-              </tr>
-              <tr>
-                <td>POO001</td>
-                <td>Programación</td>
-                <td>Ciencia Computacional</td>
-                <td>ESI</td>
-                <td>6</td>
-                <td>
-                  <button class="btn btn-dark" type="button" data-toggle="collapse" data-target="#desc-Asignatura-2" aria-expanded="false" aria-controls="desc-Asignatura-2">
-                    <i class="fas fa-info-circle"></i>
-                  </button>
-                  <button class="btn btn-dark" type="button" data-target="#agregarAsignatura" data-toggle="modal">
-                    <i class="fas fa-edit"></i>
-                </button>
-                </td>
-                <div class="collapse" id="desc-Asignatura-2">
-                  <div class="card card-body">
-                    <p>Clase de programación orientada a objetos</p>
-                    <button class="btn btn-light text-left" type="button" data-toggle="collapse" data-target="#grupoB" aria-expanded="false" aria-controls="grupoB">
-                      Grupo B
-                    </button>
-                      <div class="collapse" id="grupoB">
-                        <div class="card card-body">
-                          <p>Profesor: [Profesor]</p>
-                          <p>Horario: [Horario]</p>
-                          <p>Salón: [Salón]</p>
-                        </div>
-                      </div>
-                  </div>
-                </div>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    <br/>
-
-    <div class="center">
-      <nav aria-label="Page navigation">
-        <ul class="pagination justify-content-center">
-          <li class="page-item">
-            <a class="page-link" href="#" id="anteriorPag" aria-label="Previous">
-              <span aria-hidden="true">&laquo;</span>
-              <span class="sr-only">Previous</span>
-            </a>
-          </li>
-          <li class="page-item active" id="paginador"><a class="page-link" href="#">1</a></li>
-          <li class="page-item">
-            <a class="page-link" href="#" id="siguientePag" aria-label="Next">
-              <span aria-hidden="true">&raquo;</span>
-              <span class="sr-only">Next</span>
-            </a>
-          </li>
-        </ul>
-      </nav>
-    </div>
-
-    <!-- Modal agregar -->
-    <!-- Button trigger modal -->
-
-    
-    <!-- <añadir asignatura-> -->
-    <div class="modal fade" id="agregarAsignatura" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">añadir asignatura</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
+      <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+        <li class="nav-item active">
+          <div class="form-group m-1">
+            <input type="text" class="form-control" name="searchBar" id="searchBar" aria-describedby="helpId"
+              placeholder="Codigo de asignatura" />
           </div>
-          <div class="modal-body">
-            <form action="">
-              <div>
-                  <label for="nombreProducto">Asignatura</label>
-                  <input type="text" class="form-control" id="nombreProducto" placeholder="Nombre">
-              </div>
-              <br>
-              <div>
-                  <div class="form-group">
-                    <label for="descripcionProducto">Descripción</label>
-                    <textarea class="form-control" name="descripcionProducto" id="descripcionProducto" rows="3"></textarea>
-                  </div>
-              </div>
-              <br>
-              <label for="">Detalles</label>
-              <div class="d-flex align-items-center">
-                  <input type="number" class="form-control m-1" id="NoCreditos" placeholder="Creditos">
-                  <input type="text" class="form-control m-1" id="Depto" placeholder="Departamento">    
-              </div>
-              <div class="d-flex align-items-center">
-                  <input type="text" class="form-control m-1" id="CodigoA" placeholder="Código">
-                  <input type="text" class="form-control m-1" id="AreaA" placeholder="Área">    
-              </div>
-              <br>
-              <div class="d-flex align-items-center">
-                  <button type="button" name="addGroup" id="addGroup" class="btn btn-dark btn-lg btn-block" data-toggle="modal" data-target="#modalAddGroup">Agregar grupo</button>
-              </div>
-              <p class="hide text-primary">No hay grupos guardados</p>
-          </form>
+        </li>
+        <li class="nav-item">
+          <div class="m-1">
+            <a name="buscar" id="buscarNavBar" class="btn btn-dark border border-white" href="#" role="button">Buscar</a>
           </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save</button>
-          </div>
-        </div>
+        </li>
+      </ul>
+      <div>
+
+        <a name="" id="" class="btn btn-dark" href="coordinador.html" role="button"><i class="fa fa-book"></i> Registras
+          Prof</a>
+      </div>
+      <div>
+
+        <a name="" id="" class="btn btn-dark" href="administracion_coordinadores.html" role="button"><i
+            class="fa fa-edit"></i> Coordinadores</a>
+      </div>
+      <div>
+        <a name="" id="" class="btn btn-dark" href="asignaturas.html" role="button"><i class="fas fa-list"></i>
+          Asignaturas</a>
+      </div>
+      <div>
+        <a name="" id="" class="btn btn-dark" href="profesorPerfil.html" role="button"><i class="fas fa-user"></i></a>
       </div>
     </div>
+  </nav>
 
-
-
-    
-    <!-- Modal -->
-    <div class="modal fade" id="modalAddGroup" tabindex="-1" role="dialog" aria-labelledby="modalAddGroup" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Agregar Grupo</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-          </div>
-          <div class="modal-body">
-            <form action="">
-              <div>
-                  <label for="nombreProducto">Profesor</label>
-                  <input type="text" class="form-control" id="nombreProducto" placeholder="Nombre">
-              </div>
-              <br>
-              <div>
-                <label for="nombreProducto">Horario</label>
-                <input type="text" class="form-control" id="nombreProducto" placeholder="Ej: Mar & Jue 8:00 - 10:00">
-              </div>
-              <br>
-              <div>
-                <label for="nombreProducto">Salón</label>
-                <input type="text" class="form-control" id="nombreProducto" placeholder="Ej: C-208">
-              </div>
-              <br>
+  <!-- Opciones de busqueda -->
+  <div class="container w-100 p-4">
+    <div class="row">
+      <div class="col-6 text-center" id="filtroPeriodo">
+        <!-- periodo   -->
+        <div class="">
+          <div class="form-group">
+            <input type="text" class="form-control" name="filteredSearch" id="filteredSearch" aria-describedby="helpId"
+              placeholder="Palabra clave" />
               
-              <br>
-          </form>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save</button>
           </div>
         </div>
       </div>
+      <div class="col-2 text-center" id="filtroABS">
+        <select class="form-control dark" id="FiltroBusqueda">
+          <option>Buscar por</option>
+          <option>Nombre</option>
+          <option>Área</option>
+          <option>Creditos</option>
+          <option>Departamento</option>
+        </select>
+      </div>
+      <!-- Buscar -->
+      <div class="col-2">
+        <button class="btn btn-dark" type="button" id="searchFilter"><i class="fas fa-search"></i></button>
+      </div>
+      <div>
+        <button class="btn btn-dark" type="button" id="agregar elemento" data-toggle="modal"
+        data-target="#agregarAsignatura">
+          Agregar <i class="fas fa-plus-circle"></i>
+        </button>
+      </div>
+      <!-- Agregar -->
+      
     </div>
+  </div>
+
+
+  </div>
+  <br>
+  <div class="container w-100 p-2">
+    <div class="accordion w-100" style="width: 100%;">
+      <table class="table">
+        <thead>
+          <tr>
+            <td>Codigo</td>
+            <td>Nombre</td>
+            <td>Area</td>
+            <td>Depto.</td>
+            <td>Creditos</td>
+            <td>Detalles</td>
+          </tr>
+        </thead>
+        <tbody id="tablaAsignaturas">
+          <tr>
+            <td>MAT001</td>
+            <td>Matematicas</td>
+            <td>Ciencias Básicas</td>
+            <td>DCE</td>
+            <td>8</td>
+            <td>
+              <button class="btn btn-dark" type="button" data-toggle="collapse" data-target="#desc-Asignatura-1"
+                aria-expanded="false" aria-controls="desc-Asignatura-1">
+                <i class="fas fa-info-circle"></i>
+              </button>
+              <button class="btn btn-dark" type="button" data-target="#agregarAsignatura" data-toggle="modal">
+                <i class="fas fa-edit"></i>
+              </button>
+            </td>
+            <div class="collapse" id="desc-Asignatura-1">
+              <div class="card card-body">
+                <p>Clase de matematicas desde algebra hasta trigonometría</p>
+                <button class="btn btn-light text-left" type="button" data-toggle="collapse" data-target="#grupoA"
+                  aria-expanded="false" aria-controls="grupoA">
+                  Grupo A
+                </button>
+                <button class="btn btn-light text-left" type="button" data-toggle="collapse" data-target="#grupoC"
+                  aria-expanded="false" aria-controls="grupoC">
+                  Grupo C
+                </button>
+                <div class="collapse" id="grupoA">
+                  <div class="card card-body">
+                    <p>Profesor: [Profesor]</p>
+                    <p>Horario: [Horario]</p>
+                    <p>Salón: [Salón]</p>
+                  </div>
+                </div>
+                <div class="collapse" id="grupoC">
+                  <div class="card card-body">
+                    <p>Profesor: [Profesor *]</p>
+                    <p>Horario: [Horario *]</p>
+                    <p>Salón: [Salón *]</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </tr>
+          <tr>
+            <td>POO001</td>
+            <td>Programación</td>
+            <td>Ciencia Computacional</td>
+            <td>ESI</td>
+            <td>6</td>
+            <td>
+              <button class="btn btn-dark" type="button" data-toggle="collapse" data-target="#desc-Asignatura-2"
+                aria-expanded="false" aria-controls="desc-Asignatura-2">
+                <i class="fas fa-info-circle"></i>
+              </button>
+              <button class="btn btn-dark" type="button" data-target="#agregarAsignatura" data-toggle="modal">
+                <i class="fas fa-edit"></i>
+              </button>
+            </td>
+            <div class="collapse" id="desc-Asignatura-2">
+              <div class="card card-body">
+                <p>Clase de programación orientada a objetos</p>
+                <button class="btn btn-light text-left" type="button" data-toggle="collapse" data-target="#grupoB"
+                  aria-expanded="false" aria-controls="grupoB">
+                  Grupo B
+                </button>
+                <div class="collapse" id="grupoB">
+                  <div class="card card-body">
+                    <p>Profesor: [Profesor]</p>
+                    <p>Horario: [Horario]</p>
+                    <p>Salón: [Salón]</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <br />
+
+  <div class="center">
+    <nav aria-label="Page navigation">
+      <ul class="pagination justify-content-center">
+        <li class="page-item">
+          <a class="page-link" href="#" id="anteriorPag" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+            <span class="sr-only">Previous</span>
+          </a>
+        </li>
+        <li class="page-item active" id="paginador"><a class="page-link" href="#">1</a></li>
+        <li class="page-item">
+          <a class="page-link" href="#" id="siguientePag" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+            <span class="sr-only">Next</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+
+  <!-- Modal agregar -->
+  <!-- Button trigger modal -->
+
+
+  <!-- <añadir asignatura-> -->
+  <div class="modal fade" id="agregarAsignatura" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">añadir asignatura</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form action="">
+            <div>
+              <label for="nombreProducto">Asignatura</label>
+              <input type="text" class="form-control" id="nombreProducto" placeholder="Nombre">
+            </div>
+            <br>
+            <div>
+              <div class="form-group">
+                <label for="descripcionProducto">Descripción</label>
+                <textarea class="form-control" name="descripcionProducto" id="descripcionProducto" rows="3"></textarea>
+              </div>
+            </div>
+            <br>
+            <label for="">Detalles</label>
+            <div class="d-flex align-items-center">
+              <input type="number" class="form-control m-1" id="NoCreditos" placeholder="Creditos">
+              <input type="text" class="form-control m-1" id="Depto" placeholder="Departamento">
+            </div>
+            <div class="d-flex align-items-center">
+              <input type="text" class="form-control m-1" id="CodigoA" placeholder="Código">
+              <input type="text" class="form-control m-1" id="AreaA" placeholder="Área">
+            </div>
+            <br>
+            <div class="d-flex align-items-center">
+              <button type="button" name="addGroup" id="addGroup" class="btn btn-dark btn-lg btn-block"
+                data-toggle="modal" data-target="#modalAddGroup">Agregar grupo</button>
+            </div>
+            <p class="hide text-primary">No hay grupos guardados</p>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
 
 
-    <script>
+
+  <!-- Modal -->
+  <div class="modal fade" id="modalAddGroup" tabindex="-1" role="dialog" aria-labelledby="modalAddGroup"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Agregar Grupo</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form action="">
+            <div>
+              <label for="nombreProducto">Profesor</label>
+              <input type="text" class="form-control" id="nombreProducto" placeholder="Nombre">
+            </div>
+            <br>
+            <div>
+              <label for="nombreProducto">Horario</label>
+              <input type="text" class="form-control" id="nombreProducto" placeholder="Ej: Mar & Jue 8:00 - 10:00">
+            </div>
+            <br>
+            <div>
+              <label for="nombreProducto">Salón</label>
+              <input type="text" class="form-control" id="nombreProducto" placeholder="Ej: C-208">
+            </div>
+            <br>
+
+            <br>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <script>
       // $("#exampleModal").on("show.bs.modal", (event) => {
       //   var button = $(event.relatedTarget);
       //   var modal = $(this);
       //   // Use above variables to manipulate the DOM
       // });
-    </script>
+  </script>
 
-    <!-- Optional JavaScript -->
-    <script src="../JavaScript/subjectsLoad.js"></script>
+  <!-- Optional JavaScript -->
+  <script src="../JavaScript/subjectsLoad.js"></script>
 
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script
-      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-      crossorigin="anonymous"
-    ></script>
-  </body>
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+</body>
+
 </html>
