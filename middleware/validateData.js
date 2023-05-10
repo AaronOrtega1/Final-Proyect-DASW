@@ -1,17 +1,26 @@
-const jwt = require('jsonwebtoken');
-const config = require('../config/config.js');
+const jwt = require("jsonwebtoken");
+const config = require("../config/config.js");
 
-function validateBodyTeacher(req, res, next) {
-  let { fullName, department, birthDate, status, userName, passWord, isCoord } =
-    req.body;
+function validateBodyUser(req, res, next) {
+  let {
+    fullName,
+    department,
+    status,
+    userName,
+    passWord,
+    isCoord,
+    isTeach,
+    email,
+  } = req.body;
   if (
     fullName &&
     department &&
-    birthDate &&
     status &&
     userName &&
     passWord &&
-    isCoord !== undefined
+    isCoord &&
+    isTeach &&
+    email !== undefined
   ) {
     next();
     return;
@@ -20,8 +29,15 @@ function validateBodyTeacher(req, res, next) {
 }
 
 function validateBodyGroup(req, res, next) {
-  let { group, department, status, students, professor } = req.body;
-  if (group && department && status && students && professor !== undefined) {
+  let { group, department, status, professor, period, year } = req.body;
+  if (
+    group &&
+    department &&
+    status &&
+    professor &&
+    period &&
+    year !== undefined
+  ) {
     next();
     return;
   }
@@ -29,18 +45,11 @@ function validateBodyGroup(req, res, next) {
 }
 
 function validateSubject(req, res, next) {
-  let {
-    codigo,
-    nombre,
-    areaAsig,
-    creditos,
-    depto,
-    descripcion,
-  } = req.body;
+  let { codigo, nombre, areaAsig, creditos, depto, descripcion } = req.body;
   let missing = [];
-  if (!codigo && !req.params.codigo){
+  if (!codigo && !req.params.codigo) {
     missing.push("codigo");
-  }else if (!codigo && req.params.codigo){
+  } else if (!codigo && req.params.codigo) {
     codigo = req.params.codigo;
   }
   if (!nombre) missing.push("nombre");
@@ -56,42 +65,22 @@ function validateSubject(req, res, next) {
   next();
 }
 
-function validateStudent(req, res, next) {
-  let { fullName, email, carreer } = req.body;
-  if (fullName && email && carreer !== undefined) {
-    next();
-    return;
-  }
-  res.status(400).send({ error: "Missing atributes, please check" });
-}
-
-function validateCoordinator(req, res, next) {
-  let {nombre, rol,departamento, correo, telefono, oficina, imageUrl} = req.body;
-  if (nombre && rol && departamento && correo && telefono && oficina && imageUrl !== undefined) {
-    next();
-    return;
-  }
-  res.status(400).send({ error: "Missing atributes, please check" });
-
-}
-
-function validarToken(req, res, next){
-  let token = req.get('x-token')
-  if(!token){
-    res.status(401).send({error: 'No estas autenticado'})
+function validarToken(req, res, next) {
+  let token = req.get("x-token");
+  if (!token) {
+    res.status(401).send({ error: "No estas autenticado" });
     return;
   }
 
-  jwt.verify(token,config.jwtSecret, (error, decoded)=>{
-    if(error){
-      res.status(401).send({erro: error.message})
+  jwt.verify(token, config.jwtSecret, (error, decoded) => {
+    if (error) {
+      res.status(401).send({ erro: error.message });
       return;
     }
 
     req.username = decoded.userName;
     next();
-  })
-  
+  });
 }
 
 function validateView(req, res, next) {
@@ -104,11 +93,11 @@ function validateView(req, res, next) {
 }
 
 module.exports = {
-  validateBodyTeacher,
+  validateBodyUser,
   validateBodyGroup,
   validateSubject,
   validateStudent,
   validateCoordinator,
   validarToken,
-  validateView
+  validateView,
 };

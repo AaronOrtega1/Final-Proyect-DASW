@@ -5,7 +5,7 @@ const nanoid = require("nanoid");
 
 router.get("/", async(req, res) => {
     let filter  = {};
-    let {codigo, nombre, rol, departamento, correo, telefono, oficina} = req.query;
+    let {codigo, nombre, rol, departamento, correo, telefono, oficina,pagina,limite} = req.query;
 
     if(codigo) filter.codigo = new RegExp(codigo, "i");
     if(nombre) filter.nombre = new RegExp(nombre, "i");
@@ -15,9 +15,14 @@ router.get("/", async(req, res) => {
     if(telefono) filter.telefono = telefono;
     if(oficina) filter.oficina = new RegExp(oficina, "i");
 
+    if(!pagina) pagina = 1;
+    if(!limite) limite = 6;
+    if(pagina < 1) pagina = 1;
 
-    let coordinador = await Administrator.getCoordinadores(filter)
-    res.status(200).send(coordinador);
+    let finalPag = parseInt(limite);
+    let coordinadores = await Administrator.getCoordinadores(filter, pagina, finalPag);
+
+    res.status(200).send(coordinadores);
 });
 
 router.post("/",validateCoordinator,async(req, res) => {

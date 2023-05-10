@@ -1,12 +1,12 @@
 const route = require("express").Router();
-const { Teacher } = require("../db/teacher.js");
+const { User } = require("../db/users");
 const jwt = require("jsonwebtoken");
 const config = require("../config/config.js");
 
 //Validar que los datos que nos pasen sean los correctos
 route.post("/", async (req, res) => {
   console.log(req.body);
-  let user = await Teacher.getTeacherByUserName(req.body.username);
+  let user = await User.getUserByUserName(req.body.username);
   if (!user) {
     res.send("Usuario no existe");
     return;
@@ -18,10 +18,10 @@ route.post("/", async (req, res) => {
     return;
   }
 
-  let token = jwt.sign({ username: user.userName },
-                         config.jwtSecret, 
-                         {expiresIn: 60 * 15},);
-  res.send( {token} );
+  let token = jwt.sign({ username: user.userName }, config.jwtSecret, {
+    expiresIn: 60 * 15,
+  });
+  res.send({ token });
 });
 
 module.exports = route;

@@ -1,7 +1,8 @@
-@host = http://localhost:4000
+@host = http://localhost:3000
 
 ##Recuerden que el token tiene duracion de 5 min
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkluZ2U2NCIsImlhdCI6MTY4MzQxNzYyMywiZXhwIjoxNjgzNDE4NTIzfQ.cUdhtbZxx7WjtzR8mk3CVWuHyYC2-_spIcyTYv-jsaY
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkluZ2U2NCIsImlhdCI6MTY4MzYwOTg1OCwiZXhwIjoxNjgzNjEwNzU4fQ.sOqOplX5cgt31nWq6DKlh92Mxa78pdvqGse0d-goumA
+
 
 ###
 GET {{host}}/api/teachers
@@ -68,7 +69,7 @@ GET {{host}}/api/asignaturas?nombre=Calculo
 GET {{host}}/api/asignaturas?depto=DMF
 
 ###
-GET {{host}}/api/asignaturas?pagina=2&limite=2
+GET {{host}}/api/asignaturas?pagina=1&limite=2
 
 ###
 POST {{host}}/api/asignaturas
@@ -150,6 +151,178 @@ Content-Type: application/json
 
 ###
 DELETE {{host}}/api/view/yz-U9tb78aF4jsEbr2nsE
+
+###
+GET {{host}}/api/administrator
+
+###
+POST {{host}}/api/administrator
+Content-Type: application/json
+
+{
+  "nombre":"Luis Fernando Gutiérrez Preciado",
+  "rol":"Coordinador",
+  "departamento":"DESI",
+  "correo":"lgutierrez@iteso.mx",
+  "telefono":333885655,
+  "oficina":"T312",
+  "imageUrl": "testImage"
+}
+
+###
+POST {{host}}/api/administrator
+Content-Type: application/json
+
+{
+  "nombre":"Daniel Alejandro Hernandez",
+  "rol":"Coordinador",
+  "departamento":"DFH",
+  "correo":"daniel@iteso.mx",
+  "telefono":5454545,
+  "oficina":"J523",
+  "imageUrl": "testImage"
+}
+
+###
+GET {{host}}/api/administrator/?pagina=2&limite=1
+
+###
+POST {{host}}/api/administrator
+Content-Type: application/json
+
+{
+  "nombre":"Dan Vázquez",
+  "rol":"Coordinador",
+  "departamento":"DESI",
+  "correo":"dan.vazquez@iteso.mx",
+  "telefono":333333,
+  "oficina":"T206",
+  "imageUrl": "testImage"
+}
+
+###
+GET {{host}}/api/administrator
+
+###
+GET {{host}}/api/administrator/9vb_suvmdRNmniB6FurW2
+
+###
+PUT {{host}}/api/administrator/9vb_suvmdRNmniB6FurW2
+Content-Type: application/json
+
+{
+  "nombre":"Dan Vázquez",
+  "rol":"Coordinador",
+  "departamento":"DESI",
+  "correo":"newEmail",
+  "telefono":333333,
+  "oficina":"T206",
+  "imageUrl": "testImage"
+}
+
+###
+DELETE {{host}}/api/administrator/9vb_suvmdRNmniB6FurW2
+
+###
+POST {{host}}/api/view 
+Content-Type: application/json
+
+{
+  "profesores":["64519476ddfcc66bd7ee92fd"],
+  "materias":["CHS001","MAT005"],
+  "coordinadorId":"6451a76a278b33981ffb39c6"
+}
+
+###
+GET {{host}}/api/view
+
+###
+PUT {{host}}/api/view/ZeosJHjM9orwuE2xuSebm
+Content-Type: application/json
+
+{
+  "profesores":["64519476ddfcc66bd7ee92fd"],
+  "materias":["CHS001","MAT005", "CRR001"],
+  "coordinadorId":"6451a76a278b33981ffb39c6"
+}
+
+###
+DELETE {{host}}/api/view/ZeosJHjM9orwuE2xuSebm
+
+###
+POST {{host}}/api/evidence
+Content-Type: application/json
+
+{
+  "titulo":"test",
+  "urlArchivo":"test",
+  "descripcion":"test",
+  "teacher": "64519476ddfcc66bd7ee92fd"
+}
+
+###
+DELETE {{host}}/api/evidence/8vw-z7FqX_Ot2ANMWsRTZ
+
+###
+GET {{host}}/api/evidence
+
+###
+GET {{host}}/api/comments
+
+###
+POST {{host}}/api/comments
+Content-Type: application/json
+
+{
+  "autor":"test",
+  "fecha": 952023,
+  "mensaje": "Esta es una prueba de comentario"
+}
+
+###
+PUT {{host}}/api/comments/4TYhmqrJLyQ1dmLqu0mnB
+Content-Type: application/json
+
+{
+  "autor":"test",
+  "fecha": 2,
+  "mensaje": "Esta es una prueba de comentario Test"
+}
+
+###
+DELETE {{host}}/api/comments/4TYhmqrJLyQ1dmLqu0mnB
+
+###
+GET {{host}}/api/evidence
+
+###
+POST {{host}}/api/evidence
+Content-Type: application/json
+
+{
+  "titulo":"test",
+  "urlArchivo":"test",
+  "descripcion":"test",
+  "teacher": "64519476ddfcc66bd7ee92fd",
+  "comments": "6459e92fe9a88b7467890af7",
+  "fecha": 952023
+}
+
+###
+PUT {{host}}/api/evidence/8CPY4rFRtuT0KuyUSLI9L
+Content-Type: application/json
+
+{
+  "titulo":"test",
+  "urlArchivo":"test",
+  "descripcion":"test",
+  "teacher": "64519476ddfcc66bd7ee92fd",
+  "comment": "6459e92fe9a88b7467890af7"
+}
+
+###
+DELETE {{host}}/api/evidence/8CPY4rFRtuT0KuyUSLI9L
+
 
 
 
