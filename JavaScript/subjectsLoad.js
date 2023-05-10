@@ -11,7 +11,11 @@ let btnSiguiente = document.getElementById('siguientePag');
 let displayPaginador = document.getElementById('paginador');
 let searchBarNavBar = document.getElementById('searchBar');
 let searchButtonNavBar = document.getElementById('buscarNavBar');
+let filteredSearch = document.getElementById('filteredSearch');
+let filtroBusqueda = document.getElementById('filtroBusqueda');
+let filteredSearchButton = document.getElementById('filteredSearchButton');
 searchButtonNavBar.addEventListener('click', buscarAsignaturaXcodigo);
+filteredSearchButton.addEventListener('click', buscarAsignaturaXfiltro);
 btnAnterior.addEventListener('click', anteriorPagina);
 btnSiguiente.addEventListener('click', siguientePagina);
 
@@ -36,8 +40,8 @@ async function muestraAsignaturas(listaXmostrar){
         <td>${a.codigo}</td>
         <td>${a.nombre}</td>
         <td>${a.areaAsig}</td>
-        <td>${a.creditos}</td>
         <td>${a.depto}</td>
+        <td>${a.creditos}</td>
         <td>
             <button class="btn btn-dark" type="button" data-toggle="collapse" data-target="#desc-${a.codigo}" aria-expanded="false" aria-controls="#desc-${a.codigo}">
             <i class="fas fa-info-circle"></i>
@@ -105,6 +109,23 @@ async function buscarAsignaturaXcodigo(){
     muestraAsignaturas(asignaturasXmostrar);
 }
 
-
+async function buscarAsignaturaXfiltro(){
+    let filtro = filtroBusqueda.value;
+    if(filtro == 'Departamento'){
+        filtro == 'depto';
+    }else if(filtro == 'Area'){
+        filtro == 'areaAsig';
+    }
+    let asignaturas = await fetch(`http://localhost:3000/api/asignaturas?${filtro}=${filteredSearch.value}`,{
+    method: 'GET',
+    headers: {
+        'Content-Type': 'application/json'
+    }
+    })
+    let datos = await asignaturas.json();
+    let asignaturasXmostrar = [];
+    asignaturasXmostrar.push(datos);
+    muestraAsignaturas(asignaturasXmostrar);
+}
 
 cargaAsignaturas();
