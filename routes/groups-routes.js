@@ -1,6 +1,5 @@
 const router = require("express").Router();
 const {
-  validateBodyTeacher,
   validateBodyGroup,
 } = require("../middleware/validateData.js");
 const { Groups } = require("../db/groups.js");

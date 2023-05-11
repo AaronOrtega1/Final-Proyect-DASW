@@ -1,4 +1,5 @@
 const { mongoose } = require("./connectDB.js");
+const { Teacher } = require("./teacher.js");
 const { Comment } = require("./comments.js");
 const { User } = require("./users.js");
 
@@ -22,7 +23,7 @@ const  evidenceSchema = mongoose.Schema({
     },
     userId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "User"
+        ref: "Teacher"
     },
     comment: { 
         type: mongoose.Schema.Types.ObjectId,

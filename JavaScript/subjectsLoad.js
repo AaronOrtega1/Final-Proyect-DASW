@@ -14,10 +14,14 @@ let searchButtonNavBar = document.getElementById('buscarNavBar');
 let filteredSearch = document.getElementById('filteredSearch');
 let filtroBusqueda = document.getElementById('filtroBusqueda');
 let filteredSearchButton = document.getElementById('filteredSearchButton');
+let addGroup = document.getElementById('addGroup');
+let postSubject = document.getElementById('postSubject');
+postSubject.addEventListener('click', agregarAsignatura);
 searchButtonNavBar.addEventListener('click', buscarAsignaturaXcodigo);
 filteredSearchButton.addEventListener('click', buscarAsignaturaXfiltro);
 btnAnterior.addEventListener('click', anteriorPagina);
 btnSiguiente.addEventListener('click', siguientePagina);
+addGroup.style.display = 'none';
 
 
 async function cargaAsignaturas () {
@@ -54,7 +58,7 @@ async function muestraAsignaturas(listaXmostrar){
             <div class="card card-body">
             <p>${a.descripcion}</p>
             <ul>
-                ${a.grupos.map(g => `
+                ${a.grupos ? a.grupos.map(g => `
                 <li>  <button class="btn btn-light" type="button" data-toggle="collapse" data-target="#desc-${g.groupID}" aria-expanded="false" aria-controls="#desc-${g.groupID}">
                 <i class="fas fa-info-circle">Grupo ${g.professor}</i>
                 </button>
@@ -65,7 +69,7 @@ async function muestraAsignaturas(listaXmostrar){
                     <p>Año: ${g.year}</p>
                 </div>
             </div>
-                `).join('')}
+                `).join(''): ''}
                 
             </ul>
             </div>
@@ -111,11 +115,18 @@ async function buscarAsignaturaXcodigo(){
 
 async function buscarAsignaturaXfiltro(){
     let filtro = filtroBusqueda.value;
+    console.log(filtro);
     if(filtro == 'Departamento'){
-        filtro == 'depto';
-    }else if(filtro == 'Area'){
-        filtro == 'areaAsig';
+        filtro = 'depto';
+    }else if(filtro == 'Creditos'){
+        filtro = 'creditos';
+        filteredSearch.value = parseInt(filteredSearch.value);
+    }else if(filtro == 'Nombre'){
+        filtro = 'nombre';
+    }else{
+        filtro ='areaAsig';
     }
+    console.log(filtro + ' ' + filteredSearch.value);
     let asignaturas = await fetch(`http://localhost:3000/api/asignaturas?${filtro}=${filteredSearch.value}`,{
     method: 'GET',
     headers: {
@@ -123,9 +134,48 @@ async function buscarAsignaturaXfiltro(){
     }
     })
     let datos = await asignaturas.json();
-    let asignaturasXmostrar = [];
-    asignaturasXmostrar.push(datos);
-    muestraAsignaturas(asignaturasXmostrar);
+    console.log(datos);
+    muestraAsignaturas(datos);
+}
+
+async function agregarAsignatura(){
+    let nombreAsignatura = document.getElementById('nombreAsignatura').value;
+    let codigoAsignatura = document.getElementById('CodigoA').value;
+    let areaAsignatura = document.getElementById('AreaA').value;
+    let deptoAsignatura = document.getElementById('Depto').value;
+    let creditosAsignatura = document.getElementById('NoCreditos').value;
+    let descripcionAsignatura = document.getElementById('descripcionAsignatura').value;
+    if(!nombreAsignatura || !codigoAsignatura || !areaAsignatura || !deptoAsignatura || !creditosAsignatura || !descripcionAsignatura){
+        alert('Por favor llene todos los campos');
+    }else{
+        let asignatura = {
+            nombre: nombreAsignatura,
+            codigo: codigoAsignatura,
+            areaAsig: areaAsignatura,
+            depto: deptoAsignatura,
+            creditos: creditosAsignatura,
+            descripcion: descripcionAsignatura
+        }
+
+        let response = await fetch('http://localhost:3000/api/asignaturas',{
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(asignatura)
+    }).then(res => {
+        if(res.ok){
+            alert('Se ha agregado la asignatura');
+        }
+    }).catch(error => {
+        console.log(error);
+    });
+
+
+    
+    }
+    
+
 }
 
 cargaAsignaturas();
