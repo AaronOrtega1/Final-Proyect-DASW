@@ -58,6 +58,9 @@ function validateSubject(req, res, next) {
   if (!depto) missing.push("departamento");
   if (!descripcion) missing.push("descripcion");
 
+  codigo = codigo.toUpperCase();
+  console.log(codigo);
+
   if (missing.length > 0) {
     res.status(400).send({ error: "Faltan atributos: " + missing.join(", ") });
     return;
