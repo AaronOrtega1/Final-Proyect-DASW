@@ -1,6 +1,6 @@
 const { mongoose } = require("./connectDB.js");
-const { Teacher } = require("./teacher.js");
 const { Comment } = require("./comments.js");
+const { User } = require("./users.js");
 
 const  evidenceSchema = mongoose.Schema({
     codigo: {
@@ -20,9 +20,9 @@ const  evidenceSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    teacher: {
+    userId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Teacher"
+        ref: "User"
     },
     comment: { 
         type: mongoose.Schema.Types.ObjectId,
