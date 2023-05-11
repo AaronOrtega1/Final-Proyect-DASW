@@ -60,10 +60,13 @@ Content-Type: application/json
 GET {{host}}/api/asignaturas
 
 ###
-GET {{host}}/api/asignaturas/CRR001
+GET {{host}}/api/asignaturas/crr005
 
 ###
 GET {{host}}/api/asignaturas?nombre=Calculo
+
+###
+GET {{host}}/api/asignaturas?areaAsig=Curric
 
 ###
 GET {{host}}/api/asignaturas?depto=DMF
