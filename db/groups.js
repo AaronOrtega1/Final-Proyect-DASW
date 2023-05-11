@@ -1,5 +1,5 @@
 const { mongoose } = require("./connectDB.js");
-const { Teacher } = require("./teacher.js");
+const { User } = require("./users.js");
 
 const groupSchema = mongoose.Schema({
   groupID: {
@@ -22,7 +22,7 @@ const groupSchema = mongoose.Schema({
   },
   professor: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Teacher"
+    ref: "User"
   },
   period: {
     type: String,

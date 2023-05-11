@@ -1,12 +1,10 @@
 const express = require("express");
 const path = require("path");
 const teacherLogin = require("./routes/auth-route.js");
-const teachersRoute = require("./routes/teachers-route.js");
 const groupsRoute = require("./routes/groups-routes.js");
 const subjectsRoute = require("./routes/subjects-routes.js");
-const studentsRoute = require("./routes/students-routes.js");
 const coordinadorRoute = require("./routes/coordinador-route.js");
-const cordinatorsRoute = require("./routes/administrator-cords-routes.js");
+//const cordinatorsRoute = require("./routes/administrator-cords-routes.js");
 const viewsRoute = require("./routes/view-routes.js");
 const evidenceRoute = require("./routes/evidence-routes.js");
 const commentRoute = require("./routes/comments-route.js");
@@ -24,11 +22,7 @@ app.use(express.json());
 
 app.use("/api/login", teacherLogin);
 
-app.use("/api/teachers", teachersRoute);
-
 app.use("/api/asignaturas", subjectsRoute);
-
-app.use("/api/students", studentsRoute);
 
 app.use("/api/users", usersRoute);
 
@@ -36,7 +30,7 @@ app.use("/api/groups", groupsRoute);
 
 app.use("/api/coordinador", coordinadorRoute);
 
-app.use("/api/administrator", cordinatorsRoute);
+//app.use("/api/administrator", cordinatorsRoute);
 
 app.use("/api/view", viewsRoute);
 
