@@ -52,7 +52,7 @@ userSchema.statics.getUser = async (filters) => {
   return user;
 };
 
-teacherSchema.statics.getUserByID = async (userID) => {
+userSchema.statics.getUserByID = async (userID) => {
   let user = await User.findOne({ userID });
   console.log(
     "🚀 ~ file: users.js:54 ~ teacherSchema.statics.getUserByID= ~ user:",

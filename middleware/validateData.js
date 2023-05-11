@@ -96,8 +96,6 @@ module.exports = {
   validateBodyUser,
   validateBodyGroup,
   validateSubject,
-  validateStudent,
-  validateCoordinator,
   validarToken,
   validateView,
 };
