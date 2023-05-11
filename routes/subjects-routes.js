@@ -23,7 +23,7 @@ router.get("/", async (req, res) => {
     filter.nombre = new RegExp(nombre, "i");
   }
   if (creditos) {
-    filter.creditos = new RegExp(creditos, "i");
+    filter.creditos = parseInt(creditos);
   }
   if (depto) {
     filter.depto = new RegExp(depto, "i");
@@ -44,15 +44,10 @@ router.get("/", async (req, res) => {
 
 router.get("/:codigo", async (req, res) => {
   let codigo  = req.params.codigo;
+  codigo = codigo.toUpperCase();
   let asignatura = await Asignaturas.getAsignaturaXcodigo(codigo);
   res.send(asignatura);
 });
-
-// router.get("/:nombre", async (req, res) => {
-//   let  nombre  = req.params.nombre;
-//   let asignatura = await Asignaturas.getAsignaturaXnombre(nombre);
-//   res.send(asignatura);
-// });
 
 router.post("/", validateSubject, async (req, res) => {
   let {
