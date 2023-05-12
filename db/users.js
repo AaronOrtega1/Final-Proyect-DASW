@@ -73,7 +73,7 @@ userSchema.statics.getUserByUserName = async (userName) => {
   return user;
 };
 
-userSchema.statics.createTeacher = async (userData) => {
+userSchema.statics.createUser = async (userData) => {
   let newUser = User(userData);
   console.log(
     "🚀 ~ file: users.js:72 ~ userSchema.statics.createTeacher= ~ newUser:",

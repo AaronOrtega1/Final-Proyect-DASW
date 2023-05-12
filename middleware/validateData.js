@@ -11,6 +11,7 @@ function validateBodyUser(req, res, next) {
     isCoord,
     isTeach,
     email,
+    imgURL,
   } = req.body;
   if (
     fullName &&
@@ -20,7 +21,8 @@ function validateBodyUser(req, res, next) {
     passWord &&
     isCoord &&
     isTeach &&
-    email !== undefined
+    email &&
+    imgURL !== undefined
   ) {
     next();
     return;
