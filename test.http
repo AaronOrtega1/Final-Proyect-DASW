@@ -90,6 +90,7 @@ Content-Type: application/json
 
 ###
 PUT {{host}}/api/asignaturas/MAT003
+x-token:
 Content-Type: application/json
 
 {
@@ -328,6 +329,24 @@ Content-Type: application/json
 ###
 DELETE {{host}}/api/evidence/8CPY4rFRtuT0KuyUSLI9L
 
+###
+DELETE {{host}}/api/users/A01234567
+
+###
+PUT {{host}}/api/users/A01234567
+Content-Type: application/json
+
+{    
+  "userID": "A01234567",
+  "fullName": "Juan Perez",
+  "department": "Sistemas",
+  "status": true,
+  "userName": "jperez",
+  "passWord": 1234,
+  "isCoord": false,
+  "isTeach": true,
+  "email": "jperez@iteso.mx",
+}
 
 
 
