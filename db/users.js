@@ -102,4 +102,18 @@ userSchema.statics.deleteUser = async (userID) => {
 };
 
 const User = mongoose.model("User", userSchema);
+
+// User.createTeacher({
+//   userID: "A01234567",
+//   fullName: "Juan Perez",
+//   department: "Sistemas",
+//   status: true,
+//   userName: "jperez",
+//   passWord: "1234",
+//   isCoord: false,
+//   isTeach: true,
+//   email: "jperez@iteso.mx"
+// })
+
+User.getUser()
 module.exports = { User };
