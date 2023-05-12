@@ -28,16 +28,24 @@ const asignaturaSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  grupos: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Groups'
-  }],
+  grupos: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Groups",
+    },
+  ],
 });
 
-asignaturaSchema.statics.getAsignaturas = async (filters,  pagina, limite) => {
+asignaturaSchema.statics.getAsignaturas = async (filters, pagina, limite) => {
   let salto = (pagina - 1) * limite;
-  let asignaturas = await Asignaturas.find(filters).skip(salto).limit(limite)
-  .populate({path: 'grupos', model: 'Groups', select: 'professor period year groupID'}); // 'professor period year groupID'
+  let asignaturas = await Asignaturas.find(filters)
+    .skip(salto)
+    .limit(limite)
+    .populate({
+      path: "grupos",
+      model: "Groups",
+      select: "professor period year groupID",
+    }); // 'professor period year groupID'
   //asignaturas = asignaturas.slice(salto, salto + limite);
   console.log("Asignaturas: \n" + asignaturas);
   return asignaturas;
@@ -87,10 +95,14 @@ asignaturaSchema.statics.deleteAsignatura = async (codigo) => {
   return asignaturaEliminada;
 };
 
+asignaturaSchema.statics.update = async function (asignaturaData) {
+  let data = await this.updateOne(asignaturaData);
+  console.log("🚀 ~ file: asignatura.js:100 ~ data:", data);
+  return this;
+};
+
 let Asignaturas = mongoose.model("Asignaturas", asignaturaSchema);
 
 /* Asignaturas.getAsignaturas({}); */
 
-
 module.exports = { Asignaturas };
-

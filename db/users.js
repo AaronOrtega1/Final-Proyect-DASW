@@ -41,6 +41,9 @@ const userSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  imgURL: {
+    type: String,
+  },
 });
 
 userSchema.statics.getUser = async (filters) => {
@@ -115,5 +118,5 @@ const User = mongoose.model("User", userSchema);
 //   email: "jperez@iteso.mx"
 // })
 
-User.getUser()
+User.getUser();
 module.exports = { User };

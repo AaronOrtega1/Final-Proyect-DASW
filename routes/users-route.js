@@ -19,6 +19,7 @@ router.get("/", validarToken, async (req, res) => {
     isCoord,
     isTeach,
     email,
+    imgURL,
   } = req.query;
 
   if (fullName) {
@@ -45,6 +46,9 @@ router.get("/", validarToken, async (req, res) => {
   if (email) {
     filter.email = new RegExp(email, "i");
   }
+  if (imgURL) {
+    filter.imgURL = new RegExp(imgURL, "i");
+  }
   let user = await User.getUser(filter);
   res.send(user);
 });
@@ -59,6 +63,7 @@ router.post("/", validarToken, validateBodyUser, async (req, res) => {
     isCoord,
     isTeach,
     email,
+    imgURL,
   } = req.body;
 
   let hash = bcrypt.hashSync(passWord, 10);
@@ -73,6 +78,7 @@ router.post("/", validarToken, validateBodyUser, async (req, res) => {
     isCoord,
     isTeach,
     email,
+    imgURL,
   });
 
   res.status(201).send(newUser);
@@ -95,6 +101,7 @@ router.put("/:userID", validarToken, validateBodyUser, async (req, res) => {
     isCoord,
     isTeach,
     email,
+    imgURL,
   } = req.body;
 
   let hash = bcrypt.hashSync(passWord, 10);
@@ -106,6 +113,9 @@ router.put("/:userID", validarToken, validateBodyUser, async (req, res) => {
     userName,
     passWord: hash,
     isCoord,
+    isTeach,
+    email,
+    imgURL,
   });
   res.send(updatedUser);
 });
