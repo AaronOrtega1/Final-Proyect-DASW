@@ -46,8 +46,11 @@ asignaturaSchema.statics.getAsignaturas = async (filters, pagina, limite) => {
       model: "Groups",
       select: "professor period year groupID",
     }); // 'professor period year groupID'
+  console.log(
+    "🚀 ~ file: asignatura.js:49 ~ asignaturaSchema.statics.getAsignaturas= ~ asignaturas:",
+    asignaturas
+  );
   //asignaturas = asignaturas.slice(salto, salto + limite);
-  console.log("Asignaturas: \n" + asignaturas);
   return asignaturas;
 };
 
@@ -103,6 +106,6 @@ asignaturaSchema.statics.update = async function (asignaturaData) {
 
 let Asignaturas = mongoose.model("Asignaturas", asignaturaSchema);
 
-/* Asignaturas.getAsignaturas({}); */
+Asignaturas.getAsignaturas({});
 
 module.exports = { Asignaturas };

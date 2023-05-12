@@ -22,15 +22,15 @@ const groupSchema = mongoose.Schema({
   },
   professor: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "User"
+    ref: "User",
   },
   period: {
     type: String,
-    required: true
+    required: true,
   },
   year: {
     type: Number,
-    required: true
+    required: true,
   },
 });
 
@@ -85,6 +85,6 @@ groupSchema.statics.deleteGroup = async (groupID) => {
 
 const Groups = mongoose.model("Groups", groupSchema);
 
-module.exports = { Groups };
+Groups.getGroup({});
 
-/* Groups.getGroup({}); */
+module.exports = { Groups };
