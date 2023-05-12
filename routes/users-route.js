@@ -17,7 +17,7 @@ router.get("/", validarToken, async (req, res) => {
     userName,
     passWord,
     isCoord,
-    isTeach,
+    isAdmin,
     email,
     imgURL,
   } = req.query;
@@ -40,8 +40,8 @@ router.get("/", validarToken, async (req, res) => {
   if (isCoord !== undefined) {
     filter.isCoord = isCoord == "true" ? true : false;
   }
-  if (isTeach !== undefined) {
-    filter.isTeach = isTeach == "true" ? true : false;
+  if (isAdmin !== undefined) {
+    filter.isAdmin = isAdmin == "true" ? true : false;
   }
   if (email) {
     filter.email = new RegExp(email, "i");
@@ -61,7 +61,7 @@ router.post("/", validarToken, validateBodyUser, async (req, res) => {
     userName,
     passWord,
     isCoord,
-    isTeach,
+    isAdmin,
     email,
     imgURL,
   } = req.body;
@@ -76,7 +76,7 @@ router.post("/", validarToken, validateBodyUser, async (req, res) => {
     userName,
     passWord: hash,
     isCoord,
-    isTeach,
+    isAdmin,
     email,
     imgURL,
   });
@@ -99,7 +99,7 @@ router.put("/:userID", validarToken, validateBodyUser, async (req, res) => {
     userName,
     passWord,
     isCoord,
-    isTeach,
+    isAdmin,
     email,
     imgURL,
   } = req.body;
@@ -113,7 +113,7 @@ router.put("/:userID", validarToken, validateBodyUser, async (req, res) => {
     userName,
     passWord: hash,
     isCoord,
-    isTeach,
+    isAdmin,
     email,
     imgURL,
   });
