@@ -25,7 +25,8 @@ const commentSchema = mongoose.Schema({
 
 commentSchema.statics.getComments = async(filters, pagina, limite) => {
     let salto = (pagina - 1) * limite;
-    let comments = await Comment.find(filters).skip(salto).limit(limite);
+    let comments = await Comment.find(filters).skip(salto).limit(limite)
+    .populate('idUser');
     console.log("Comments: \n" + comments);
     return comments;
 }
