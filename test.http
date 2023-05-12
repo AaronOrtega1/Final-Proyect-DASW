@@ -277,23 +277,24 @@ POST {{host}}/api/comments
 Content-Type: application/json
 
 {
-  "autor":"test",
   "fecha": 952023,
-  "mensaje": "Esta es una prueba de comentario"
+  "mensaje": "Esta es una prueba de comentario",
+  "user":"645d309a7dd03ece21b587dd"
 }
 
 ###
-PUT {{host}}/api/comments/4TYhmqrJLyQ1dmLqu0mnB
+PUT {{host}}/api/comments/HO3AbNox-OKhWqnxPV50L
 Content-Type: application/json
 
 {
   "autor":"test",
   "fecha": 2,
-  "mensaje": "Esta es una prueba de comentario Test"
+  "mensaje": "Esta es una prueba de comentario Test",
+  "idUser":"645d309a7dd03ece21b587dd"
 }
 
 ###
-DELETE {{host}}/api/comments/4TYhmqrJLyQ1dmLqu0mnB
+DELETE {{host}}/api/comments/zNd7ePvNJ85fcxeg6rhuO
 
 ###
 GET {{host}}/api/evidence
@@ -312,15 +313,16 @@ Content-Type: application/json
 }
 
 ###
-PUT {{host}}/api/evidence/8CPY4rFRtuT0KuyUSLI9L
+PUT {{host}}/api/evidence/yg2a9t1IDmzP3HYuRwgxh
 Content-Type: application/json
 
 {
   "titulo":"test",
   "urlArchivo":"test",
   "descripcion":"test",
-  "teacher": "64519476ddfcc66bd7ee92fd",
-  "comment": "6459e92fe9a88b7467890af7"
+  "userId": "645d309a7dd03ece21b587dd",
+  "comment": "645da68570803115322d2237",
+  "fecha": 952023
 }
 
 ###
