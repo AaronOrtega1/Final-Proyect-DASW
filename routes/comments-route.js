@@ -27,7 +27,7 @@ router.post("/", async(req, res) => {
 
     let newComment = {
         codigo: nanoid.nanoid(),
-        autor: commentData.autor,
+        idUser: commentData.idUser,
         fecha: commentData.fecha,
         mensaje: commentData.mensaje
     }
