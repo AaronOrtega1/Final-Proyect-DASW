@@ -1,6 +1,7 @@
 const { mongoose } = require("./connectDB.js");
-const { Teacher } = require("./teacher.js");
 const { Comment } = require("./comments.js");
+const { User } = require("./users.js");
+
 
 const  evidenceSchema = mongoose.Schema({
     codigo: {
@@ -20,9 +21,9 @@ const  evidenceSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    teacher: {
+    userId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Teacher"
+        ref: "User"
     },
     comment: { 
         type: mongoose.Schema.Types.ObjectId,
@@ -36,7 +37,9 @@ const  evidenceSchema = mongoose.Schema({
 
 evidenceSchema.statics.getEvidencias = async(filters, pagina, limite) => {
     let salto = (pagina - 1) * limite;
-    let evidencias = await Evidence.find(filters).skip(salto).limit(limite);
+    let evidencias = await Evidence.find(filters).skip(salto).limit(limite)
+    .populate({path: 'userId', model: 'User', select: 'fullName '})
+    .populate({path: 'comment', model: 'Comment', select: 'mensaje idUser fecha', populate: {path: 'idUser', model: 'User', select: 'fullName'}});
     console.log("All: \n" + evidencias);
     return evidencias;
 }
@@ -69,5 +72,5 @@ evidenceSchema.statics.deleteEvidencia = async(codigo) => {
 
 
 
-let Evidence = mongoose.model("evidence", evidenceSchema);
+const Evidence = mongoose.model("Evidence", evidenceSchema);
 module.exports = { Evidence };

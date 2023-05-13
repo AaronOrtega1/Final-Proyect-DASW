@@ -11,6 +11,7 @@ function validateBodyUser(req, res, next) {
     isCoord,
     isTeach,
     email,
+    imgURL,
   } = req.body;
   if (
     fullName &&
@@ -20,7 +21,8 @@ function validateBodyUser(req, res, next) {
     passWord &&
     isCoord &&
     isTeach &&
-    email !== undefined
+    email &&
+    imgURL !== undefined
   ) {
     next();
     return;
@@ -57,6 +59,9 @@ function validateSubject(req, res, next) {
   if (!creditos) missing.push("creditos");
   if (!depto) missing.push("departamento");
   if (!descripcion) missing.push("descripcion");
+
+  codigo = codigo.toUpperCase();
+  console.log(codigo);
 
   if (missing.length > 0) {
     res.status(400).send({ error: "Faltan atributos: " + missing.join(", ") });
@@ -96,8 +101,6 @@ module.exports = {
   validateBodyUser,
   validateBodyGroup,
   validateSubject,
-  validateStudent,
-  validateCoordinator,
   validarToken,
   validateView,
 };

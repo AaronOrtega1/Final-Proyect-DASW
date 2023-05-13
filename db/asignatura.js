@@ -28,18 +28,29 @@ const asignaturaSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  grupos: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Groups'
-  }],
+  grupos: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Groups",
+    },
+  ],
 });
 
-asignaturaSchema.statics.getAsignaturas = async (filters,  pagina, limite) => {
+asignaturaSchema.statics.getAsignaturas = async (filters, pagina, limite) => {
   let salto = (pagina - 1) * limite;
-  let asignaturas = await Asignaturas.find(filters).skip(salto).limit(limite)
-  .populate({path: 'grupos', model: 'Groups', select: 'professor period year groupID'}); // 'professor period year
+  let asignaturas = await Asignaturas.find(filters)
+    .skip(salto)
+    .limit(limite)
+    .populate({
+      path: "grupos",
+      model: "Groups",
+      select: "professor period year groupID",
+    }); // 'professor period year groupID'
+  console.log(
+    "🚀 ~ file: asignatura.js:49 ~ asignaturaSchema.statics.getAsignaturas= ~ asignaturas:",
+    asignaturas
+  );
   //asignaturas = asignaturas.slice(salto, salto + limite);
-  console.log("Asignaturas: \n" + asignaturas);
   return asignaturas;
 };
 
@@ -82,15 +93,19 @@ asignaturaSchema.statics.updateAsignatura = async (codigo, datos) => {
 };
 
 asignaturaSchema.statics.deleteAsignatura = async (codigo) => {
-  let asignaturaEliminada = await Asignaturas.findOneAndDelete(codigo);
+  let asignaturaEliminada = await Asignaturas.findOneAndDelete({ codigo: codigo  });
   console.log("Asignatura Eliminada: \n" + asignaturaEliminada);
   return asignaturaEliminada;
 };
 
+asignaturaSchema.statics.update = async function (asignaturaData) {
+  let data = await this.updateOne(asignaturaData);
+  console.log("🚀 ~ file: asignatura.js:100 ~ data:", data);
+  return this;
+};
+
 let Asignaturas = mongoose.model("Asignaturas", asignaturaSchema);
 
-/* Asignaturas.getAsignaturas({}); */
-
+Asignaturas.getAsignaturas({});
 
 module.exports = { Asignaturas };
-

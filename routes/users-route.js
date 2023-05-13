@@ -17,8 +17,9 @@ router.get("/", validarToken, async (req, res) => {
     userName,
     passWord,
     isCoord,
-    isTeach,
+    isAdmin,
     email,
+    imgURL,
   } = req.query;
 
   if (fullName) {
@@ -39,11 +40,14 @@ router.get("/", validarToken, async (req, res) => {
   if (isCoord !== undefined) {
     filter.isCoord = isCoord == "true" ? true : false;
   }
-  if (isTeach !== undefined) {
-    filter.isTeach = isTeach == "true" ? true : false;
+  if (isAdmin !== undefined) {
+    filter.isAdmin = isAdmin == "true" ? true : false;
   }
   if (email) {
     filter.email = new RegExp(email, "i");
+  }
+  if (imgURL) {
+    filter.imgURL = new RegExp(imgURL, "i");
   }
   let user = await User.getUser(filter);
   res.send(user);
@@ -57,8 +61,9 @@ router.post("/", validarToken, validateBodyUser, async (req, res) => {
     userName,
     passWord,
     isCoord,
-    isTeach,
+    isAdmin,
     email,
+    imgURL,
   } = req.body;
 
   let hash = bcrypt.hashSync(passWord, 10);
@@ -71,8 +76,9 @@ router.post("/", validarToken, validateBodyUser, async (req, res) => {
     userName,
     passWord: hash,
     isCoord,
-    isTeach,
+    isAdmin,
     email,
+    imgURL,
   });
 
   res.status(201).send(newUser);
@@ -93,8 +99,9 @@ router.put("/:userID", validarToken, validateBodyUser, async (req, res) => {
     userName,
     passWord,
     isCoord,
-    isTeach,
+    isAdmin,
     email,
+    imgURL,
   } = req.body;
 
   let hash = bcrypt.hashSync(passWord, 10);
@@ -106,6 +113,9 @@ router.put("/:userID", validarToken, validateBodyUser, async (req, res) => {
     userName,
     passWord: hash,
     isCoord,
+    isAdmin,
+    email,
+    imgURL,
   });
   res.send(updatedUser);
 });

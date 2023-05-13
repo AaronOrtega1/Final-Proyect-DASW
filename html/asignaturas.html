@@ -87,7 +87,7 @@
       </div>
       <div>
         <button class="btn btn-dark" type="button" id="agregarElemento" data-toggle="modal"
-        data-target="#agregarAsignatura">
+        data-target="#agregarAsignatura" onclick="funcionPost()">
           Agregar <i class="fas fa-plus-circle"></i>
         </button>
       </div>
@@ -224,45 +224,45 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">añadir asignatura</h5>
+          <h5 class="modal-title" id="bannerModal">añadir asignatura</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          <form action="">
+          <form action="" id="formularioAsignatura">
             <div>
               <label for="nombreProducto">Asignatura</label>
-              <input type="text" class="form-control" id="nombreProducto" placeholder="Nombre">
+              <input type="text" class="form-control" id="nombreAsignatura" placeholder="Nombre" required>
             </div>
             <br>
             <div>
               <div class="form-group">
                 <label for="descripcionProducto">Descripción</label>
-                <textarea class="form-control" name="descripcionProducto" id="descripcionProducto" rows="3"></textarea>
+                <textarea class="form-control" name="descripcionAsignatura" id="descripcionAsignatura" rows="3" required></textarea>
               </div>
             </div>
             <br>
             <label for="">Detalles</label>
             <div class="d-flex align-items-center">
-              <input type="number" class="form-control m-1" id="NoCreditos" placeholder="Creditos">
-              <input type="text" class="form-control m-1" id="Depto" placeholder="Departamento">
+              <input type="number" class="form-control m-1" id="NoCreditos" placeholder="Creditos" required>
+              <input type="text" class="form-control m-1" id="Depto" placeholder="Departamento" required>
             </div>
             <div class="d-flex align-items-center">
-              <input type="text" class="form-control m-1" id="CodigoA" placeholder="Código">
-              <input type="text" class="form-control m-1" id="AreaA" placeholder="Área">
+              <input type="text" class="form-control m-1" id="CodigoA" placeholder="Código" pattern="^[a-zA-Z]{3}\d{3}$" maxlength="6" required>
+              <input type="text" class="form-control m-1" id="AreaA" placeholder="Área" required>
             </div>
             <br>
-            <div class="d-flex align-items-center">
+            <div class="d-flex align-items-center" id="">
               <button type="button" name="addGroup" id="addGroup" class="btn btn-dark btn-lg btn-block"
                 data-toggle="modal" data-target="#modalAddGroup">Agregar grupo</button>
             </div>
-            <p class="hide text-primary">No hay grupos guardados</p>
           </form>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-danger" id="deleteSubject" data-dismiss="modal">Borrar</button>
+          <button type="button" class="btn btn-primary" id="postSubject" data-dismiss="modal">Guardar</button>
         </div>
       </div>
     </div>

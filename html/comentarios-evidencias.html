@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <style>
     #addComentario{
-        margin-top: 20px;
+        margin-top: 120px;
         margin-bottom: 20px;
         width: 200px;
         height: 50px;
@@ -23,85 +23,31 @@
   </head>
   <body>
       
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-  </body>
-  <div class="container mt-5 mb-5">
-    <div class="d-flex justify-content-center row">
-        <div class="d-flex flex-column col-md-8">
-            <div class="d-flex flex-row align-items-center text-left comment-top p-2 bg-white border-bottom px-4">
-                <div class="profile-image"><img class="rounded-circle" src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png" width="70"></div>
-                <div class="d-flex flex-column ml-3">
-                      <div class="d-flex flex-row align-items-center align-content-center post-title" id="fechaPublicacion">
-                        <h6 class="mr-2">Fecha</h6>
-                    </div>
-                    <div class="d-flex flex-row post-title">
-                        <h3>Titulo de Evidencia</h3><span class="ml-2"></span></div>
-                    <div class="d-flex flex-row align-items-center align-content-center post-title" id="nombreProfesor">
-                        <h5 class="mr-2">Nombre de Profesor</h5>
-                    </div>
-                </div>
-            </div>
-            <div id="descripcionEvidencia" class="d-flex flex-row align-items-center text-left comment-top p-2 bg-white border-bottom px-4">
-                <div class="commented-section mt-2">
-                    <div class="d-flex flex-row align-items-center commented-user">
-                        <h5 class="mr-2">Descripcion</h5><span class="dot mb-1"></span></div>
-                    <div class="comment-text-sm" id ="descripcionEvidencia"><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</span></div>
-                    <div id = "urlEvidencia" style="margin-top: 20px;">
-                        <h5>Archivos</h5>
-                        <a href="https://www.google.com">https://www.google.com</a>
-                    </div>
-                </div>
 
-            </div>
-
-            <button type="button" class="btn btn-dark border border-white" id="addComentario">Añadir comentario</button>
-
-<div class="container my-5 py-5">
- <div class="row d-flex justify-content-center">
-    <div class="col-md-12 col-lg-10">
-        <div class="card text-dark" id="comentarioEvidencias">
-
-            <div class="card-body p-4">
-                <div class="d-flex flex-start">
-                  <img class="rounded-circle shadow-1-strong me-3"
-                    src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png" alt="avatar" width="60"
-                    height="60" />
-                  <div>
-                    <h6 class="fw-bold mb-1" id="autorComentario">Autor Comentario </h6>
-                    <div class="d-flex align-items-center mb-3">
-                      <p class="mb-0" id="fechaComentario">
-                        Fecha Comentario
-                      </p>
-                      
-                    </div>
-                    <p class="mb-0" id="mensajeComentario">
-                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. 
-                        Fugiat est nesciunt temporibus alias odio vitae nisi accusamus 
-                        sint eos rerum.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-        </div>
-    </div>
-            
+<div class= "container my-5 py-5" id="evidenceData">
 
 
+</div>
 
-        </div>
-    </div>
-  </div>
+<button type="button" class="btn btn-dark border border-white" id="addComentario">Añadir comentario</button>
+
+
+<div class= "container my-5 py-5" id="commentData">
+  
+  
+</div>
 
 
 
 
  
-
+    <!-- Optional JavaScript -->
+    <script type = "module" src="../JavaScript/evidences-comments.js"></script>
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
 
 
 

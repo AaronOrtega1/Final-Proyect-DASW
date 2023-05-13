@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { Teacher } = require("../db/teacher.js");
+// const { Teacher } = require("../db/teacher.js");
 // const {validateBodyTeacher} = require('../middleware/validateData.js');
 const nanoid = require("nanoid");
 

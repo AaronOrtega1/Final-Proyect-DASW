@@ -63,23 +63,23 @@ router.get("/:teacherID",validarToken, async (req, res) => {
   res.send(teacher);
 });
 
-router.put("/:teacherID",validarToken, validateBodyTeacher, async (req, res) => {
-  let { teacherID } = req.params;
-  let { fullName, department, birthDate, status, userName, passWord, isCoord } =
-    req.body;
+// router.put("/:teacherID",validarToken, validateBodyTeacher, async (req, res) => {
+//   let { teacherID } = req.params;
+//   let { fullName, department, birthDate, status, userName, passWord, isCoord } =
+//     req.body;
 
-  let hash = bcrypt.hashSync(passWord,10);
-  let updatedTeacher = await Teacher.updateTeacher(teacherID, {
-    fullName,
-    department,
-    birthDate,
-    status,
-    userName,
-    passWord: hash,
-    isCoord
-  });
-  res.send(updatedTeacher);
-});
+//   let hash = bcrypt.hashSync(passWord,10);
+//   let updatedTeacher = await Teacher.updateTeacher(teacherID, {
+//     fullName,
+//     department,
+//     birthDate,
+//     status,
+//     userName,
+//     passWord: hash,
+//     isCoord
+//   });
+//   res.send(updatedTeacher);
+// });
 
 router.delete("/:teacherID",validarToken, async (req, res) => {
   let { teacherID } = req.params;

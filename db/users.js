@@ -32,7 +32,7 @@ const userSchema = mongoose.Schema({
     default: false,
     required: true,
   },
-  isTeach: {
+  isAdmin: {
     type: Boolean,
     default: false,
     required: true,
@@ -40,6 +40,9 @@ const userSchema = mongoose.Schema({
   email: {
     type: String,
     required: true,
+  },
+  imgURL: {
+    type: String,
   },
 });
 
@@ -52,7 +55,7 @@ userSchema.statics.getUser = async (filters) => {
   return user;
 };
 
-teacherSchema.statics.getUserByID = async (userID) => {
+userSchema.statics.getUserByID = async (userID) => {
   let user = await User.findOne({ userID });
   console.log(
     "🚀 ~ file: users.js:54 ~ teacherSchema.statics.getUserByID= ~ user:",
@@ -70,7 +73,7 @@ userSchema.statics.getUserByUserName = async (userName) => {
   return user;
 };
 
-userSchema.statics.createTeacher = async (userData) => {
+userSchema.statics.createUser = async (userData) => {
   let newUser = User(userData);
   console.log(
     "🚀 ~ file: users.js:72 ~ userSchema.statics.createTeacher= ~ newUser:",
@@ -102,4 +105,18 @@ userSchema.statics.deleteUser = async (userID) => {
 };
 
 const User = mongoose.model("User", userSchema);
+
+// User.createTeacher({
+//   userID: "A01234567",
+//   fullName: "Juan Perez",
+//   department: "Sistemas",
+//   status: true,
+//   userName: "jperez",
+//   passWord: "1234",
+//   isCoord: false,
+//   isTeach: true,
+//   email: "jperez@iteso.mx"
+// })
+
+User.getUser();
 module.exports = { User };
