@@ -41,10 +41,10 @@ router.get("/:codigo", async (req, res) => {
 });
 
 router.post("/", validateSubject, async (req, res) => {
-  if (!req.user.isAdmin) {
-    res.status(401).send("Unauthorized");
-    return;
-  }
+  // if (!req.user.isAdmin) {
+  //   res.status(401).send("Unauthorized");
+  //   return;
+  // }
   let { codigo, nombre, areaAsig, creditos, depto, descripcion, grupos } =
     req.body;
   codigo = codigo.toUpperCase();
@@ -65,10 +65,10 @@ router.post("/", validateSubject, async (req, res) => {
 });
 
 router.put("/:codigo", validateSubject, async (req, res) => {
-  if (!req.user.isAdmin) {
-    res.status(401).send("Unauthorized");
-    return;
-  }
+  // if (!req.user.isAdmin) {
+  //   res.status(401).send("Unauthorized");
+  //   return;
+  // }
 
   let codigo = req.params.codigo;
   let { nombre, areaAsig, creditos, depto, descripcion, grupos } = req.body;
