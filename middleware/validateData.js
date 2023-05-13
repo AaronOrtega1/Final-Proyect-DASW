@@ -77,7 +77,7 @@ function validarToken(req, res, next) {
     return;
   }
 
-  /*   jwt.verify(token, config.jwtSecret, (error, decoded) => {
+  jwt.verify(token, config.jwtSecret, (error, decoded) => {
     if (error) {
       res.status(401).send({ error: error.message });
       return;
@@ -85,7 +85,7 @@ function validarToken(req, res, next) {
 
     req.username = decoded.userName;
     next();
-  }); */
+  });
 
   next();
 }
