@@ -93,7 +93,7 @@ asignaturaSchema.statics.updateAsignatura = async (codigo, datos) => {
 };
 
 asignaturaSchema.statics.deleteAsignatura = async (codigo) => {
-  let asignaturaEliminada = await Asignaturas.findOneAndDelete(codigo);
+  let asignaturaEliminada = await Asignaturas.findOneAndDelete({ codigo: codigo  });
   console.log("Asignatura Eliminada: \n" + asignaturaEliminada);
   return asignaturaEliminada;
 };
