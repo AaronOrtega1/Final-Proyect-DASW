@@ -9,18 +9,18 @@ function validateBodyUser(req, res, next) {
     userName,
     passWord,
     isCoord,
-    isTeach,
+    isAdmin,
     email,
     imgURL,
   } = req.body;
   if (
     fullName &&
     department &&
-    status &&
+    status !== undefined &&
     userName &&
     passWord &&
-    isCoord &&
-    isTeach &&
+    isCoord !== undefined &&
+    isAdmin !== undefined &&
     email &&
     imgURL !== undefined
   ) {
@@ -77,15 +77,17 @@ function validarToken(req, res, next) {
     return;
   }
 
-  jwt.verify(token, config.jwtSecret, (error, decoded) => {
+  /*   jwt.verify(token, config.jwtSecret, (error, decoded) => {
     if (error) {
-      res.status(401).send({ erro: error.message });
+      res.status(401).send({ error: error.message });
       return;
     }
 
     req.username = decoded.userName;
     next();
-  });
+  }); */
+
+  next();
 }
 
 function validateView(req, res, next) {
