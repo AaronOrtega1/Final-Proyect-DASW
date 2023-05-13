@@ -1,11 +1,7 @@
 @host = http://localhost:3000
 
 ##Recuerden que el token tiene duracion de 5 min
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkluZ2U2NCIsImlhdCI6MTY4MzYwOTg1OCwiZXhwIjoxNjgzNjEwNzU4fQ.sOqOplX5cgt31nWq6DKlh92Mxa78pdvqGse0d-goumA
-
-
-###
-GET {{host}}/api/teachers
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImpwZXJleiIsImlhdCI6MTY4NDAxNzEwMiwiZXhwIjoxNjg0MDI0MzAyfQ.2wh57edaFR5OBAc7KWBJtmF4MR5abgyYMxq8gIEFdkI
 x-token: {{token}}
 
 ###
@@ -121,8 +117,8 @@ POST {{host}}/api/login
 Content-Type: application/json
 
 {
-  "username": "Inge64",
-  "password": 123456
+  "username": "jperez",
+  "password": "$2a$10$NFZeyS31m46UIojRn/6R..O0fAcakzyrNj3qBBUnwApjViwIOAKH6"
 }
 ###
 GET {{host}}/api/administrator
@@ -347,6 +343,47 @@ Content-Type: application/json
   "isTeach": true,
   "email": "jperez@iteso.mx",
 }
+###
+GET {{host}}/api/users
+x-token: {{token}}
 
+###
+GET {{host}}/api/users/5U0Tk4PkUhf_Z0CcdKHWp
+x-token: {{token}}
+###
+POST {{host}}/api/users
+x-token: {{token}}
+Content-Type: application/json
+
+{
+  "fullName": "Sergio Torres",
+  "department": "Electronica",
+  "status": "true",
+  "userName": "torres",
+  "passWord": "2758",
+  "isCoord": "false",
+  "isAdmin": "false",
+  "email": "storres@iteso.mx",
+  "imgURL": "https://www.aprendemas.com/co/blog/images/2021/10/profesor_mal_tips.jpg"
+}
+###
+PUT  {{host}}/api/users/borrar
+x-token: {{token}}
+Content-Type: application/json
+
+{
+  "fullName": "Sergio Torres con z",
+  "department": "Electronica",
+  "status": "true",
+  "userName": "torres",
+  "passWord": "3849",
+  "isCoord": "false",
+  "isAdmin": "false",
+  "email": "storres@iteso.mx",
+  "imgURL": "https://www.aprendemas.com/co/blog/images/2021/10/profesor_mal_tips.jpg"
+}
+###
+DELETE {{host}}/api/users/x96gau36Q-uEtQsbirI8d
+x-token: {{token}}
 
 

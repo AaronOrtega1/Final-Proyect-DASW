@@ -9,7 +9,7 @@ function validateBodyUser(req, res, next) {
     userName,
     passWord,
     isCoord,
-    isTeach,
+    isAdmin,
     email,
     imgURL,
   } = req.body;
@@ -20,14 +20,15 @@ function validateBodyUser(req, res, next) {
     userName &&
     passWord &&
     isCoord &&
-    isTeach &&
+    isAdmin &&
     email &&
     imgURL !== undefined
   ) {
     next();
     return;
   }
-  res.status(400).send({ error: "Missing atributes, please check" });
+  res.status(400).send('Falta el ' + fullName + department + status+ userName + passWord + isCoord+ isAdmin+ email + imgURL);
+  //{ error: "Missing atributes, please check" }
 }
 
 function validateBodyGroup(req, res, next) {
