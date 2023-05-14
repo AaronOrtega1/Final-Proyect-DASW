@@ -22,7 +22,7 @@ router.get("/", async (req, res) => {
     filter.coordinador = new RegExp(coordinador, "i");
   }
   if (areaAsig) {
-    filter.areaAsig = parseInt(areaAsig);
+    filter.areaAsig = new RegExp(areaAsig, "i");
   }
   if (!pagina) pagina = 1;
   if (!limite) limite = 6;
@@ -43,6 +43,18 @@ router.get("/areas", async (req, res) => {
     res.status(500).send("Error al obtener las áreas");
   }
 });
+
+router.get("/areas/:codigo", async (req, res) => {
+  try {
+    let id = req.params.codigo;
+    let area = await Areas.getArea(id);
+    res.send(area);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error al obtener el área");
+  }
+});
+
 
 router.get("/:codigo", async (req, res) => {
   let codigo = req.params.codigo;
@@ -71,8 +83,12 @@ router.post("/", validateSubject, async (req, res) => {
     coordinador,
     descripcion,
     grupos,
-  });
+  }).catch((err) => {
+    console.log(err);
+  }
+  );
   res.status(201).send(newAsignatura);
+  
 });
 
 router.put("/:codigo", validateSubject, async (req, res) => {
