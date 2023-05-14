@@ -2,7 +2,7 @@
 let asignaturasXmostrar = [];
 let numDeAsignaturas = 0;
 let pagina = 1;
-let limite = 2;
+let limite = 4;
 let tablaAsignaturas = document.getElementById('tablaAsignaturas');
 let btnAnterior = document.getElementById('anteriorPag');
 let btnSiguiente = document.getElementById('siguientePag');
@@ -209,12 +209,15 @@ async function agregarAsignatura(){
         let response = await fetch('http://localhost:3000/api/asignaturas',{
         method: 'POST',
         headers: {
+            'x-token': sessionStorage.getItem('token'),
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(asignatura)
     }).then(res => {
         if(res.ok){
             alert('Se ha agregado la asignatura');
+        }else{
+            alert('No se ha podido agregar la asignatura:\n'+"Error: " + res.status + "\n" + "Mensaje: " + res.statusText + "\n");
         }
     }).catch(error => {
         console.log(error);
@@ -238,7 +241,7 @@ function funcionPut(uuid){
     bannerModal.innerHTML = 'Editar Asignatura';
     console.log(uuid);
     Metodo = 'PUT';
-
+    cargaParametros();
     editarAsignatura(uuid);
 }
 
@@ -283,12 +286,15 @@ async function callPUT(newAsignatura){
     let response = await fetch(`http://localhost:3000/api/asignaturas/${newAsignatura.codigo}`,{
         method: 'PUT',
         headers: {
+            'x-token': sessionStorage.getItem('token'),
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(newAsignatura)
     }).then(res => {
         if(res.ok){
             alert('Se ha editado la asignatura');
+        }else{
+            alert('No se ha podido editar la asignatura:\n'+"Error: " + res.status + "\n" + "Mensaje: " + res.statusText + "\n");
         }
     }).catch(error => {
         console.log(error);
@@ -303,6 +309,7 @@ async function eliminarAsignatura(){
     let response = await fetch(`http://localhost:3000/api/asignaturas/${uuid}`,{
         method: 'DELETE',
         headers: {
+            'x-token': sessionStorage.getItem('token'),
             'Content-Type': 'application/json'
         }
     }).then(res => {
