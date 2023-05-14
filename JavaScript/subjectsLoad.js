@@ -143,8 +143,8 @@ async function buscarAsignaturaXcodigo(){
 async function buscarAsignaturaXfiltro(){
     let filtro = filtroBusqueda.value;
     console.log(filtro);
-    if(filtro == 'Departamento'){
-        filtro = 'listaCoordinadores';
+    if(filtro == 'Coordinador'){
+        filtro = 'coordinador';
     }else if(filtro == 'Creditos'){
         filtro = 'creditos';
         filteredSearch.value = parseInt(filteredSearch.value);

@@ -65,7 +65,7 @@ GET {{host}}/api/asignaturas?nombre=Calculo
 GET {{host}}/api/asignaturas?areaAsig=Curric
 
 ###
-GET {{host}}/api/asignaturas?depto=DMF
+GET {{host}}/api/asignaturas?coordinador=Juan
 
 ###
 GET {{host}}/api/asignaturas?pagina=1&limite=2
