@@ -1,6 +1,7 @@
 // import { Evidence } from '../db/evidence.js';
 
 
+
 let identificador = "";
 let evidences = [];
 let pagina = 1;
@@ -24,6 +25,19 @@ closeModalButton.addEventListener('click', () => closeModal());
 otherCloseButton.addEventListener('click', () => closeModal());
 let evidenceSpace = document.getElementById("evidenceData");
 let commentSpace = document.getElementById("commentData");
+let commentId;
+let editButtonModal = document.getElementById("editCommentSend");
+editButtonModal.addEventListener('click', () => editComment());
+editButtonModal.addEventListener('click', () => closeModalEdit());
+let editButtonClose = document.getElementById("EditCloseButton");
+editButtonClose.addEventListener('click', () => closeModalEdit());
+let editButtonOtherClose = document.getElementById("EditOtherClose");
+editButtonOtherClose.addEventListener('click', () => closeModalEdit());
+
+let editMessageModal = document.getElementById("editCommentContent");
+let deleteButtonModal = document.getElementById("deleteCommentButton");
+deleteButtonModal.addEventListener('click', () => deleteComment());
+deleteButtonModal.addEventListener('click', () => closeModalDelete());
 
 async function loadEvidences() {
     console.log("Loading evidences...⏳");
@@ -86,6 +100,9 @@ async function showEvidences(evidences) {
 
 }
 
+
+
+
 async function showComments(evidences) {
     commentSpace.innerHTML = "";
     evidences.forEach(c => {
@@ -96,32 +113,51 @@ async function showComments(evidences) {
             item.setAttribute("class", "d-flex justify-content-center row");
             item.setAttribute("id", "commentItem");
             item.innerHTML = `
+            
             <div class="col-md-12 col-lg-10">
             <div class="card text-dark" id="comentarioEvidencias">
-
-                <div class="card-body p-4">
-                    <div class="d-flex flex-start">
-                    <img class="rounded-circle shadow-1-strong me-3"
-                        src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png" alt="avatar" width="60"
-                        height="60" />
-                    <div>
+              <div class="card-body p-4">
+                <div class="d-flex flex-start justify-content-between">
+                  <div>
+                    <img class="rounded-circle shadow-1-strong me-3" src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png" alt="avatar" width="60" height="60" />
+                    <div class="d-flex flex-column justify-content-between ml-3">
+                      <div>
                         <h6 class="fw-bold mb-1" id="autorComentario">${comment.idUser.fullName} </h6>
                         <div class="d-flex align-items-center mb-3">
-                        <p class="mb-0" id="fechaComentario">
-                            ${comment.fecha}
-                        </p>
-                        
+                          <p class="mb-0" id="fechaComentario">${comment.fecha}</p>
                         </div>
-                        <p class="mb-0" id="mensajeComentario">
-                            ${comment.mensaje}
-                        </p>
+                        <p class="mb-0" id="mensajeComentario">${comment.mensaje}</p>
+                      </div>
                     </div>
+                  </div>
+                  <div class="d-flex align-items-center">
+                    <button type="button" class="btn btn-sm btn-danger me-2" id="deleteCommentButton" data-comment-id="${comment.codigo}" onclick="getCommentCode(${comment.codigo})" data-target="#deleteComment" data-toggle="modal">
+                      Delete
+                    </button>
+                    <button type="button" class="btn btn-sm btn-primary" id="editCommentButton" data-comment-id="${comment.codigo}" onclick="getCommentCode(${comment.codigo})" data-target="#editComment" data-toggle="modal">
+                    Edit</button>                 
                     </div>
                 </div>
-                </div>
+              </div>
             </div>
+          </div>
+          
             `
             commentSpace.append(item);
+        });
+    });
+      // Add event listeners for all edit buttons
+    document.querySelectorAll('#editCommentButton').forEach(item => {
+        item.addEventListener('click', () => {
+            const commentId = item.dataset.commentId;
+            getCommentCode(commentId);
+    });
+  });
+
+  document.querySelectorAll('#deleteCommentButton').forEach(item => {
+    item.addEventListener('click', () => {
+        const commentId = item.dataset.commentId;
+        getCommentCode(commentId);
         });
     });
 }
@@ -175,7 +211,7 @@ async function postComment(codigoEvidencia){
         });
 
         if(response.ok){
-            const data = await response.json(); // parse response body as JSON
+            const data = await response.json(); 
             commentId = data._id;
             alert('Comment added!');        
         }
@@ -226,7 +262,81 @@ async function closeModal(){
 
 }
 
+
+async function getCommentCode(id) {
+    commentId = id;
+    console.log(commentId);
+}
+  
+  async function editComment() {
+    let comentario = editMessageModal.value;
+
+    let commentData = {
+        mensaje: comentario
+    }
+
+    let response;
+
+    try {
+        response = await fetch(`http://localhost:3000/api/comments/${commentId}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(commentData)
+        });
+
+        if (response.ok) {
+            alert('Comment edited!');
+        }
+    } catch (err) {
+        console.log(err);
+        alert('Error editing comment');
+        return;
+    }
+
+    loadEvidences();
+}
+
+async function closeModalEdit(){
+    editMessageModal.value = "";
+    $('#editComment').modal('hide');
+
+}
+
+async function deleteComment() {
+    let response;
+
+    try {
+        response = await fetch(`http://localhost:3000/api/comments/${commentId}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+            }
+        });
+
+        if (response.ok) {
+            alert('Comment deleted!');
+        }
+    } catch (err) {
+        console.log(err);
+        alert('Error deleting comment');
+        return;
+    }
+
+    loadEvidences();
+}
+
+async function closeModalDelete(){
+    $('#deleteComment').modal('hide');
+}
     
+
+
+  
+
+
+
 
 
 

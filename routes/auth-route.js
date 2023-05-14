@@ -24,27 +24,11 @@ route.post("/", async (req, res) => {
   let token = jwt.sign({ username: user.userName }, config.jwtSecret, {
     expiresIn: 60 * 120,
   });
-
+  res.status(201).send({ token });
   if (user.isAdmin) {
     console.log("Bienvenido Admin");
     validAdmins.push(token);
     let role = "admin";
-    res.send({ token, role });
-    return;
-  }
-
-  if (user.isCoord) {
-    console.log("Bienvenido Admin");
-    validAdmins.push(token);
-    let role = "coord";
-    res.send({ token, role });
-    return;
-  }
-
-  if (!user.isCoord && !user.isAdmin) {
-    console.log("Bienvenido Admin");
-    validAdmins.push(token);
-    let role = "teacher";
     res.send({ token, role });
     return;
   }
