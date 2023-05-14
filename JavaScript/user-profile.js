@@ -118,8 +118,8 @@ function showProfile(user) {
       </div>
       <div class="col-md-6">
         <div class="profile-head">
-          <h5>Kshiti Ghelani</h5>
-          <h6>Coordinadora de Equis Materia</h6>
+          <h5>${user.fullName}</h5>
+          <h6></h6>
           <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item">
               <a

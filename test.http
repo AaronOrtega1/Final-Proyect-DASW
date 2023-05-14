@@ -123,22 +123,8 @@ POST {{host}}/api/login
 Content-Type: application/json
 
 {
-<<<<<<< HEAD
   "username": "prueba",
   "password": "123456"
-=======
-  "username": "torres",
-  "password": "$2a$10$olmQnFEZYFNFz0P.7RA0uehklyV6Ixj7iyJu.FxJU3e2PmMMMDbXm"
-}
-
-###
-POST {{host}}/api/login
-Content-Type: application/json
-
-{
-  "username": "jperez",
-  "password": "$2a$10$NFZeyS31m46UIojRn/6R..O0fAcakzyrNj3qBBUnwApjViwIOAKH6"
->>>>>>> origin
 }
 
 ###
