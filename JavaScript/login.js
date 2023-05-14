@@ -1,6 +1,8 @@
 //Status lo mandare como un true por defecto cuando se cree la cuenta
 //ImageURL tambien se enviara por defecto
 
+const { response } = require("express");
+
 async function login(){
     event.preventDefault();
     let username = document.querySelector("#username").value;
@@ -27,19 +29,19 @@ async function login(){
         body: JSON.stringify(newUser)
     })
     
-    let data = await resp.json()
+    let data = await resp.text()
 
     if (resp.status == 201){
         alert("Inciaste sesion")
         //Se almacena el token
-        localStorage.setItem("token",JSON.stringify(data))
+        localStorage.setItem("token",data)
         var token = localStorage.getItem("token");
         console.log(token);
         //loadTasks();
       }else{
         alert(data.error)
       }
-    
+async function registrarUsuario(){}
     
 }
 

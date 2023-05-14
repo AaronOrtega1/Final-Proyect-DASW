@@ -23,7 +23,7 @@ route.post("/", async (req, res) => {
   let token = jwt.sign({ username: user.userName }, config.jwtSecret, {
     expiresIn: 60 * 120,
   });
-  res.status(201).send({ token });
+  res.status(201).send(token);
   if (user.isAdmin) {
     console.log("Bienvenido Admin");
     validAdmins.push(token);
