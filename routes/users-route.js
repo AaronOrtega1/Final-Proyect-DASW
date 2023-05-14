@@ -9,7 +9,7 @@ const { User } = require("../db/users.js");
 const nanoid = require("nanoid");
 
 router.get("/", validarToken, async (req, res) => {
-  let filter = [];
+  let filter = {};
   let {
     fullName,
     department,
@@ -54,6 +54,7 @@ router.get("/", validarToken, async (req, res) => {
 });
 
 router.post("/", validarToken, validateBodyUser, async (req, res) => {
+  console.log("Este es el reqbody 1: ",req.body);
   let {
     fullName,
     department,
@@ -67,7 +68,8 @@ router.post("/", validarToken, validateBodyUser, async (req, res) => {
   } = req.body;
 
   let hash = bcrypt.hashSync(passWord, 10);
-
+  console.log("Este es el reqbody 2: ",req.body);
+  console.log(hash);
   let newUser = await User.createUser({
     userID: nanoid.nanoid(),
     fullName,
@@ -105,10 +107,9 @@ router.put("/:userID", validarToken, validateBodyUser, async (req, res) => {
   } = req.body;
 
   let hash = bcrypt.hashSync(passWord, 10);
-  let updatedUser = await User.updateUser(userID, {
+  let updatedUser = await User.updateUserById(userID, {
     fullName,
     department,
-    birthDate,
     status,
     userName,
     passWord: hash,
@@ -117,12 +118,12 @@ router.put("/:userID", validarToken, validateBodyUser, async (req, res) => {
     email,
     imgURL,
   });
-  res.send(updatedUser);
+  res.status(200).send(updatedUser);
 });
 
 router.delete("/:userID", validarToken, async (req, res) => {
   let { userID } = req.params;
-  let deletedUser = await User.deleteUser(userID);
+  let deletedUser = await User.deleteUserById(userID);
   res.send(deletedUser);
 });
 

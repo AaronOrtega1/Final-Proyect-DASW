@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const config = require("../config/config.js");
 const { Groups } = require("./groups.js");
+const { User } = require("./users.js");
 
 const asignaturaSchema = mongoose.Schema({
   codigo: {
@@ -13,15 +14,11 @@ const asignaturaSchema = mongoose.Schema({
     required: true,
   },
   areaAsig: {
-    type: String,
-    required: true,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Area",
   },
   creditos: {
     type: Number,
-    required: true,
-  },
-  depto: {
-    type: String,
     required: true,
   },
   descripcion: {
@@ -34,6 +31,10 @@ const asignaturaSchema = mongoose.Schema({
       ref: "Groups",
     },
   ],
+  coordinador: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+  },
 });
 
 asignaturaSchema.statics.getAsignaturas = async (filters, pagina, limite) => {
@@ -45,7 +46,15 @@ asignaturaSchema.statics.getAsignaturas = async (filters, pagina, limite) => {
       path: "grupos",
       model: "Groups",
       select: "professor period year groupID",
-    }); // 'professor period year groupID'
+    }).populate({
+      path: "coordinador",
+      model: "User",
+      select: "fullName",
+    }).populate({
+      path: "areaAsig",
+      model: "Area",
+      select: "nombre",
+    });
   console.log(
     "🚀 ~ file: asignatura.js:49 ~ asignaturaSchema.statics.getAsignaturas= ~ asignaturas:",
     asignaturas
@@ -72,10 +81,24 @@ asignaturaSchema.statics.createAsignatura = async (asignaturaData) => {
     for (let i = 0; i < grupos.length; i++) {
       const grupo = await Groups.findOne({ groupID: grupos[i] });
       if (grupo) {
-        grupos[i] = grupo._id;
+        grupos[i] = grupo.groupID;
       }
     }
     asignaturaData.grupos = grupos;
+  }
+  let coordinador = asignaturaData.coordinador || "";
+  if (coordinador != "" && coordinador != null) {
+    let user = await User.findOne({ userID: coordinador });
+    if (user && user.isCoord) {
+      asignaturaData.coordinador = user.userID;
+    }
+  }
+  let areaAsig = asignaturaData.areaAsig || "";
+  if (areaAsig != "" && areaAsig != null) {
+    let area = await Area.findOne({ codigo: areaAsig });
+    if (area) {
+      asignaturaData.areaAsig = area.codigo;
+    }
   }
   let nuevaAsignatura = Asignaturas(asignaturaData);
   console.log("Nueva Asignatura: \n" + nuevaAsignatura);

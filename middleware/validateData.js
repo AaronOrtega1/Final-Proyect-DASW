@@ -1,5 +1,6 @@
 const jwt = require("jsonwebtoken");
 const config = require("../config/config.js");
+const { User } = require("../db/users.js");
 
 function validateBodyUser(req, res, next) {
   let {
@@ -9,7 +10,7 @@ function validateBodyUser(req, res, next) {
     userName,
     passWord,
     isCoord,
-    isTeach,
+    isAdmin,
     email,
     imgURL,
   } = req.body;
@@ -20,14 +21,15 @@ function validateBodyUser(req, res, next) {
     userName &&
     passWord &&
     isCoord &&
-    isTeach &&
+    isAdmin &&
     email &&
     imgURL !== undefined
   ) {
     next();
     return;
   }
-  res.status(400).send({ error: "Missing atributes, please check" });
+  res.status(400).send('Falta el ' + fullName + department + status+ userName + passWord + isCoord+ isAdmin+ email + imgURL);
+  //{ error: "Missing atributes, please check" }
 }
 
 function validateBodyGroup(req, res, next) {
@@ -46,8 +48,8 @@ function validateBodyGroup(req, res, next) {
   res.status(400).send({ error: "Missing atributes, please check" });
 }
 
-function validateSubject(req, res, next) {
-  let { codigo, nombre, areaAsig, creditos, depto, descripcion } = req.body;
+async function validateSubject(req, res, next) {
+  let { codigo, nombre, areaAsig, creditos, coordinadorId, descripcion } = req.body;
   let missing = [];
   if (!codigo && !req.params.codigo) {
     missing.push("codigo");
@@ -57,7 +59,7 @@ function validateSubject(req, res, next) {
   if (!nombre) missing.push("nombre");
   if (!areaAsig) missing.push("area");
   if (!creditos) missing.push("creditos");
-  if (!depto) missing.push("departamento");
+  if (!coordinadorId) missing.push("coordinador");
   if (!descripcion) missing.push("descripcion");
 
   codigo = codigo.toUpperCase();
@@ -67,6 +69,19 @@ function validateSubject(req, res, next) {
     res.status(400).send({ error: "Faltan atributos: " + missing.join(", ") });
     return;
   }
+
+  let codigoAsig = await User.getUser({ areaAsig: codigo });
+  if (!codigoAsig) {
+    res.status(400).send({ error: "El codigo de la asignatura no existe" });
+    return;
+  }
+
+  codigoCoor = await User.getUser({ userName: coordinadorId });
+  if (User.isCoord !== true) {
+    res.status(400).send({ error: "El coordinador no existe o su usuario no es coordinador" });
+    return;
+  }
+
   next();
 }
 
