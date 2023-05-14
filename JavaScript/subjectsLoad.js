@@ -38,6 +38,8 @@ deleteSubject.style.display = 'none';
 
 let coordinadores = [];
 
+let role = sessionStorage.getItem('role');
+
 async function cargaAsignaturas () {
     console.log('cargando asignaturas:'+ pagina + ' ' + limite);
   let asignaturas = await fetch(`http://localhost:3000/api/asignaturas?pagina=${pagina}&limite=${limite}`,{
@@ -61,6 +63,16 @@ async function cargaAsignaturas () {
     console.log(datosCoordinadores);
     coordinadores = datosCoordinadores;
 
+    
+    if(role != 'admin' || role == null){
+        role = 'user';
+        let btnAgregarAsignatura = document.getElementById('agregarElemento');
+        btnAgregarAsignatura.style.display = 'none';
+    }else{
+        let btnAgregarAsignatura = document.getElementById('agregarElemento');
+        btnAgregarAsignatura.style.display = 'block';
+    }
+
     muestraAsignaturas(datos);
 }
 
@@ -76,7 +88,7 @@ async function muestraAsignaturas(listaXmostrar){
             <button class="btn btn-dark" type="button" data-toggle="collapse" data-target="#desc-${a.codigo}" aria-expanded="false" aria-controls="#desc-${a.codigo}">
             <i class="fas fa-info-circle"></i>
             </button>
-            <button class="btn btn-dark" type="button" data-target="#agregarAsignatura" data-toggle="modal" onclick="funcionPut('${a.codigo}')">
+            <button class="btn btn-dark" type="button" name="editButton" data-target="#agregarAsignatura" data-toggle="modal" onclick="funcionPut('${a.codigo}')">
             <i class="fas fa-edit"></i>
         </button>
         </td>
@@ -102,6 +114,13 @@ async function muestraAsignaturas(listaXmostrar){
         </div>
     </tr>
     `).join('');
+
+    if(role != 'admin' || role == null){
+        let btnsEditar = document.getElementsByName('editButton');
+        for(let i = 0; i < btnsEditar.length; i++){
+            btnsEditar[i].style.display = 'none';
+        }
+    }
 
 }
 
@@ -214,7 +233,7 @@ async function agregarAsignatura(){
         },
         body: JSON.stringify(asignatura)
     }).then(res => {
-        if(res.ok){
+        if(res.status == 201){
             alert('Se ha agregado la asignatura');
         }else{
             alert('No se ha podido agregar la asignatura:\n'+"Error: " + res.status + "\n" + "Mensaje: " + res.statusText + "\n");
@@ -291,7 +310,7 @@ async function callPUT(newAsignatura){
         },
         body: JSON.stringify(newAsignatura)
     }).then(res => {
-        if(res.ok){
+        if(res.status == 200){
             alert('Se ha editado la asignatura');
         }else{
             alert('No se ha podido editar la asignatura:\n'+"Error: " + res.status + "\n" + "Mensaje: " + res.statusText + "\n");

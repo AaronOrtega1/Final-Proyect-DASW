@@ -28,6 +28,9 @@ route.post("/", async (req, res) => {
   if (user.isAdmin) {
     console.log("Bienvenido Admin");
     validAdmins.push(token);
+    let role = "admin";
+    res.send({ token, role });
+    return;
   }
 
   res.send({ token });
