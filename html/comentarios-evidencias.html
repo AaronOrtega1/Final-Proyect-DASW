@@ -10,14 +10,10 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <style>
     #addComentario{
-        margin-top: 120px;
-        margin-bottom: 20px;
         width: 200px;
         height: 50px;
-        position: absolute;
         top: 50%;
         left: 50%;
-        transform: translate(-50%, -50%);
     }
     #addComment{
       width: 150px;
@@ -30,16 +26,57 @@
   </style>
   </head>
   <body>
+<!-- busca el snippet b4-navbar -->
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+  <a class="navbar-brand" href="./profesorPerfil.html">DASW</a>
+  <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId"
+    aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation"></button>
+  <div class="collapse navbar-collapse" id="collapsibleNavId">
+
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <li class="nav-item active">
+        <div class="form-group m-1">
+          <input type="text" class="form-control" name="searchBar" id="searchBar" aria-describedby="helpId"
+            placeholder="Codigo de asignatura" />
+        </div>
+      </li>
+      <li class="nav-item">
+        <div class="m-1">
+          <a name="buscar" id="buscarNavBar" class="btn btn-dark border border-white" href="#" role="button">Buscar</a>
+        </div>
+      </li>
+    </ul>
+    <div>
+
+      <a name="" id="" class="btn btn-dark" href="coordinador.html" role="button"><i class="fa fa-book"></i> Registras
+        Prof</a>
+    </div>
+    <div>
+
+      <a name="" id="" class="btn btn-dark" href="administracion_coordinadores.html" role="button"><i
+          class="fa fa-edit"></i> Coordinadores</a>
+    </div>
+    <div>
+      <a name="" id="" class="btn btn-dark" href="asignaturas.html" role="button"><i class="fas fa-list"></i>
+        Asignaturas</a>
+    </div>
+    <div>
+      <a name="" id="" class="btn btn-dark" href="profesorPerfil.html" role="button"><i class="fas fa-user"></i></a>
+    </div>
+  </div>
+</nav>
+
       
 
 <div class= "container my-5 py-5" id="evidenceData">
 
 
 </div>
+<div style="display: flex; justify-content: center; height: 5vh;">
 
 <button type="button" class="btn btn-dark border border-white" id="addComentario" data-target="#newComment" data-toggle="modal" >
   Enviar comentario</button>
-
+</div>
 
 <div class= "container my-5 py-5" id="commentData">
   
