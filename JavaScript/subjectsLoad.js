@@ -1,6 +1,4 @@
-//const { Groups } = require("../db/groups");
 
-let asignaturas = [];
 let asignaturasXmostrar = [];
 let numDeAsignaturas = 0;
 let pagina = 1;
@@ -16,7 +14,7 @@ let filtroBusqueda = document.getElementById('filtroBusqueda');
 let filteredSearchButton = document.getElementById('filteredSearchButton');
 let addGroup = document.getElementById('addGroup');
 let postSubject = document.getElementById('postSubject');
-let bannerModal = document.getElementById('bannerModal');
+
 let Metodo = 'POST';
 let Hanger = '';
 
@@ -24,7 +22,7 @@ let codigoAsignatura = document.getElementById('CodigoA');
 let nombreAsignatura = document.getElementById('nombreAsignatura');
 let descripcionAsignatura = document.getElementById('descripcionAsignatura');
 let areaAsignatura = document.getElementById('AreaA');
-let deptoAsignatura = document.getElementById('Depto');
+let coordAsignatura = document.getElementById('listaCoordinadores');
 let creditosAsignatura = document.getElementById('NoCreditos');
 
 let deleteSubject = document.getElementById('deleteSubject');
@@ -36,8 +34,9 @@ filteredSearchButton.addEventListener('click', buscarAsignaturaXfiltro);
 btnAnterior.addEventListener('click', anteriorPagina);
 btnSiguiente.addEventListener('click', siguientePagina);
 
-addGroup.style.display = 'none';
 deleteSubject.style.display = 'none';
+
+let coordinadores = [];
 
 async function cargaAsignaturas () {
     console.log('cargando asignaturas:'+ pagina + ' ' + limite);
@@ -50,6 +49,19 @@ async function cargaAsignaturas () {
   let datos = await asignaturas.json();
     console.log(datos);
     totalAsignaturas();
+
+    let listaCoordinadores = await fetch(`http://localhost:3000/api/users`,{
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'x-token' : localStorage.getItem('token')
+        }
+    })
+    let datosCoordinadores = await listaCoordinadores.json();
+    console.log(datosCoordinadores);
+    datosCoordinadores = datosCoordinadores.filter(c => c.isCoor === true);
+    coordinadores = datosCoordinadores;
+
     muestraAsignaturas(datos);
 }
 
@@ -59,7 +71,7 @@ async function muestraAsignaturas(listaXmostrar){
         <td>${a.codigo}</td>
         <td>${a.nombre}</td>
         <td>${a.areaAsig}</td>
-        <td>${a.depto}</td>
+        <td>${a.coordinador}</td>
         <td>${a.creditos}</td>
         <td>
             <button class="btn btn-dark" type="button" data-toggle="collapse" data-target="#desc-${a.codigo}" aria-expanded="false" aria-controls="#desc-${a.codigo}">
@@ -133,7 +145,7 @@ async function buscarAsignaturaXfiltro(){
     let filtro = filtroBusqueda.value;
     console.log(filtro);
     if(filtro == 'Departamento'){
-        filtro = 'depto';
+        filtro = 'listaCoordinadores';
     }else if(filtro == 'Creditos'){
         filtro = 'creditos';
         filteredSearch.value = parseInt(filteredSearch.value);
@@ -158,21 +170,21 @@ function limpiarCampos() {
     codigoAsignatura.value = '';
     nombreAsignatura.value = '';
     descripcionAsignatura.value = '';
-    areaAsignatura.value = '';
-    deptoAsignatura.value = '';
+    coordAsignatura.value = '';
     creditosAsignatura.value = '';
     codigoAsignatura.disabled = false;
     deleteSubject.style.display = 'none';
+    cargaParametros();
 }
 
 async function agregarAsignatura(){
     let nombreAsig = nombreAsignatura.value;
     let codigoAsig = codigoAsignatura.value;
     let areaAsig = areaAsignatura.value;
-    let deptoAsig = deptoAsignatura.value;
+    let listaCoordinadoresAsig = coordAsignatura.value;
     let creditosAsig = creditosAsignatura.value;
     let descripcionAsig = descripcionAsignatura.value;
-    if(!nombreAsig || !codigoAsig || !areaAsig || !deptoAsig || !creditosAsig || !descripcionAsig){
+    if(!nombreAsig || !codigoAsig || !areaAsig || !listaCoordinadoresAsig || !creditosAsig || !descripcionAsig){
         alert('Por favor llene todos los campos');
     }else if(isNaN(creditosAsig) || creditosAsig < 1 || creditosAsig > 40 || creditosAsig % 1 != 0){
         alert('Este no es un numero de creditos valido');
@@ -183,7 +195,7 @@ async function agregarAsignatura(){
             nombre: nombreAsig,
             codigo: codigoAsig,
             areaAsig: areaAsig,
-            depto: deptoAsig,
+            listaCoordinadores: listaCoordinadoresAsig,
             creditos: creditosAsig,
             descripcion: descripcionAsig
         }
@@ -213,8 +225,22 @@ async function agregarAsignatura(){
     cargaAsignaturas();
     
     }
-    
+}
 
+function funcionPost(){
+    let bannerModal = document.getElementById('bannerModal');
+    bannerModal.innerHTML = 'Añadir Asignatura';
+    Metodo = 'POST';
+    limpiarCampos();
+}
+
+function funcionPut(uuid){
+    let bannerModal = document.getElementById('bannerModal');
+    bannerModal.innerHTML = 'Editar Asignatura';
+    console.log(uuid);
+    Metodo = 'PUT';
+
+    editarAsignatura(uuid);
 }
 
 async function totalAsignaturas(){
@@ -227,17 +253,6 @@ async function totalAsignaturas(){
     let datos = await asignaturas.json();
     console.log(datos.length);
     numDeAsignaturas = datos.length;
-}
-
-function funcionPost(){
-    bannerModal.innerHTML = 'Añadir Asignatura';
-    limpiarCampos();
-}
-
-function funcionPut(uuid){
-    bannerModal.innerHTML = 'Editar Asignatura';
-    console.log(uuid);
-    editarAsignatura(uuid);
 }
 
 async function editarAsignatura(uuid){
@@ -256,7 +271,7 @@ async function editarAsignatura(uuid){
     $('#nombreAsignatura').val(datos.nombre);
     $('#CodigoA').val(datos.codigo);
     $('#AreaA').val(datos.areaAsig);
-    $('#Depto').val(datos.depto);
+    $('#listaCoordinadores').val(datos.listaCoordinadores);
     $('#NoCreditos').val(datos.creditos);
     $('#descripcionAsignatura').val(datos.descripcion);
 
@@ -301,6 +316,21 @@ async function eliminarAsignatura(){
     });
     Metodo = 'POST';
     cargaAsignaturas();
+}
+
+function cargaParametros(){
+    let response = fetch('http://localhost:3000/api/asignaturas/areas',{
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    let datos = response.json();
+    console.log(datos);
+
+    areaAsignatura.innerHTML = datos.map(area => {
+        `<option value="${area}">${area}</option>`
+    }).join('');
 }
 
 
