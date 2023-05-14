@@ -6,29 +6,27 @@ const nanoid = require("nanoid");
 
 router.get("/", async(req, res) => {
     let filter  = {};
-    let {codigo, autor, fecha, pagina, limite} = req.query;
+    let {codigo, autor, fecha} = req.query;
 
     if(codigo) filter.codigo = new RegExp(codigo, "i");
     if(autor) filter.autor = new RegExp(autor, "i");
     if(fecha) filter.fecha = fecha;
 
-    if(!pagina) pagina = 1;
-    if(!limite) limite = 6;
-    if(pagina < 1) pagina = 1;
 
-    let finalPag = parseInt(limite);
-    let comments = await Comment.getComments(filter, pagina, finalPag);
+
+    let comments = await Comment.getComments(filter);
 
     res.status(200).send(comments);
 });
 
 router.post("/", async(req, res) => {
     let commentData = req.body;
+    let date = new Date().toLocaleDateString();
 
     let newComment = {
         codigo: nanoid.nanoid(),
         idUser: commentData.idUser,
-        fecha: commentData.fecha,
+        fecha: date,
         mensaje: commentData.mensaje
     }
 

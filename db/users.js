@@ -140,5 +140,6 @@ const User = mongoose.model("User", userSchema);
 //   email: "jperez@iteso.mx"
 // })
 
+
 User.getUser();
 module.exports = { User };

@@ -1,10 +1,8 @@
-//const { Groups } = require("../db/groups");
 
-let asignaturas = [];
 let asignaturasXmostrar = [];
 let numDeAsignaturas = 0;
 let pagina = 1;
-let limite = 2;
+let limite = 4;
 let tablaAsignaturas = document.getElementById('tablaAsignaturas');
 let btnAnterior = document.getElementById('anteriorPag');
 let btnSiguiente = document.getElementById('siguientePag');
@@ -15,8 +13,8 @@ let filteredSearch = document.getElementById('filteredSearch');
 let filtroBusqueda = document.getElementById('filtroBusqueda');
 let filteredSearchButton = document.getElementById('filteredSearchButton');
 let addGroup = document.getElementById('addGroup');
-let postSubject = document.getElementById('postSubject');
-let bannerModal = document.getElementById('bannerModal');
+let postSubject = document.getElementById('postSubject'); 
+
 let Metodo = 'POST';
 let Hanger = '';
 
@@ -24,7 +22,7 @@ let codigoAsignatura = document.getElementById('CodigoA');
 let nombreAsignatura = document.getElementById('nombreAsignatura');
 let descripcionAsignatura = document.getElementById('descripcionAsignatura');
 let areaAsignatura = document.getElementById('AreaA');
-let deptoAsignatura = document.getElementById('Depto');
+let coordAsignatura = document.getElementById('listaCoordinadores');
 let creditosAsignatura = document.getElementById('NoCreditos');
 
 let deleteSubject = document.getElementById('deleteSubject');
@@ -36,8 +34,11 @@ filteredSearchButton.addEventListener('click', buscarAsignaturaXfiltro);
 btnAnterior.addEventListener('click', anteriorPagina);
 btnSiguiente.addEventListener('click', siguientePagina);
 
-addGroup.style.display = 'none';
 deleteSubject.style.display = 'none';
+
+let coordinadores = [];
+
+let role = sessionStorage.getItem('role');
 
 async function cargaAsignaturas () {
     console.log('cargando asignaturas:'+ pagina + ' ' + limite);
@@ -50,6 +51,28 @@ async function cargaAsignaturas () {
   let datos = await asignaturas.json();
     console.log(datos);
     totalAsignaturas();
+
+    let listaCoordinadores = await fetch(`http://localhost:3000/api/users`,{
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'x-token' : sessionStorage.token
+        }
+    })
+    let datosCoordinadores = await listaCoordinadores.json();
+    console.log(datosCoordinadores);
+    coordinadores = datosCoordinadores;
+
+    
+    if(role != 'admin' || role == null){
+        role = 'user';
+        let btnAgregarAsignatura = document.getElementById('agregarElemento');
+        btnAgregarAsignatura.style.display = 'none';
+    }else{
+        let btnAgregarAsignatura = document.getElementById('agregarElemento');
+        btnAgregarAsignatura.style.display = 'block';
+    }
+
     muestraAsignaturas(datos);
 }
 
@@ -59,13 +82,13 @@ async function muestraAsignaturas(listaXmostrar){
         <td>${a.codigo}</td>
         <td>${a.nombre}</td>
         <td>${a.areaAsig}</td>
-        <td>${a.depto}</td>
+        <td>${a.coordinador}</td>
         <td>${a.creditos}</td>
         <td>
             <button class="btn btn-dark" type="button" data-toggle="collapse" data-target="#desc-${a.codigo}" aria-expanded="false" aria-controls="#desc-${a.codigo}">
             <i class="fas fa-info-circle"></i>
             </button>
-            <button class="btn btn-dark" type="button" data-target="#agregarAsignatura" data-toggle="modal" onclick="funcionPut('${a.codigo}')">
+            <button class="btn btn-dark" type="button" name="editButton" data-target="#agregarAsignatura" data-toggle="modal" onclick="funcionPut('${a.codigo}')">
             <i class="fas fa-edit"></i>
         </button>
         </td>
@@ -91,6 +114,13 @@ async function muestraAsignaturas(listaXmostrar){
         </div>
     </tr>
     `).join('');
+
+    if(role != 'admin' || role == null){
+        let btnsEditar = document.getElementsByName('editButton');
+        for(let i = 0; i < btnsEditar.length; i++){
+            btnsEditar[i].style.display = 'none';
+        }
+    }
 
 }
 
@@ -132,8 +162,8 @@ async function buscarAsignaturaXcodigo(){
 async function buscarAsignaturaXfiltro(){
     let filtro = filtroBusqueda.value;
     console.log(filtro);
-    if(filtro == 'Departamento'){
-        filtro = 'depto';
+    if(filtro == 'Coordinador'){
+        filtro = 'coordinador';
     }else if(filtro == 'Creditos'){
         filtro = 'creditos';
         filteredSearch.value = parseInt(filteredSearch.value);
@@ -158,21 +188,21 @@ function limpiarCampos() {
     codigoAsignatura.value = '';
     nombreAsignatura.value = '';
     descripcionAsignatura.value = '';
-    areaAsignatura.value = '';
-    deptoAsignatura.value = '';
+    coordAsignatura.value = '';
     creditosAsignatura.value = '';
     codigoAsignatura.disabled = false;
     deleteSubject.style.display = 'none';
+    cargaParametros();
 }
 
 async function agregarAsignatura(){
     let nombreAsig = nombreAsignatura.value;
     let codigoAsig = codigoAsignatura.value;
     let areaAsig = areaAsignatura.value;
-    let deptoAsig = deptoAsignatura.value;
+    let CoordinadorAsig = coordAsignatura.value;
     let creditosAsig = creditosAsignatura.value;
     let descripcionAsig = descripcionAsignatura.value;
-    if(!nombreAsig || !codigoAsig || !areaAsig || !deptoAsig || !creditosAsig || !descripcionAsig){
+    if(!nombreAsig || !codigoAsig || !areaAsig || !CoordinadorAsig || !creditosAsig || !descripcionAsig){
         alert('Por favor llene todos los campos');
     }else if(isNaN(creditosAsig) || creditosAsig < 1 || creditosAsig > 40 || creditosAsig % 1 != 0){
         alert('Este no es un numero de creditos valido');
@@ -183,7 +213,7 @@ async function agregarAsignatura(){
             nombre: nombreAsig,
             codigo: codigoAsig,
             areaAsig: areaAsig,
-            depto: deptoAsig,
+            coordinador: CoordinadorAsig,
             creditos: creditosAsig,
             descripcion: descripcionAsig
         }
@@ -198,12 +228,15 @@ async function agregarAsignatura(){
         let response = await fetch('http://localhost:3000/api/asignaturas',{
         method: 'POST',
         headers: {
+            'x-token': sessionStorage.getItem('token'),
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(asignatura)
     }).then(res => {
-        if(res.ok){
+        if(res.status == 201){
             alert('Se ha agregado la asignatura');
+        }else{
+            alert('No se ha podido agregar la asignatura:\n'+"Error: " + res.status + "\n" + "Mensaje: " + res.statusText + "\n");
         }
     }).catch(error => {
         console.log(error);
@@ -213,8 +246,22 @@ async function agregarAsignatura(){
     cargaAsignaturas();
     
     }
-    
+}
 
+function funcionPost(){
+    let bannerModal = document.getElementById('bannerModal');
+    bannerModal.innerHTML = 'Añadir Asignatura';
+    Metodo = 'POST';
+    limpiarCampos();
+}
+
+function funcionPut(uuid){
+    let bannerModal = document.getElementById('bannerModal');
+    bannerModal.innerHTML = 'Editar Asignatura';
+    console.log(uuid);
+    Metodo = 'PUT';
+    cargaParametros();
+    editarAsignatura(uuid);
 }
 
 async function totalAsignaturas(){
@@ -227,17 +274,6 @@ async function totalAsignaturas(){
     let datos = await asignaturas.json();
     console.log(datos.length);
     numDeAsignaturas = datos.length;
-}
-
-function funcionPost(){
-    bannerModal.innerHTML = 'Añadir Asignatura';
-    limpiarCampos();
-}
-
-function funcionPut(uuid){
-    bannerModal.innerHTML = 'Editar Asignatura';
-    console.log(uuid);
-    editarAsignatura(uuid);
 }
 
 async function editarAsignatura(uuid){
@@ -256,7 +292,7 @@ async function editarAsignatura(uuid){
     $('#nombreAsignatura').val(datos.nombre);
     $('#CodigoA').val(datos.codigo);
     $('#AreaA').val(datos.areaAsig);
-    $('#Depto').val(datos.depto);
+    $('#listaCoordinadores').val(datos.listaCoordinadores);
     $('#NoCreditos').val(datos.creditos);
     $('#descripcionAsignatura').val(datos.descripcion);
 
@@ -269,12 +305,15 @@ async function callPUT(newAsignatura){
     let response = await fetch(`http://localhost:3000/api/asignaturas/${newAsignatura.codigo}`,{
         method: 'PUT',
         headers: {
+            'x-token': sessionStorage.getItem('token'),
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(newAsignatura)
     }).then(res => {
-        if(res.ok){
+        if(res.status == 200){
             alert('Se ha editado la asignatura');
+        }else{
+            alert('No se ha podido editar la asignatura:\n'+"Error: " + res.status + "\n" + "Mensaje: " + res.statusText + "\n");
         }
     }).catch(error => {
         console.log(error);
@@ -289,6 +328,7 @@ async function eliminarAsignatura(){
     let response = await fetch(`http://localhost:3000/api/asignaturas/${uuid}`,{
         method: 'DELETE',
         headers: {
+            'x-token': sessionStorage.getItem('token'),
             'Content-Type': 'application/json'
         }
     }).then(res => {
@@ -302,6 +342,26 @@ async function eliminarAsignatura(){
     Metodo = 'POST';
     cargaAsignaturas();
 }
+
+async function cargaParametros() {
+    try {
+      const response = await fetch("http://localhost:3000/api/asignaturas/areas", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const data = await response.json();
+
+      areaAsignatura.innerHTML = data.map((area) => `<option value="${area.nombre}">${area.nombre}</option>`).join("");
+    } catch (error) {
+      console.error(error);
+    }
+    
+    let sonCoord = coordinadores.filter(coord => coord.isCoord === true);
+    coordAsignatura.innerHTML = sonCoord.map((coord) => `<option value="${coord.fullName}">${coord.fullName}</option>`).join("");
+
+  }
 
 
 cargaAsignaturas();
