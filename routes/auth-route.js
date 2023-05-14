@@ -3,7 +3,7 @@ const { User } = require("../db/users");
 const jwt = require("jsonwebtoken");
 const config = require("../config/config.js");
 const bcrypt = require("bcryptjs");
-const validAdmins = require("../JavaScript/Tokens/validAdmins.js")
+const validAdmins = require("../JavaScript/Tokens/validAdmins.js");
 
 //Validar que los datos que nos pasen sean los correctos
 route.post("/", async (req, res) => {
@@ -29,6 +29,22 @@ route.post("/", async (req, res) => {
     console.log("Bienvenido Admin");
     validAdmins.push(token);
     let role = "admin";
+    res.send({ token, role });
+    return;
+  }
+
+  if (user.isCoord) {
+    console.log("Bienvenido Admin");
+    validAdmins.push(token);
+    let role = "coord";
+    res.send({ token, role });
+    return;
+  }
+
+  if (!user.isCoord && !user.isAdmin) {
+    console.log("Bienvenido Admin");
+    validAdmins.push(token);
+    let role = "teacher";
     res.send({ token, role });
     return;
   }

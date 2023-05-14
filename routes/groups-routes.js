@@ -1,5 +1,8 @@
 const router = require("express").Router();
-const { validateBodyGroup } = require("../middleware/validateData.js");
+const {
+  validateBodyGroup,
+  validarAdmin,
+} = require("../middleware/validateData.js");
 const { Groups } = require("../db/groups.js");
 const nanoid = require("nanoid");
 
@@ -29,11 +32,11 @@ router.get("/", async (req, res) => {
   res.send(group2);
 });
 
-router.post("/", validateBodyGroup, async (req, res) => {
-  if (!req.user.isCoord) {
+router.post("/", validateBodyGroup, validarAdmin, async (req, res) => {
+  /*   if (!req.user.isCoord) {
     res.status(401).send("Unauthorized");
     return;
-  }
+  } */
   let { group, department, status, professor, period, year } = req.body;
   let newGroup = await Groups.createGroup({
     groupID: nanoid.nanoid(),
@@ -43,6 +46,8 @@ router.post("/", validateBodyGroup, async (req, res) => {
     professor,
     period,
     year,
+  }).catch((err) => {
+    console.log(err);
   });
   res.status(201).send(newGroup);
 });

@@ -1,7 +1,7 @@
 @host = http://localhost:3000
 
 ##Recuerden que el token tiene duracion de 5 min
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkluZ2U2NCIsImlhdCI6MTY4MzYwOTg1OCwiZXhwIjoxNjgzNjEwNzU4fQ.sOqOplX5cgt31nWq6DKlh92Mxa78pdvqGse0d-goumA
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRvcnJlcyIsImlhdCI6MTY4NDA5ODAyOSwiZXhwIjoxNjg0MTA1MjI5fQ.NBzeGPQzvB92CeQ8KTOVxMdDs_OLqT8DUHGL4MyBqeE
 
 
 ###
@@ -33,13 +33,16 @@ GET {{host}}/api/groups
 ###
 POST {{host}}/api/groups
 Content-Type: application/json
+x-token: {{token}}
 
 {
-  "group":"groupTest2",
-  "department":"test2 department",
+  "groupID":"1",
+  "group":"groupTest4",
+  "department":"test4 department",
   "status":true,
-  "students":["getjRpBcKfH9vvRF4r4Kg","RYKuhzcn9WsKHa_TRW5Hj","J81e73UlFmVOBuFlcBmOr"],
-  "professor":"64519476ddfcc66bd7ee92fd"
+  "professor":"64519476ddfcc66bd7ee92fd",
+  "period":"PRIM2023",
+  "year":"2023"
 }
 
 ###
@@ -371,7 +374,7 @@ Content-Type: application/json
   "userName": "jperez",
   "passWord": "1234",
   "isCoord": true,
-  "isAdmin": false,
+  "isAdmin": ,
   "email": "jperez@iteso.mx",
   "imgURL": "https://www.allisonacademy.com/wp-content/uploads/2021/12/Teacher-in-the-classroom.jpg"
 }
