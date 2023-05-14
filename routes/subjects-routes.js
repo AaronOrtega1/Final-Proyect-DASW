@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const { Asignaturas } = require("../db/asignatura.js");
 const { Areas } = require("../db/areasAsig.js");
-const { validateSubject } = require("../middleware/validateData.js");
+const { validateSubject, validarToken, validarAdmin } = require("../middleware/validateData.js");
 const { Grupo } = require("../db/groups.js");
 const { validate } = require("../middleware/validateData.js");
 const nanoid = require("nanoid");
@@ -22,7 +22,7 @@ router.get("/", async (req, res) => {
     filter.coordinador = new RegExp(coordinador, "i");
   }
   if (areaAsig) {
-    filter.areaAsig = parseInt(areaAsig);
+    filter.areaAsig = new RegExp(areaAsig, "i");
   }
   if (!pagina) pagina = 1;
   if (!limite) limite = 6;
@@ -44,6 +44,18 @@ router.get("/areas", async (req, res) => {
   }
 });
 
+router.get("/areas/:codigo", async (req, res) => {
+  try {
+    let id = req.params.codigo;
+    let area = await Areas.getArea(id);
+    res.send(area);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error al obtener el área");
+  }
+});
+
+
 router.get("/:codigo", async (req, res) => {
   let codigo = req.params.codigo;
   codigo = codigo.toUpperCase();
@@ -51,7 +63,7 @@ router.get("/:codigo", async (req, res) => {
   res.send(asignatura);
 });
 
-router.post("/", validateSubject, async (req, res) => {
+router.post("/", validateSubject, validarAdmin,async (req, res) => {
   // if (!req.user.isAdmin) {
   //   res.status(401).send("Unauthorized");
   //   return;
@@ -71,15 +83,20 @@ router.post("/", validateSubject, async (req, res) => {
     coordinador,
     descripcion,
     grupos,
-  });
+  }).catch((err) => {
+    console.log(err);
+  }
+  );
   res.status(201).send(newAsignatura);
+  
 });
 
-router.put("/:codigo", validateSubject, async (req, res) => {
+router.put("/:codigo", validateSubject, validarAdmin,async (req, res) => {
   // if (!req.user.isAdmin) {
   //   res.status(401).send("Unauthorized");
   //   return;
   // }
+  let token 
 
   let codigo = req.params.codigo;
   let { nombre, areaAsig, creditos, coordinador, descripcion, grupos } = req.body;

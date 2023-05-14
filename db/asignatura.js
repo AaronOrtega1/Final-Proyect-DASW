@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const config = require("../config/config.js");
 const { Groups } = require("./groups.js");
 const { User } = require("./users.js");
+const { Areas } = require("./areasAsig.js");
 
 const asignaturaSchema = mongoose.Schema({
   codigo: {
@@ -14,8 +15,12 @@ const asignaturaSchema = mongoose.Schema({
     required: true,
   },
   areaAsig: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Area",
+    type: String,
+    required: true,
+  },
+  coordinador: {
+    type: String,
+    required: true,
   },
   creditos: {
     type: Number,
@@ -31,10 +36,6 @@ const asignaturaSchema = mongoose.Schema({
       ref: "Groups",
     },
   ],
-  coordinador: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
-  },
 });
 
 asignaturaSchema.statics.getAsignaturas = async (filters, pagina, limite) => {
@@ -46,14 +47,6 @@ asignaturaSchema.statics.getAsignaturas = async (filters, pagina, limite) => {
       path: "grupos",
       model: "Groups",
       select: "professor period year groupID",
-    }).populate({
-      path: "coordinador",
-      model: "User",
-      select: "fullName",
-    }).populate({
-      path: "areaAsig",
-      model: "Area",
-      select: "nombre",
     });
   console.log(
     "🚀 ~ file: asignatura.js:49 ~ asignaturaSchema.statics.getAsignaturas= ~ asignaturas:",
@@ -86,20 +79,7 @@ asignaturaSchema.statics.createAsignatura = async (asignaturaData) => {
     }
     asignaturaData.grupos = grupos;
   }
-  let coordinador = asignaturaData.coordinador || "";
-  if (coordinador != "" && coordinador != null) {
-    let user = await User.findOne({ userID: coordinador });
-    if (user && user.isCoord) {
-      asignaturaData.coordinador = user.userID;
-    }
-  }
-  let areaAsig = asignaturaData.areaAsig || "";
-  if (areaAsig != "" && areaAsig != null) {
-    let area = await Area.findOne({ codigo: areaAsig });
-    if (area) {
-      asignaturaData.areaAsig = area.codigo;
-    }
-  }
+ 
   let nuevaAsignatura = Asignaturas(asignaturaData);
   console.log("Nueva Asignatura: \n" + nuevaAsignatura);
   return await nuevaAsignatura.save();
@@ -107,7 +87,7 @@ asignaturaSchema.statics.createAsignatura = async (asignaturaData) => {
 
 asignaturaSchema.statics.updateAsignatura = async (codigo, datos) => {
   let asignaturaActualizada = await Asignaturas.findOneAndUpdate(
-    codigo,
+    { codigo: codigo },
     { $set: datos },
     { new: true }
   );

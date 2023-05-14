@@ -1,7 +1,7 @@
 @host = http://localhost:3000
 
 ##Recuerden que el token tiene duracion de 5 min
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImpwZXJleiIsImlhdCI6MTY4NDAxNzEwMiwiZXhwIjoxNjg0MDI0MzAyfQ.2wh57edaFR5OBAc7KWBJtmF4MR5abgyYMxq8gIEFdkI
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRvcnJlcyIsImlhdCI6MTY4NDA3NDMwMSwiZXhwIjoxNjg0MDgxNTAxfQ.U-QrXPUTJ7NUe12gwIET4MVNEmt5f56JKHuKdhCmAk8
 x-token: {{token}}
 
 ###
@@ -65,20 +65,21 @@ GET {{host}}/api/asignaturas?nombre=Calculo
 GET {{host}}/api/asignaturas?areaAsig=Curric
 
 ###
-GET {{host}}/api/asignaturas?depto=DMF
+GET {{host}}/api/asignaturas?coordinador=Juan
 
 ###
 GET {{host}}/api/asignaturas?pagina=1&limite=2
 
 ###
 POST {{host}}/api/asignaturas
+x-token: {{token}}
 Content-Type: application/json
 
 {
   "codigo": "CRR005",
   "nombre": "Contexto Historico-Social",
   "creditos": 8,
-  "depto": "DSC",
+  "coordinador": "Juan Perez",
   "descripcion": "Curso de contexto historico social donde se analizara la historia de la humanidad desde la perspectiva de las ciencias sociales",
   "areaAsig": "Curriculum Universitario",
   "grupos": []
@@ -105,6 +106,9 @@ DELETE  {{host}}/api/asignaturas/mat002
 GET {{host}}/api/asignaturas/areas
 
 ###
+GET {{host}}/api/asignaturas/areas/1
+
+###
 POST {{host}}/api/asignaturas/areas
 Content-Type: application/json
 
@@ -123,9 +127,19 @@ POST {{host}}/api/login
 Content-Type: application/json
 
 {
+  "username": "torres",
+  "password": "$2a$10$olmQnFEZYFNFz0P.7RA0uehklyV6Ixj7iyJu.FxJU3e2PmMMMDbXm"
+}
+
+###
+POST {{host}}/api/login
+Content-Type: application/json
+
+{
   "username": "jperez",
   "password": "$2a$10$NFZeyS31m46UIojRn/6R..O0fAcakzyrNj3qBBUnwApjViwIOAKH6"
 }
+
 ###
 GET {{host}}/api/administrator
 
