@@ -1,7 +1,11 @@
 @host = http://localhost:3000
 
 ##Recuerden que el token tiene duracion de 5 min
+<<<<<<< HEAD
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImpwZXJleiIsImlhdCI6MTY4NDA5MzkwOCwiZXhwIjoxNjg0MTAxMTA4fQ.Hx2XyxFcck55SrPdDqh7aBRKpl-1S6QKllAMsSj3iNI
+=======
 @token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRvcnJlcyIsImlhdCI6MTY4NDA3NDMwMSwiZXhwIjoxNjg0MDgxNTAxfQ.U-QrXPUTJ7NUe12gwIET4MVNEmt5f56JKHuKdhCmAk8
+>>>>>>> origin
 x-token: {{token}}
 
 ###
@@ -388,7 +392,6 @@ Content-Type: application/json
   "imgURL": "https://www.aprendemas.com/co/blog/images/2021/10/profesor_mal_tips.jpg"
 }
 
-<<<<<<< HEAD
 {
   "fullName": "Ejemplo Nombre",
   "department": "Electronica",
@@ -400,10 +403,40 @@ Content-Type: application/json
   "email": "ejemplo@iteso.mx",
   "imgURL": "https://www.aprendemas.com/co/blog/images/2021/10/profesor_mal_tips.jpg"
 }
-=======
->>>>>>> origin
 ###
 GET {{host}}/api/comments
+
+###
+get {{host}}/api/evidence
+
+###
+DELETE {{host}}/api/evidence/jAksfgxU6Uisk2z39Rv1v
+
+###
+POST {{host}}/api/evidence
+Content-Type: application/json
+
+{
+  "titulo":"RESULTADOS DE ENCUESTA DE MEDIO TERMINO DEP-DESI-2021",
+  "urlArchivo":"https://iteso01-my.sharepoint.com/:w:/g/personal/antonio_rodriguez_iteso_mx/ESL8iQIY0VVLtoi8XVDqCEQBJVbTSwAnUf5MklTcjppehg?e=4MtEXw",
+  "descripcion":"Aqui adjunto el reporte de la encuesta de medio termino del departamento de sistemas DEP-DESI-2021",
+  "userId": "645ed94370e215a722eaf3bb",
+  "comment": []
+  }
+
+###
+PUT {{host}}/api/evidence/ovOUOFuiDLzwt7_bJ_sg_
+Content-Type: application/json
+
+{
+  "titulo":"REPORTE DE EVALUACIONES GRUPO-ISI542",
+  "urlArchivo":"https://iteso01-my.sharepoint.com/:w:/g/personal/antonio_rodriguez_iteso_mx/ESL8iQIY0VVLtoi8XVDqCEQBJVbTSwAnUf5MklTcjppehg?e=4MtEXw",
+  "descripcion":"Este es el reporte de las evaluaciones realizada al grupo de redes inalambricas ISI542",
+  "userId": "645ed94370e215a722eaf3bb",
+  "comment": []
+  }
+
+
 
 
 
