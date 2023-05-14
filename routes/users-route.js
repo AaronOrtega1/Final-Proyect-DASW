@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const bcrypt = require("bcryptjs");
+//const bcrypt = require("bcryptjs");
 const {
   validateBodyUser,
   validateBodyGroup,
@@ -67,16 +67,16 @@ router.post("/", validarToken, validateBodyUser, async (req, res) => {
     imgURL,
   } = req.body;
 
-  let hash = bcrypt.hashSync(passWord, 10);
-  console.log("Este es el reqbody 2: ",req.body);
-  console.log(hash);
+  //let hash = bcrypt.hashSync(passWord, 10);
+  //console.log("Este es el reqbody 2: ",req.body);
+  //console.log(hash);
   let newUser = await User.createUser({
     userID: nanoid.nanoid(),
     fullName,
     department,
     status,
     userName,
-    passWord: hash,
+    passWord,
     isCoord,
     isAdmin,
     email,
@@ -106,13 +106,13 @@ router.put("/:userID", validarToken, validateBodyUser, async (req, res) => {
     imgURL,
   } = req.body;
 
-  let hash = bcrypt.hashSync(passWord, 10);
+  //let hash = bcrypt.hashSync(passWord, 10);
   let updatedUser = await User.updateUserById(userID, {
     fullName,
     department,
     status,
     userName,
-    passWord: hash,
+    passWord,
     isCoord,
     isAdmin,
     email,
