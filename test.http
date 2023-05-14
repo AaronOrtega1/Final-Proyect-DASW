@@ -101,11 +101,17 @@ Content-Type: application/json
 ###
 DELETE  {{host}}/api/asignaturas/mat002
 
+###
+GET {{host}}/api/asignaturas/areas
 
-  
+###
+POST {{host}}/api/asignaturas/areas
+Content-Type: application/json
 
-DELETE  {{host}}/api/asignaturas/CRR005
-
+{
+  "codigo": 1,
+  "nombre": "Saberes profesionales"
+}
 
 ###
 POST  {{host}}/api/coordinador?fullName=Horacio&department=DESI&birthDate=9752810&status=false&userName=Ciber12&passWord=7439611&isCoord=false
