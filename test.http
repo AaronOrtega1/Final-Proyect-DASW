@@ -251,6 +251,9 @@ Content-Type: application/json
 }
 
 ###
+GET {{host}}/api/evidence
+
+###
 DELETE {{host}}/api/view/ZeosJHjM9orwuE2xuSebm
 
 ###
@@ -258,30 +261,38 @@ POST {{host}}/api/evidence
 Content-Type: application/json
 
 {
-  "titulo":"test",
+  "titulo":"new evidence",
   "urlArchivo":"test",
-  "descripcion":"test",
-  "teacher": "64519476ddfcc66bd7ee92fd"
+  "descripcion":"segun yo esto es una prueba",
+  "userId": "645ed94370e215a722eaf3bb",
+  "comment": "645da68570803115322d2237",
+  "fecha": 1352023
 }
+
+###
+PUT {{host}}/api/evidence/D3tRWvVwEWIfhaGjOO8Aa
+Content-Type: application/json
+
+{
+  "titulo":"new evidence",
+  "urlArchivo":"test",
+  "descripcion":"segun yo esto es una prueba",
+  "userId": "645ed94370e215a722eaf3bb",
+  "comment": ["645da68570803115322d2237","645ffaf04fab8c44e5c76d3a"],
+  "fecha": 1352023
+}
+
 
 ###
 DELETE {{host}}/api/evidence/8vw-z7FqX_Ot2ANMWsRTZ
 
 ###
-GET {{host}}/api/evidence
+GET {{host}}/api/evidence/yK0WwrEjogr6gSOuyN1cn
 
 ###
 GET {{host}}/api/comments
 
-###
-POST {{host}}/api/comments
-Content-Type: application/json
 
-{
-  "fecha": 952023,
-  "mensaje": "Esta es una prueba de comentario",
-  "user":"645d309a7dd03ece21b587dd"
-}
 
 ###
 PUT {{host}}/api/comments/HO3AbNox-OKhWqnxPV50L
@@ -291,7 +302,7 @@ Content-Type: application/json
   "autor":"test",
   "fecha": 2,
   "mensaje": "Esta es una prueba de comentario Test",
-  "idUser":"645d309a7dd03ece21b587dd"
+  "idUser":"645ed94370e215a722eaf3bb"
 }
 
 ###
@@ -321,13 +332,13 @@ Content-Type: application/json
   "titulo":"test",
   "urlArchivo":"test",
   "descripcion":"test",
-  "userId": "645d309a7dd03ece21b587dd",
+  "userId": "645ed94370e215a722eaf3bb",
   "comment": "645da68570803115322d2237",
   "fecha": 952023
 }
 
 ###
-DELETE {{host}}/api/evidence/8CPY4rFRtuT0KuyUSLI9L
+DELETE {{host}}/api/evidence/yK0WwrEjogr6gSOuyN1cn
 
 ###
 DELETE {{host}}/api/users/A01234567
@@ -347,6 +358,80 @@ Content-Type: application/json
   "isTeach": true,
   "email": "jperez@iteso.mx",
 }
+
+###
+POST {{host}}/api/comments
+Content-Type: application/json
+
+{
+  "fecha": 1352023,
+  "mensaje": "Probando Comentrario",
+  "idUser":"645ed94370e215a722eaf3bb"
+}
+
+###
+GET {{host}}/api/comments
+
+###
+DELETE {{host}}/api/comments/W45hA73Ra3fm0k63YMzj_
+
+
+
+
+
+
+
+
+
+
+
+###
+POST {{host}}/api/comments
+Content-Type: application/json
+
+{
+  "mensaje": "Probando Comentrario",
+  "idUser":"645ed94370e215a722eaf3bb"
+}
+
+###
+PUT {{host}}/api/comments/uPE7Wzr9H6QO66kUpncp-
+Content-Type: application/json
+
+{  
+  "mensaje": "Probando Comentrario Modificado",
+  "idUser":"645ed94370e215a722eaf3bb"
+
+}
+
+###
+PUT {{host}}/api/evidence/yg2a9t1IDmzP3HYuRwgxh
+Content-Type: application/json
+
+{
+  "titulo":"test",
+  "urlArchivo":"test",
+  "descripcion":"test",
+  "userId": "645ed94370e215a722eaf3bb",
+  "comment": ["646029bb99beb6f30862069e"]
+}
+
+###
+PUT {{host}}/api/evidence/yg2a9t1IDmzP3HYuRwgxh
+Content-Type: application/json
+
+{
+  "titulo":"test",
+  "urlArchivo":"test",
+  "descripcion":"test",
+  "userId": "645ed94370e215a722eaf3bb",
+  "comment": ["646029bb99beb6f30862069e","646029bb99beb6f30862069e"]
+}
+
+###
+GET {{host}}/api/evidence/?_id=645d2a7649d498a623066db6
+
+
 
 
 

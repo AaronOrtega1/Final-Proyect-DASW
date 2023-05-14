@@ -9,7 +9,7 @@ const commentSchema = mongoose.Schema({
         required: true
     },
     fecha: {
-        type: Number,
+        type: String,
         required: true
     },
     mensaje: {

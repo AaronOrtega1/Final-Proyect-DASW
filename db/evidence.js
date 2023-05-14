@@ -25,24 +25,31 @@ const  evidenceSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "User"
     },
-    comment: { 
+    comment: [{ 
         type: mongoose.Schema.Types.ObjectId,
         ref: "Comment"
-    },
+    }],
     fecha: {
-        type: Number,
+        type: String,
         required: true
     }
 });
 
-evidenceSchema.statics.getEvidencias = async(filters, pagina, limite) => {
+evidenceSchema.statics.getEvidencias = async (filters, pagina, limite) => {
     let salto = (pagina - 1) * limite;
-    let evidencias = await Evidence.find(filters).skip(salto).limit(limite)
-    .populate({path: 'userId', model: 'User', select: 'fullName '})
-    .populate({path: 'comment', model: 'Comment', select: 'mensaje idUser fecha', populate: {path: 'idUser', model: 'User', select: 'fullName'}});
+    let evidencias = await Evidence.find(filters)
+      .skip(salto)
+      .limit(limite)
+      .populate({ path: 'userId', model: 'User', select: 'fullName' })
+      .populate({
+        path: 'comment',
+        model: 'Comment',
+        select: 'mensaje idUser fecha',
+        populate: { path: 'idUser', model: 'User', select: 'fullName' }
+      });
     console.log("All: \n" + evidencias);
     return evidencias;
-}
+  };
 
 evidenceSchema.statics.getEvidenciaById = async(codigo) => {
     let evidence = await Evidence.findOne({codigo});
