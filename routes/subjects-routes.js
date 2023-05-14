@@ -1,13 +1,14 @@
 const router = require("express").Router();
 const { Asignaturas } = require("../db/asignatura.js");
-const { validateSubject } = require("../middleware/validateData.js");
+const { Areas } = require("../db/areasAsig.js");
+const { validateSubject, validarToken, validarAdmin } = require("../middleware/validateData.js");
 const { Grupo } = require("../db/groups.js");
 const { validate } = require("../middleware/validateData.js");
 const nanoid = require("nanoid");
 
 router.get("/", async (req, res) => {
   let filter = {};
-  let { codigo, nombre, areaAsig, creditos, depto, pagina, limite } = req.query;
+  let { codigo, nombre, areaAsig, creditos, coordinador, pagina, limite } = req.query;
   if (codigo) {
     filter.codigo = new RegExp(codigo, "i");
   }
@@ -17,8 +18,8 @@ router.get("/", async (req, res) => {
   if (creditos) {
     filter.creditos = parseInt(creditos);
   }
-  if (depto) {
-    filter.depto = new RegExp(depto, "i");
+  if (coordinador) {
+    filter.coordinador = new RegExp(coordinador, "i");
   }
   if (areaAsig) {
     filter.areaAsig = new RegExp(areaAsig, "i");
@@ -33,6 +34,28 @@ router.get("/", async (req, res) => {
   res.send(asignatura);
 });
 
+router.get("/areas", async (req, res) => {
+  try {
+    let areas = await Areas.getAreas({});
+    res.send(areas);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error al obtener las áreas");
+  }
+});
+
+router.get("/areas/:codigo", async (req, res) => {
+  try {
+    let id = req.params.codigo;
+    let area = await Areas.getArea(id);
+    res.send(area);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error al obtener el área");
+  }
+});
+
+
 router.get("/:codigo", async (req, res) => {
   let codigo = req.params.codigo;
   codigo = codigo.toUpperCase();
@@ -40,12 +63,12 @@ router.get("/:codigo", async (req, res) => {
   res.send(asignatura);
 });
 
-router.post("/", validateSubject, async (req, res) => {
+router.post("/", validateSubject, validarAdmin,async (req, res) => {
   // if (!req.user.isAdmin) {
   //   res.status(401).send("Unauthorized");
   //   return;
   // }
-  let { codigo, nombre, areaAsig, creditos, depto, descripcion, grupos } =
+  let { codigo, nombre, areaAsig, creditos, coordinador, descripcion, grupos } =
     req.body;
   codigo = codigo.toUpperCase();
   let compararCodigo = await Asignaturas.getAsignaturaXcodigo(codigo);
@@ -57,21 +80,26 @@ router.post("/", validateSubject, async (req, res) => {
     nombre,
     areaAsig,
     creditos,
-    depto,
+    coordinador,
     descripcion,
     grupos,
-  });
+  }).catch((err) => {
+    console.log(err);
+  }
+  );
   res.status(201).send(newAsignatura);
+  
 });
 
-router.put("/:codigo", validateSubject, async (req, res) => {
+router.put("/:codigo", validateSubject, validarAdmin,async (req, res) => {
   // if (!req.user.isAdmin) {
   //   res.status(401).send("Unauthorized");
   //   return;
   // }
+  let token 
 
   let codigo = req.params.codigo;
-  let { nombre, areaAsig, creditos, depto, descripcion, grupos } = req.body;
+  let { nombre, areaAsig, creditos, coordinador, descripcion, grupos } = req.body;
   codigo = codigo.toUpperCase();
   let compararCodigo = await Asignaturas.getAsignaturaXcodigo(codigo);
   if (!compararCodigo) {
@@ -81,7 +109,7 @@ router.put("/:codigo", validateSubject, async (req, res) => {
     nombre,
     areaAsig,
     creditos,
-    depto,
+    coordinador,
     descripcion,
     grupos,
   });
@@ -99,5 +127,7 @@ router.delete("/:codigo", async (req, res) => {
   let asignatura = await Asignaturas.deleteAsignatura(codigo);
   res.send(asignatura);
 });
+
+
 
 module.exports = router;

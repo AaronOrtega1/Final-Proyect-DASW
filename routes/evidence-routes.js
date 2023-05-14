@@ -10,7 +10,7 @@ router.get("/", async(req, res) => {
 
     if(codigo) filter.codigo = new RegExp(codigo, "i");
     if(titulo) filter.titulo = new RegExp(titulo, "i");
-    if(teacher) filter.teacher = new RegExp(teacher, "i");
+    if(teacher) filter.idUser = new RegExp(teacher, "i");
     if(fecha) filter.fecha = fecha;
 
     if(!pagina) pagina = 1;
@@ -27,15 +27,16 @@ router.get("/", async(req, res) => {
 
 router.post("/", async(req, res) => {
     let evidenceData = req.body;
+    let date = new Date().toLocaleDateString();
 
     let newEvidence = {
         codigo: nanoid.nanoid(),
         titulo: evidenceData.titulo,
         urlArchivo: evidenceData.urlArchivo,
         descripcion: evidenceData.descripcion,
-        teacher: evidenceData.teacher,
+        idUser: evidenceData.idUser,
         comment: evidenceData.comment,
-        fecha: evidenceData.fecha
+        fecha: date
     }
 
     let evidence = await Evidence.createEvidencia(newEvidence);

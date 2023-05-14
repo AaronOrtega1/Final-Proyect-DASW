@@ -19,6 +19,14 @@
         left: 50%;
         transform: translate(-50%, -50%);
     }
+    #addComment{
+      width: 150px;
+      height: 40px;
+      top: 50%;
+      left: 50%;
+
+
+    }
   </style>
   </head>
   <body>
@@ -29,13 +37,70 @@
 
 </div>
 
-<button type="button" class="btn btn-dark border border-white" id="addComentario">Añadir comentario</button>
+<button type="button" class="btn btn-dark border border-white" id="addComentario" data-target="#newComment" data-toggle="modal" >
+  Enviar comentario</button>
 
 
 <div class= "container my-5 py-5" id="commentData">
   
   
 </div>
+
+
+<div class="center">
+  <nav aria-label="Page navigation">
+    <ul class="pagination justify-content-center">
+      <li class="page-item">
+        <a class="page-link" href="#" id="anteriorPag" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+          <span class="sr-only">Previous</span>
+        </a>
+      </li>
+      <li class="page-item active" id="paginador"><a class="page-link" href="#">1</a></li>
+      <li class="page-item">
+        <a class="page-link" href="#" id="siguientePag" aria-label="Next">
+          <span aria-hidden="true">&raquo;</span>
+          <span class="sr-only">Next</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>
+
+<!-- <New Comment-> -->
+  <div class="modal fade" id="newComment" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="bannerModal">Enviar comentario</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="otherClose">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form action="" id="formularioComment">
+            <br>
+            <div>
+              <div class="form-group">
+                <label for="descripcionProducto">Comentario</label>
+                <textarea class="form-control" name="commentContent" id="commentContent" rows="5" required></textarea>
+              </div>
+            </div>
+            <div class="d-flex justify-content-center" id="">
+              <button type="button" name="addComment" id="addComment" class="btn btn-dark btn-lg btn-block"
+                data-toggle="modal" data-target="#modalAddGroup">Publicar</button>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" id="closeButton">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
 
 
 

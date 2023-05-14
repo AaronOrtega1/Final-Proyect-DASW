@@ -78,7 +78,7 @@
           <option>Nombre</option>
           <option>Área</option>
           <option>Creditos</option>
-          <option>Departamento</option>
+          <option>Coordinador</option>
         </select>
       </div>
       <!-- Buscar -->
@@ -107,7 +107,7 @@
             <td>Codigo</td>
             <td>Nombre</td>
             <td>Area</td>
-            <td>Depto.</td>
+            <td>Coordinador</td>
             <td>Creditos</td>
             <td>Detalles</td>
           </tr>
@@ -238,7 +238,7 @@
             <br>
             <div>
               <div class="form-group">
-                <label for="descripcionProducto">Descripción</label>
+                <label for="descripcionAsignatura">Descripción</label>
                 <textarea class="form-control" name="descripcionAsignatura" id="descripcionAsignatura" rows="3" required></textarea>
               </div>
             </div>
@@ -246,17 +246,28 @@
             <label for="">Detalles</label>
             <div class="d-flex align-items-center">
               <input type="number" class="form-control m-1" id="NoCreditos" placeholder="Creditos" required>
-              <input type="text" class="form-control m-1" id="Depto" placeholder="Departamento" required>
-            </div>
-            <div class="d-flex align-items-center">
               <input type="text" class="form-control m-1" id="CodigoA" placeholder="Código" pattern="^[a-zA-Z]{3}\d{3}$" maxlength="6" required>
-              <input type="text" class="form-control m-1" id="AreaA" placeholder="Área" required>
             </div>
             <br>
-            <div class="d-flex align-items-center" id="">
-              <button type="button" name="addGroup" id="addGroup" class="btn btn-dark btn-lg btn-block"
-                data-toggle="modal" data-target="#modalAddGroup">Agregar grupo</button>
+            <div class="" id="">
+              <label for="AreaA">Área</label>
+              <select class="form-control dark" name="AreaA" id="AreaA">
+                <option>Area A</option>
+                <option>Area B</option>
+                <option>Area C</option>
+              </select>
             </div>
+            <br>
+            <div class="" id="">
+              <label for="listaCoordinadores">Coordinador</label>
+              <select class="form-control dark" name="listaCoordinadores" id="listaCoordinadores">
+                <option>Fulano</option>
+                <option>Mengano</option>
+                <option>Zultano</option>
+              </select>
+            </div>
+            <br>
+            
           </form>
         </div>
         <div class="modal-footer">
@@ -323,6 +334,7 @@
 
   <!-- Optional JavaScript -->
   <script src="../JavaScript/subjectsLoad.js"></script>
+
 
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

@@ -1,5 +1,8 @@
 const jwt = require("jsonwebtoken");
 const config = require("../config/config.js");
+const { User } = require("../db/users.js");
+const { Areas } = require("../db/areasAsig.js");
+const validAdmins = require("../JavaScript/Tokens/validAdmins.js");
 
 function validateBodyUser(req, res, next) {
   let {
@@ -27,7 +30,21 @@ function validateBodyUser(req, res, next) {
     next();
     return;
   }
-  res.status(400).send({ error: "Missing atributes, please check" });
+  res
+    .status(400)
+    .send(
+      "Falta el " +
+        fullName +
+        department +
+        status +
+        userName +
+        passWord +
+        isCoord +
+        isAdmin +
+        email +
+        imgURL
+    );
+  //{ error: "Missing atributes, please check" }
 }
 
 function validateBodyGroup(req, res, next) {
@@ -46,8 +63,9 @@ function validateBodyGroup(req, res, next) {
   res.status(400).send({ error: "Missing atributes, please check" });
 }
 
-function validateSubject(req, res, next) {
-  let { codigo, nombre, areaAsig, creditos, depto, descripcion } = req.body;
+async function validateSubject(req, res, next) {
+  let { codigo, nombre, areaAsig, creditos, coordinador, descripcion } =
+    req.body;
   let missing = [];
   if (!codigo && !req.params.codigo) {
     missing.push("codigo");
@@ -57,7 +75,7 @@ function validateSubject(req, res, next) {
   if (!nombre) missing.push("nombre");
   if (!areaAsig) missing.push("area");
   if (!creditos) missing.push("creditos");
-  if (!depto) missing.push("departamento");
+  if (!coordinador) missing.push("coordinador");
   if (!descripcion) missing.push("descripcion");
 
   codigo = codigo.toUpperCase();
@@ -65,9 +83,23 @@ function validateSubject(req, res, next) {
 
   if (missing.length > 0) {
     res.status(400).send({ error: "Faltan atributos: " + missing.join(", ") });
+    console.log("Faltan atributos: " + missing.join(", "));
     return;
   }
+
   next();
+}
+
+function validarAdmin(req, res, next) {
+  let token = req.get("x-token");
+  if (validAdmins.includes(token)) {
+    next();
+    return;
+  } else {
+    res.status(401).send({ error: "No tienes permisos de administrador" });
+    console.log("No tienes permisos de administrador");
+    return;
+  }
 }
 
 function validarToken(req, res, next) {
@@ -105,4 +137,5 @@ module.exports = {
   validateSubject,
   validarToken,
   validateView,
+  validarAdmin,
 };

@@ -27,6 +27,7 @@
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^7.1.0",
     "nanoid": "^3.0.0",
+    "node": "^20.1.0",
     "nodemon": "^2.0.22"
   }
 }

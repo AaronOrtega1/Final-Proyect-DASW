@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
 const config = require("../config/config.js");
 const { Groups } = require("./groups.js");
+const { User } = require("./users.js");
+const { Areas } = require("./areasAsig.js");
 
 const asignaturaSchema = mongoose.Schema({
   codigo: {
@@ -16,12 +18,12 @@ const asignaturaSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  creditos: {
-    type: Number,
+  coordinador: {
+    type: String,
     required: true,
   },
-  depto: {
-    type: String,
+  creditos: {
+    type: Number,
     required: true,
   },
   descripcion: {
@@ -45,7 +47,7 @@ asignaturaSchema.statics.getAsignaturas = async (filters, pagina, limite) => {
       path: "grupos",
       model: "Groups",
       select: "professor period year groupID",
-    }); // 'professor period year groupID'
+    });
   console.log(
     "🚀 ~ file: asignatura.js:49 ~ asignaturaSchema.statics.getAsignaturas= ~ asignaturas:",
     asignaturas
@@ -72,11 +74,12 @@ asignaturaSchema.statics.createAsignatura = async (asignaturaData) => {
     for (let i = 0; i < grupos.length; i++) {
       const grupo = await Groups.findOne({ groupID: grupos[i] });
       if (grupo) {
-        grupos[i] = grupo._id;
+        grupos[i] = grupo.groupID;
       }
     }
     asignaturaData.grupos = grupos;
   }
+ 
   let nuevaAsignatura = Asignaturas(asignaturaData);
   console.log("Nueva Asignatura: \n" + nuevaAsignatura);
   return await nuevaAsignatura.save();
@@ -84,7 +87,7 @@ asignaturaSchema.statics.createAsignatura = async (asignaturaData) => {
 
 asignaturaSchema.statics.updateAsignatura = async (codigo, datos) => {
   let asignaturaActualizada = await Asignaturas.findOneAndUpdate(
-    codigo,
+    { codigo: codigo },
     { $set: datos },
     { new: true }
   );
