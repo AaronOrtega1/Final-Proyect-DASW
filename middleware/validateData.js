@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 const config = require("../config/config.js");
 const { User } = require("../db/users.js");
 const { Areas } = require("../db/areasAsig.js");
-const validAdmins = require("../JavaScript/Tokens/validAdmins.js")
+const validAdmins = require("../JavaScript/Tokens/validAdmins.js");
 
 function validateBodyUser(req, res, next) {
   let {
@@ -19,18 +19,31 @@ function validateBodyUser(req, res, next) {
   if (
     fullName &&
     department &&
-    status &&
+    status !== undefined &&
     userName &&
     passWord &&
-    isCoord &&
-    isAdmin &&
+    isCoord !== undefined &&
+    isAdmin !== undefined &&
     email &&
     imgURL !== undefined
   ) {
     next();
     return;
   }
-  res.status(400).send('Falta el ' + fullName + department + status+ userName + passWord + isCoord+ isAdmin+ email + imgURL);
+  res
+    .status(400)
+    .send(
+      "Falta el " +
+        fullName +
+        department +
+        status +
+        userName +
+        passWord +
+        isCoord +
+        isAdmin +
+        email +
+        imgURL
+    );
   //{ error: "Missing atributes, please check" }
 }
 
@@ -51,7 +64,8 @@ function validateBodyGroup(req, res, next) {
 }
 
 async function validateSubject(req, res, next) {
-  let { codigo, nombre, areaAsig, creditos, coordinador, descripcion } = req.body;
+  let { codigo, nombre, areaAsig, creditos, coordinador, descripcion } =
+    req.body;
   let missing = [];
   if (!codigo && !req.params.codigo) {
     missing.push("codigo");
@@ -81,7 +95,7 @@ function validarAdmin(req, res, next) {
   if (validAdmins.includes(token)) {
     next();
     return;
-  }else{
+  } else {
     res.status(401).send({ error: "No tienes permisos de administrador" });
     console.log("No tienes permisos de administrador");
     return;
@@ -97,13 +111,15 @@ function validarToken(req, res, next) {
 
   jwt.verify(token, config.jwtSecret, (error, decoded) => {
     if (error) {
-      res.status(401).send({ erro: error.message });
+      res.status(401).send({ error: error.message });
       return;
     }
 
     req.username = decoded.userName;
     next();
   });
+
+  next();
 }
 
 function validateView(req, res, next) {
@@ -121,5 +137,5 @@ module.exports = {
   validateSubject,
   validarToken,
   validateView,
-  validarAdmin
+  validarAdmin,
 };

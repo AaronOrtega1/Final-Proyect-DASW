@@ -3,6 +3,7 @@ const { User } = require("../db/users");
 const jwt = require("jsonwebtoken");
 const config = require("../config/config.js");
 const bcrypt = require("bcryptjs");
+const validAdmins = require("../JavaScript/Tokens/validAdmins.js");
 
 //Validar que los datos que nos pasen sean los correctos
 route.post("/", async (req, res) => {
@@ -31,6 +32,8 @@ route.post("/", async (req, res) => {
     res.send({ token, role });
     return;
   }
+
+  res.send({ token });
 });
 
 module.exports = route;

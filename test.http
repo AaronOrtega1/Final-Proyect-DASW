@@ -33,13 +33,16 @@ GET {{host}}/api/groups
 ###
 POST {{host}}/api/groups
 Content-Type: application/json
+x-token: {{token}}
 
 {
-  "group":"groupTest2",
-  "department":"test2 department",
+  "groupID":"1",
+  "group":"groupTest4",
+  "department":"test4 department",
   "status":true,
-  "students":["getjRpBcKfH9vvRF4r4Kg","RYKuhzcn9WsKHa_TRW5Hj","J81e73UlFmVOBuFlcBmOr"],
-  "professor":"64519476ddfcc66bd7ee92fd"
+  "professor":"64519476ddfcc66bd7ee92fd",
+  "period":"PRIM2023",
+  "year":"2023"
 }
 
 ###
@@ -109,17 +112,10 @@ DELETE  {{host}}/api/asignaturas/mat002
 ###
 GET {{host}}/api/asignaturas/areas
 
-###
-GET {{host}}/api/asignaturas/areas/1
+  
 
-###
-POST {{host}}/api/asignaturas/areas
-Content-Type: application/json
+DELETE  {{host}}/api/asignaturas/CRR005
 
-{
-  "codigo": 1,
-  "nombre": "Saberes profesionales"
-}
 
 ###
 POST  {{host}}/api/coordinador?fullName=Horacio&department=DESI&birthDate=9752810&status=false&userName=Ciber12&passWord=7439611&isCoord=false
@@ -131,22 +127,8 @@ POST {{host}}/api/login
 Content-Type: application/json
 
 {
-<<<<<<< HEAD
   "username": "prueba",
   "password": "123456"
-=======
-  "username": "torres",
-  "password": "$2a$10$olmQnFEZYFNFz0P.7RA0uehklyV6Ixj7iyJu.FxJU3e2PmMMMDbXm"
-}
-
-###
-POST {{host}}/api/login
-Content-Type: application/json
-
-{
-  "username": "jperez",
-  "password": "$2a$10$NFZeyS31m46UIojRn/6R..O0fAcakzyrNj3qBBUnwApjViwIOAKH6"
->>>>>>> origin
 }
 
 ###
@@ -369,18 +351,21 @@ DELETE {{host}}/api/evidence/yK0WwrEjogr6gSOuyN1cn
 DELETE {{host}}/api/users/A01234567
 
 ###
-PUT {{host}}/api/users/A01234567
+GET {{host}}/api/login
+
+###
+POST {{host}}/api/users
+x-token: {{token}}
 Content-Type: application/json
 
-{    
-  "userID": "A01234567",
+{
   "fullName": "Juan Perez",
   "department": "Sistemas",
   "status": true,
   "userName": "jperez",
-  "passWord": 1234,
-  "isCoord": false,
-  "isTeach": true,
+  "passWord": "1234",
+  "isCoord": true,
+  "isAdmin": ,
   "email": "jperez@iteso.mx",
 }
 ###
@@ -396,22 +381,17 @@ x-token: {{token}}
 Content-Type: application/json
 
 {
-  "fullName": "Alan Rodriguez",
-  "department": "Sistemas",
+  "fullName": "Sergio Torres",
+  "department": "Electronica",
   "status": "true",
-  "userName": "example2",
-  "passWord": "1999",
+  "userName": "torres",
+  "passWord": "2758",
   "isCoord": "false",
   "isAdmin": "false",
-  "email": "1999@iteso.mx",
+  "email": "storres@iteso.mx",
   "imgURL": "https://www.aprendemas.com/co/blog/images/2021/10/profesor_mal_tips.jpg"
 }
-###
-PUT  {{host}}/api/users/borrar
-x-token: {{token}}
-Content-Type: application/json
 
-<<<<<<< HEAD
 {
   "fullName": "Ejemplo Nombre",
   "department": "Electronica",
@@ -423,10 +403,40 @@ Content-Type: application/json
   "email": "ejemplo@iteso.mx",
   "imgURL": "https://www.aprendemas.com/co/blog/images/2021/10/profesor_mal_tips.jpg"
 }
-=======
->>>>>>> origin
 ###
 GET {{host}}/api/comments
+
+###
+get {{host}}/api/evidence
+
+###
+DELETE {{host}}/api/evidence/jAksfgxU6Uisk2z39Rv1v
+
+###
+POST {{host}}/api/evidence
+Content-Type: application/json
+
+{
+  "titulo":"RESULTADOS DE ENCUESTA DE MEDIO TERMINO DEP-DESI-2021",
+  "urlArchivo":"https://iteso01-my.sharepoint.com/:w:/g/personal/antonio_rodriguez_iteso_mx/ESL8iQIY0VVLtoi8XVDqCEQBJVbTSwAnUf5MklTcjppehg?e=4MtEXw",
+  "descripcion":"Aqui adjunto el reporte de la encuesta de medio termino del departamento de sistemas DEP-DESI-2021",
+  "userId": "645ed94370e215a722eaf3bb",
+  "comment": []
+  }
+
+###
+PUT {{host}}/api/evidence/ovOUOFuiDLzwt7_bJ_sg_
+Content-Type: application/json
+
+{
+  "titulo":"REPORTE DE EVALUACIONES GRUPO-ISI542",
+  "urlArchivo":"https://iteso01-my.sharepoint.com/:w:/g/personal/antonio_rodriguez_iteso_mx/ESL8iQIY0VVLtoi8XVDqCEQBJVbTSwAnUf5MklTcjppehg?e=4MtEXw",
+  "descripcion":"Este es el reporte de las evaluaciones realizada al grupo de redes inalambricas ISI542",
+  "userId": "645ed94370e215a722eaf3bb",
+  "comment": []
+  }
+
+
 
 
 

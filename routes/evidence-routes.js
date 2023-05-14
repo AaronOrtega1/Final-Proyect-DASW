@@ -34,7 +34,7 @@ router.post("/", async(req, res) => {
         titulo: evidenceData.titulo,
         urlArchivo: evidenceData.urlArchivo,
         descripcion: evidenceData.descripcion,
-        idUser: evidenceData.idUser,
+        userId: evidenceData.userId,
         comment: evidenceData.comment,
         fecha: date
     }
