@@ -44,7 +44,7 @@ evidenceSchema.statics.getEvidencias = async (filters, pagina, limite) => {
       .populate({
         path: 'comment',
         model: 'Comment',
-        select: 'mensaje idUser fecha',
+        select: 'codigo mensaje idUser fecha',
         populate: { path: 'idUser', model: 'User', select: 'fullName' }
       });
     console.log("All: \n" + evidencias);

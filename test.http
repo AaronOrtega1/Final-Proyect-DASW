@@ -388,5 +388,9 @@ PUT  {{host}}/api/users/borrar
 x-token: {{token}}
 Content-Type: application/json
 
+###
+GET {{host}}/api/comments
+
+
 
 
