@@ -2,6 +2,7 @@ const jwt = require("jsonwebtoken");
 const config = require("../config/config.js");
 const { User } = require("../db/users.js");
 const { Areas } = require("../db/areasAsig.js");
+const validAdmins = require("../JavaScript/Tokens/validAdmins.js")
 
 function validateBodyUser(req, res, next) {
   let {
@@ -75,6 +76,18 @@ async function validateSubject(req, res, next) {
   next();
 }
 
+function validarAdmin(req, res, next) {
+  let token = req.get("x-token");
+  if (validAdmins.includes(token)) {
+    next();
+    return;
+  }else{
+    res.status(401).send({ error: "No tienes permisos de administrador" });
+    console.log("No tienes permisos de administrador");
+    return;
+  }
+}
+
 function validarToken(req, res, next) {
   let token = req.get("x-token");
   if (!token) {
@@ -108,4 +121,5 @@ module.exports = {
   validateSubject,
   validarToken,
   validateView,
+  validarAdmin
 };
