@@ -3,7 +3,6 @@ const { User } = require("../db/users");
 const jwt = require("jsonwebtoken");
 const config = require("../config/config.js");
 const bcrypt = require("bcryptjs");
-const validAdmins = require("../JavaScript/Tokens/validAdmins.js")
 
 //Validar que los datos que nos pasen sean los correctos
 route.post("/", async (req, res) => {
@@ -24,7 +23,7 @@ route.post("/", async (req, res) => {
   let token = jwt.sign({ username: user.userName }, config.jwtSecret, {
     expiresIn: 60 * 120,
   });
-
+  res.status(201).send({ token });
   if (user.isAdmin) {
     console.log("Bienvenido Admin");
     validAdmins.push(token);
@@ -32,8 +31,6 @@ route.post("/", async (req, res) => {
     res.send({ token, role });
     return;
   }
-
-  res.status(201).send({ token });
 });
 
 module.exports = route;
