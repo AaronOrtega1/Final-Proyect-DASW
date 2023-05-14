@@ -13,7 +13,7 @@ let filteredSearch = document.getElementById('filteredSearch');
 let filtroBusqueda = document.getElementById('filtroBusqueda');
 let filteredSearchButton = document.getElementById('filteredSearchButton');
 let addGroup = document.getElementById('addGroup');
-let postSubject = document.getElementById('postSubject');
+let postSubject = document.getElementById('postSubject'); 
 
 let Metodo = 'POST';
 let Hanger = '';
@@ -54,12 +54,11 @@ async function cargaAsignaturas () {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
-            'x-token' : localStorage.getItem('token')
+            'x-token' : sessionStorage.token
         }
     })
     let datosCoordinadores = await listaCoordinadores.json();
     console.log(datosCoordinadores);
-    datosCoordinadores = datosCoordinadores.filter(c => c.isCoor === true);
     coordinadores = datosCoordinadores;
 
     muestraAsignaturas(datos);
@@ -181,10 +180,10 @@ async function agregarAsignatura(){
     let nombreAsig = nombreAsignatura.value;
     let codigoAsig = codigoAsignatura.value;
     let areaAsig = areaAsignatura.value;
-    let listaCoordinadoresAsig = coordAsignatura.value;
+    let CoordinadorAsig = coordAsignatura.value;
     let creditosAsig = creditosAsignatura.value;
     let descripcionAsig = descripcionAsignatura.value;
-    if(!nombreAsig || !codigoAsig || !areaAsig || !listaCoordinadoresAsig || !creditosAsig || !descripcionAsig){
+    if(!nombreAsig || !codigoAsig || !areaAsig || !CoordinadorAsig || !creditosAsig || !descripcionAsig){
         alert('Por favor llene todos los campos');
     }else if(isNaN(creditosAsig) || creditosAsig < 1 || creditosAsig > 40 || creditosAsig % 1 != 0){
         alert('Este no es un numero de creditos valido');
@@ -195,7 +194,7 @@ async function agregarAsignatura(){
             nombre: nombreAsig,
             codigo: codigoAsig,
             areaAsig: areaAsig,
-            listaCoordinadores: listaCoordinadoresAsig,
+            coordinador: CoordinadorAsig,
             creditos: creditosAsig,
             descripcion: descripcionAsig
         }
@@ -318,20 +317,25 @@ async function eliminarAsignatura(){
     cargaAsignaturas();
 }
 
-function cargaParametros(){
-    let response = fetch('http://localhost:3000/api/asignaturas/areas',{
-        method: 'GET',
+async function cargaParametros() {
+    try {
+      const response = await fetch("http://localhost:3000/api/asignaturas/areas", {
+        method: "GET",
         headers: {
-            'Content-Type': 'application/json'
-        }
-    })
-    let datos = response.json();
-    console.log(datos);
+          "Content-Type": "application/json",
+        },
+      });
+      const data = await response.json();
 
-    areaAsignatura.innerHTML = datos.map(area => {
-        `<option value="${area}">${area}</option>`
-    }).join('');
-}
+      areaAsignatura.innerHTML = data.map((area) => `<option value="${area.nombre}">${area.nombre}</option>`).join("");
+    } catch (error) {
+      console.error(error);
+    }
+    
+    let sonCoord = coordinadores.filter(coord => coord.isCoord === true);
+    coordAsignatura.innerHTML = sonCoord.map((coord) => `<option value="${coord.fullName}">${coord.fullName}</option>`).join("");
+
+  }
 
 
 cargaAsignaturas();

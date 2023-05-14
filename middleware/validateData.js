@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 const config = require("../config/config.js");
 const { User } = require("../db/users.js");
+const { Areas } = require("../db/areasAsig.js");
 
 function validateBodyUser(req, res, next) {
   let {
@@ -49,7 +50,7 @@ function validateBodyGroup(req, res, next) {
 }
 
 async function validateSubject(req, res, next) {
-  let { codigo, nombre, areaAsig, creditos, coordinadorId, descripcion } = req.body;
+  let { codigo, nombre, areaAsig, creditos, coordinador, descripcion } = req.body;
   let missing = [];
   if (!codigo && !req.params.codigo) {
     missing.push("codigo");
@@ -59,7 +60,7 @@ async function validateSubject(req, res, next) {
   if (!nombre) missing.push("nombre");
   if (!areaAsig) missing.push("area");
   if (!creditos) missing.push("creditos");
-  if (!coordinadorId) missing.push("coordinador");
+  if (!coordinador) missing.push("coordinador");
   if (!descripcion) missing.push("descripcion");
 
   codigo = codigo.toUpperCase();
@@ -67,18 +68,7 @@ async function validateSubject(req, res, next) {
 
   if (missing.length > 0) {
     res.status(400).send({ error: "Faltan atributos: " + missing.join(", ") });
-    return;
-  }
-
-  let codigoAsig = await User.getUser({ areaAsig: codigo });
-  if (!codigoAsig) {
-    res.status(400).send({ error: "El codigo de la asignatura no existe" });
-    return;
-  }
-
-  codigoCoor = await User.getUser({ userName: coordinadorId });
-  if (User.isCoord !== true) {
-    res.status(400).send({ error: "El coordinador no existe o su usuario no es coordinador" });
+    console.log("Faltan atributos: " + missing.join(", "));
     return;
   }
 
