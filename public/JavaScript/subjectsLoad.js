@@ -37,7 +37,7 @@ deleteSubject.style.display = "none";
 
 let coordinadores = [];
 
-let role = localStorage.getItem("role");
+let role = "admin";
 
 async function cargaAsignaturas() {
   console.log("cargando asignaturas:" + pagina + " " + limite);
@@ -73,6 +73,8 @@ async function cargaAsignaturas() {
     let btnAgregarAsignatura = document.getElementById("agregarElemento");
     btnAgregarAsignatura.style.display = "block";
   }
+
+  
 
   muestraAsignaturas(datos);
 }

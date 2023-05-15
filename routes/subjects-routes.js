@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const { Asignaturas } = require("../db/asignatura.js");
 const { Areas } = require("../db/areasAsig.js");
-const { validateSubject, validarToken, validarAdmin } = require("../middleware/validateData.js");
+const { validateSubject, validarToken} = require("../middleware/validateData.js");
 const { Grupo } = require("../db/groups.js");
 const { validate } = require("../middleware/validateData.js");
 const nanoid = require("nanoid");
@@ -63,7 +63,7 @@ router.get("/:codigo", async (req, res) => {
   res.send(asignatura);
 });
 
-router.post("/", validateSubject, validarAdmin,async (req, res) => {
+router.post("/", validateSubject, validarToken, async (req, res) => {
   // if (!req.user.isAdmin) {
   //   res.status(401).send("Unauthorized");
   //   return;
@@ -91,7 +91,7 @@ router.post("/", validateSubject, validarAdmin,async (req, res) => {
   
 });
 
-router.put("/:codigo", validateSubject, validarAdmin,async (req, res) => {
+router.put("/:codigo", validateSubject, validarToken, async (req, res) => {
   // if (!req.user.isAdmin) {
   //   res.status(401).send("Unauthorized");
   //   return;
