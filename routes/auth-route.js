@@ -22,7 +22,12 @@ route.post("/", async (req, res) => {
   }
 
   let token = jwt.sign(
-    { username: user.userName, userID: user.userID },
+    {
+      username: user.userName,
+      userID: user.userID,
+      isAdmin: user.isAdmin,
+      isCoord: user.isCoord,
+    },
     config.jwtSecret,
     {
       expiresIn: 60 * 120,

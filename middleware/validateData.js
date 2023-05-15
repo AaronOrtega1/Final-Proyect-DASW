@@ -131,6 +131,18 @@ function validateView(req, res, next) {
   res.status(400).send({ error: "Missing atributes, please check" });
 }
 
+function validateEvidence(req, res, next) {
+  let { titulo, urlArchivo, descripcion, userId, comment,} = req.body;
+  if (titulo && urlArchivo && descripcion && userId && comment !== undefined) {
+    next();
+    return;
+  }
+  res.status(400).send({ error: "Missing atributes, please check" });
+}
+
+
+
+
 module.exports = {
   validateBodyUser,
   validateBodyGroup,
@@ -138,4 +150,5 @@ module.exports = {
   validarToken,
   validateView,
   validarAdmin,
+  validateEvidence
 };

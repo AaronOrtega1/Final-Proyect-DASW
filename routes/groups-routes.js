@@ -2,6 +2,7 @@ const router = require("express").Router();
 const {
   validateBodyGroup,
   validarAdmin,
+  validarToken,
 } = require("../middleware/validateData.js");
 const { Groups } = require("../db/groups.js");
 const { Users } = require("../db/users.js");
@@ -33,6 +34,27 @@ router.get("/", async (req, res) => {
   res.send(group2);
 });
 
+router.get("/myGroups", validarToken, async (req, res) => {
+  try {
+    const userID = req.userID;
+    console.log(
+      "🚀 ~ file: groups-routes.js:39 ~ router.get ~ userID:",
+      userID
+    );
+    const user = await User.findByID(userID);
+    console.log("🚀 ~ file: groups-routes.js:45 ~ router.get ~ user:", user);
+    const groups = await Groups.find({ professor: user.userID });
+    console.log(
+      "🚀 ~ file: groups-routes.js:46 ~ router.get ~ groups:",
+      groups
+    );
+    res.status(200).send(groups);
+  } catch (error) {
+    console.log("🚀 ~ file: groups-routes.js:52 ~ router.get ~ error:", error);
+    res.send(500).send("Server Error");
+  }
+});
+
 router.post("/", validateBodyGroup, validarAdmin, async (req, res) => {
   /*   if (!req.user.isCoord) {
     res.status(401).send("Unauthorized");
@@ -60,7 +82,7 @@ router.get("/:groupID", async (req, res) => {
 });
 
 router.put("/:groupID", validateBodyGroup, async (req, res) => {
-  if (!req.user.isCoord) {
+  if (!req.user.isAdmin) {
     res.status(401).send("Unauthorized");
     return;
   }
@@ -82,17 +104,6 @@ router.delete("/:groupID", async (req, res) => {
   let { groupID } = req.params;
   let deletedGroup = await Groups.deleteGroup(groupID);
   res.send(deletedGroup);
-});
-
-router.get("/myGroups", async (req, res) => {
-  try {
-    const user = await User.findByID(req.userID);
-    const groups = await Groups.find({ professor: user.userID });
-    res.status(200).send(groups);
-  } catch (error) {
-    console.log("🚀 ~ file: groups-routes.js:93 ~ router.get ~ error:", error);
-    res.send(500).send("Server Error");
-  }
 });
 
 module.exports = router;
