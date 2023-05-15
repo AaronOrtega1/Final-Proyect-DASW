@@ -436,5 +436,13 @@ GET {{host}}/api/users/myProfile
 x-token:{{token}}
 
 
+###
+POST {{host}}/api/evidence
+Content-Type: application/json
 
+{
+  "titulo":"REPORTE DE EVALUACIONES GRUPO-ISI542",
+  "descripcion":"Este es el reporte de las evaluaciones realizada al grupo de redes inalambricas ISI542",
+  "userId": "645ed94370e215a722eaf3bb"
+}
 
