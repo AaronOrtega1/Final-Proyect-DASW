@@ -4,6 +4,7 @@ let groupsList = document.getElementById("tbody-Groups");
 let token = localStorage.getItem("token");
 
 async function loadGroups() {
+  console.log("cargando grupos...");
   let resp = await fetch("/api/groups/myGroups", {
     method: "GET",
     headers: {

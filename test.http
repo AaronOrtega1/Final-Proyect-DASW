@@ -32,12 +32,30 @@ x-token: {{token}}
 
 {
   "groupID":"1",
-  "group":"groupTest4",
-  "department":"test4 department",
+  "group":"groupTestJP",
+  "department":"tesJP department",
   "status":true,
-  "professor":"64519476ddfcc66bd7ee92fd",
+  "professor":"5U0Tk4PkUhf_Z0CcdKHWp",
   "period":"PRIM2023",
   "year":"2023"
+}
+
+###
+PUT {{host}}/api/groups
+Content-Type: application/json
+x-token: {{token}}
+
+{
+  "userID": "5U0Tk4PkUhf_Z0CcdKHWp",
+  "fullName": "Juan Perez",
+  "department": "Sistemas",
+  "status": true,
+  "userName": "jperez",
+  "passWord": "$2a$10$NFZeyS31m46UIojRn/6R..O0fAcakzyrNj3qBBUnwApjViwIOAKH6",
+  "isCoord": true,
+  "isAdmin": false,
+  "email": "jperez@iteso.mx",
+  "imgURL": "https://www.allisonacademy.com/wp-content/uploads/2021/12/Teacher-in-the-classroom.jpg",
 }
 
 ###
@@ -371,18 +389,18 @@ x-token: {{token}}
 GET {{host}}/api/users/5U0Tk4PkUhf_Z0CcdKHWp
 x-token: {{token}}
 ###
-POST {{host}}/api/users
+PUT {{host}}/api/users
 x-token: {{token}}
 Content-Type: application/json
 
 {
   "fullName": "Sergio Torres",
   "department": "Electronica",
-  "status": "true",
+  "status": true,
   "userName": "torres",
   "passWord": "2758",
-  "isCoord": "false",
-  "isAdmin": "false",
+  "isCoord": false,
+  "isAdmin": false,
   "email": "storres@iteso.mx",
   "imgURL": "https://www.aprendemas.com/co/blog/images/2021/10/profesor_mal_tips.jpg"
 }
@@ -435,6 +453,7 @@ Content-Type: application/json
 GET {{host}}/api/users/myProfile
 x-token:{{token}}
 
-
+###
+GET {{host}}/api/myGroups
 
 
