@@ -1,7 +1,6 @@
 //Status lo mandare como un true por defecto cuando se cree la cuenta
 //ImageURL tambien se enviara por defecto
 
-
 // const { response } = require("express");
 
 async function login() {
@@ -10,7 +9,7 @@ async function login() {
   let password = document.querySelector("#password").value;
   let datos = { username, password };
   console.log(datos);
-  let resp = await fetch("http://localhost:3000/api/login", {
+  let resp = await fetch("/api/login", {
     method: "POST",
     headers: {
       "content-type": "application/json",
@@ -52,7 +51,7 @@ async function registrarUsuario() {
 
   let token = localStorage.getItem("token");
 
-  let resp = await fetch("http://localhost:3000/api/users", {
+  let resp = await fetch("/api/users", {
     method: "POST",
     headers: {
       "content-type": "application/json",
@@ -67,17 +66,17 @@ async function registrarUsuario() {
       isCoord: isCoord,
       isAdmin: "false",
       email: email,
-      imgURL: "https://www.aprendemas.com/co/blog/images/2021/10/profesor_mal_tips.jpg",
+      imgURL:
+        "https://www.aprendemas.com/co/blog/images/2021/10/profesor_mal_tips.jpg",
     }),
   });
-  
-  let data = await resp.json()
 
-  if (resp.status == 201){
-    alert("Usuario registrado correctamente")
+  let data = await resp.json();
+
+  if (resp.status == 201) {
+    alert("Usuario registrado correctamente");
     window.location.href = "index.html";
-  }
-  else{
+  } else {
     alert(data.error);
   }
 }

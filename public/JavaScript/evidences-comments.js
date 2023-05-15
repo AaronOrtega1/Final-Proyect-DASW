@@ -1,72 +1,70 @@
 // import { Evidence } from '../db/evidence.js';
 
-
-
 let identificador = "";
 let evidences = [];
 let pagina = 1;
 let limite = 1;
 let totalEvidences = 0;
-let btnAnterior = document.getElementById('anteriorPag');
-let btnSiguiente = document.getElementById('siguientePag');
-let displayPaginador = document.getElementById('paginador');
-let filteredSearch = document.getElementById('filteredSearch');
-let filtroBusqueda = document.getElementById('filtroBusqueda');
-let filteredSearchButton = document.getElementById('filteredSearchButton');
-let mensajeComentario = document.getElementById('commentContent');
-let postCommentButton = document.getElementById('addComment');
-let closeModalButton = document.getElementById('closeButton');
-let otherCloseButton = document.getElementById('otherClose');
-btnAnterior.addEventListener('click', anteriorPagina);
-btnSiguiente.addEventListener('click', siguientePagina);
-postCommentButton.addEventListener('click', () => postComment(identificador));
-postCommentButton.addEventListener('click', () => closeModal());
-closeModalButton.addEventListener('click', () => closeModal());
-otherCloseButton.addEventListener('click', () => closeModal());
+let btnAnterior = document.getElementById("anteriorPag");
+let btnSiguiente = document.getElementById("siguientePag");
+let displayPaginador = document.getElementById("paginador");
+let filteredSearch = document.getElementById("filteredSearch");
+let filtroBusqueda = document.getElementById("filtroBusqueda");
+let filteredSearchButton = document.getElementById("filteredSearchButton");
+let mensajeComentario = document.getElementById("commentContent");
+let postCommentButton = document.getElementById("addComment");
+let closeModalButton = document.getElementById("closeButton");
+let otherCloseButton = document.getElementById("otherClose");
+btnAnterior.addEventListener("click", anteriorPagina);
+btnSiguiente.addEventListener("click", siguientePagina);
+postCommentButton.addEventListener("click", () => postComment(identificador));
+postCommentButton.addEventListener("click", () => closeModal());
+closeModalButton.addEventListener("click", () => closeModal());
+otherCloseButton.addEventListener("click", () => closeModal());
 let evidenceSpace = document.getElementById("evidenceData");
 let commentSpace = document.getElementById("commentData");
 let commentId;
 let editButtonModal = document.getElementById("editCommentSend");
-editButtonModal.addEventListener('click', () => editComment());
-editButtonModal.addEventListener('click', () => closeModalEdit());
+editButtonModal.addEventListener("click", () => editComment());
+editButtonModal.addEventListener("click", () => closeModalEdit());
 let editButtonClose = document.getElementById("EditCloseButton");
-editButtonClose.addEventListener('click', () => closeModalEdit());
+editButtonClose.addEventListener("click", () => closeModalEdit());
 let editButtonOtherClose = document.getElementById("EditOtherClose");
-editButtonOtherClose.addEventListener('click', () => closeModalEdit());
+editButtonOtherClose.addEventListener("click", () => closeModalEdit());
 
 let editMessageModal = document.getElementById("editCommentContent");
 let deleteButtonModal = document.getElementById("deleteCommentButton");
-deleteButtonModal.addEventListener('click', () => deleteComment());
-deleteButtonModal.addEventListener('click', () => closeModalDelete());
+deleteButtonModal.addEventListener("click", () => deleteComment());
+deleteButtonModal.addEventListener("click", () => closeModalDelete());
 
 async function loadEvidences() {
-    console.log("Loading evidences...⏳");
-    evidences = await fetch(`http://localhost:3000/api/evidence?pagina=${pagina}&limite=${limite}`, {
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json",
-        },
-    })
-    let data = await evidences.json();
-    evidences = data;
-    console.log(data);
-    numberOfEvidences();
-    showEvidences(data);
-    showComments(data);
+  console.log("Loading evidences...⏳");
+  evidences = await fetch(`/api/evidence?pagina=${pagina}&limite=${limite}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  let data = await evidences.json();
+  evidences = data;
+  console.log(data);
+  numberOfEvidences();
+  showEvidences(data);
+  showComments(data);
 }
 
 async function showEvidences(evidences) {
-    evidenceSpace.innerHTML = "";
-    let evidencesToShow = evidences;
-    evidencesToShow.forEach(e => {
-        const user = e.userId;
-        identificador = e.codigo;
-        console.log(identificador);
-        console.log(user);
-        const item = document.createElement("div");
-        item.setAttribute("class", "d-flex justify-content-center row");
-        item.setAttribute("id", "evidenceItem");
-        item.innerHTML = `
+  evidenceSpace.innerHTML = "";
+  let evidencesToShow = evidences;
+  evidencesToShow.forEach((e) => {
+    const user = e.userId;
+    identificador = e.codigo;
+    console.log(identificador);
+    console.log(user);
+    const item = document.createElement("div");
+    item.setAttribute("class", "d-flex justify-content-center row");
+    item.setAttribute("id", "evidenceItem");
+    item.innerHTML = `
         <div class="d-flex flex-column col-md-8">
             <div class="d-flex flex-row align-items-center text-left comment-top p-2 bg-white border-bottom px-4">
                 <div class="profile-image"><img class="rounded-circle" src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png" width="70"></div>
@@ -94,25 +92,21 @@ async function showEvidences(evidences) {
 
             </div>
         </div>
-        `
-        evidenceSpace.append(item);
-    });
-
+        `;
+    evidenceSpace.append(item);
+  });
 }
 
-
-
-
 async function showComments(evidences) {
-    commentSpace.innerHTML = "";
-    evidences.forEach(c => {
-        const commentsToShow = c.comment;
-        console.log(commentsToShow);
-        commentsToShow.forEach(comment => {
-            const item = document.createElement("div");
-            item.setAttribute("class", "d-flex justify-content-center row");
-            item.setAttribute("id", "commentItem");
-            item.innerHTML = `
+  commentSpace.innerHTML = "";
+  evidences.forEach((c) => {
+    const commentsToShow = c.comment;
+    console.log(commentsToShow);
+    commentsToShow.forEach((comment) => {
+      const item = document.createElement("div");
+      item.setAttribute("class", "d-flex justify-content-center row");
+      item.setAttribute("id", "commentItem");
+      item.innerHTML = `
             
             <div class="col-md-12 col-lg-10">
             <div class="card text-dark" id="comentarioEvidencias">
@@ -142,205 +136,189 @@ async function showComments(evidences) {
             </div>
           </div>
           
-            `
-            commentSpace.append(item);
-        });
+            `;
+      commentSpace.append(item);
     });
-      // Add event listeners for all edit buttons
-    document.querySelectorAll('#editCommentButton').forEach(item => {
-        item.addEventListener('click', () => {
-            const commentId = item.dataset.commentId;
-            getCommentCode(commentId);
+  });
+  // Add event listeners for all edit buttons
+  document.querySelectorAll("#editCommentButton").forEach((item) => {
+    item.addEventListener("click", () => {
+      const commentId = item.dataset.commentId;
+      getCommentCode(commentId);
     });
   });
 
-  document.querySelectorAll('#deleteCommentButton').forEach(item => {
-    item.addEventListener('click', () => {
-        const commentId = item.dataset.commentId;
-        getCommentCode(commentId);
-        });
+  document.querySelectorAll("#deleteCommentButton").forEach((item) => {
+    item.addEventListener("click", () => {
+      const commentId = item.dataset.commentId;
+      getCommentCode(commentId);
     });
+  });
 }
-function anteriorPagina(){
-    if(pagina > 1){
-        pagina--;
-    }
-    displayPaginador.innerHTML = `<li class="page-item active" id="paginador"><a class="page-link" href="#">${pagina}</a></li>`;
-    loadEvidences();
-}
-
-function siguientePagina(){
-    if(pagina < totalEvidences){
-        pagina++;
-    }
-    displayPaginador.innerHTML = `<li class="page-item active" id="paginador"><a class="page-link" href="#">${pagina}</a></li>`
-    loadEvidences();
+function anteriorPagina() {
+  if (pagina > 1) {
+    pagina--;
+  }
+  displayPaginador.innerHTML = `<li class="page-item active" id="paginador"><a class="page-link" href="#">${pagina}</a></li>`;
+  loadEvidences();
 }
 
-async function numberOfEvidences(){
-    let evidences = await fetch(`http://localhost:3000/api/evidence`,{
-    method: 'GET',
+function siguientePagina() {
+  if (pagina < totalEvidences) {
+    pagina++;
+  }
+  displayPaginador.innerHTML = `<li class="page-item active" id="paginador"><a class="page-link" href="#">${pagina}</a></li>`;
+  loadEvidences();
+}
+
+async function numberOfEvidences() {
+  let evidences = await fetch(`/api/evidence`, {
+    method: "GET",
     headers: {
-        'Content-Type': 'application/json'
-    }
-    })
-    let datos = await evidences.json();
-    console.log(datos.length);
-    totalEvidences = datos.length;
+      "Content-Type": "application/json",
+    },
+  });
+  let datos = await evidences.json();
+  console.log(datos.length);
+  totalEvidences = datos.length;
 }
 
-async function postComment(codigoEvidencia){
-    let comentario = mensajeComentario.value;
-    let idUser = "645ed94370e215a722eaf3bb";
+async function postComment(codigoEvidencia) {
+  let comentario = mensajeComentario.value;
+  let idUser = "645ed94370e215a722eaf3bb";
 
-    let commentData = {
-        mensaje: comentario,
-        idUser: idUser
-    }
+  let commentData = {
+    mensaje: comentario,
+    idUser: idUser,
+  };
 
-    let response;
-    let commentId;
+  let response;
+  let commentId;
 
-    try {
-        response = await fetch(`http://localhost:3000/api/comments`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(commentData)
-        });
-
-        if(response.ok){
-            const data = await response.json(); 
-            commentId = data._id;
-            alert('Comment added!');        
-        }
-    } catch (err) {
-        console.log(err);
-        alert('Error adding comment');
-        return;
-    }
-
-    let evidenceResponse = await fetch(`http://localhost:3000/api/evidence/${codigoEvidencia}`, {
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json",
-        }
+  try {
+    response = await fetch(`/api/comments`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(commentData),
     });
 
-    if (!evidenceResponse.ok) {
-        console.log('Error retrieving evidence data');
-        return;
+    if (response.ok) {
+      const data = await response.json();
+      commentId = data._id;
+      alert("Comment added!");
     }
+  } catch (err) {
+    console.log(err);
+    alert("Error adding comment");
+    return;
+  }
 
-    const evidenceData = await evidenceResponse.json();
-    evidenceData.comment.push(commentId);
+  let evidenceResponse = await fetch(`/api/evidence/${codigoEvidencia}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
 
-    console.log(evidenceData);
+  if (!evidenceResponse.ok) {
+    console.log("Error retrieving evidence data");
+    return;
+  }
 
-    let evidence = await fetch(`http://localhost:3000/api/evidence/${codigoEvidencia}`, {
-        method: "PUT",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(evidenceData)
-    });
+  const evidenceData = await evidenceResponse.json();
+  evidenceData.comment.push(commentId);
 
-    if (evidence.ok) {
-        alert('New comment added to the evidence!');
-    } else {
-        console.log('Error adding comment to evidence');
-    }
+  console.log(evidenceData);
 
-    loadEvidences();
+  let evidence = await fetch(`/api/evidence/${codigoEvidencia}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(evidenceData),
+  });
+
+  if (evidence.ok) {
+    alert("New comment added to the evidence!");
+  } else {
+    console.log("Error adding comment to evidence");
+  }
+
+  loadEvidences();
 }
 
-
-async function closeModal(){
-    mensajeComentario.value = "";
-    $('#newComment').modal('hide');
-
+async function closeModal() {
+  mensajeComentario.value = "";
+  $("#newComment").modal("hide");
 }
-
 
 async function getCommentCode(id) {
-    commentId = id;
-    console.log(commentId);
-}
-  
-  async function editComment() {
-    let comentario = editMessageModal.value;
-
-    let commentData = {
-        mensaje: comentario
-    }
-
-    let response;
-
-    try {
-        response = await fetch(`http://localhost:3000/api/comments/${commentId}`, {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(commentData)
-        });
-
-        if (response.ok) {
-            alert('Comment edited!');
-        }
-    } catch (err) {
-        console.log(err);
-        alert('Error editing comment');
-        return;
-    }
-
-    loadEvidences();
+  commentId = id;
+  console.log(commentId);
 }
 
-async function closeModalEdit(){
-    editMessageModal.value = "";
-    $('#editComment').modal('hide');
+async function editComment() {
+  let comentario = editMessageModal.value;
 
+  let commentData = {
+    mensaje: comentario,
+  };
+
+  let response;
+
+  try {
+    response = await fetch(`/api/comments/${commentId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(commentData),
+    });
+
+    if (response.ok) {
+      alert("Comment edited!");
+    }
+  } catch (err) {
+    console.log(err);
+    alert("Error editing comment");
+    return;
+  }
+
+  loadEvidences();
+}
+
+async function closeModalEdit() {
+  editMessageModal.value = "";
+  $("#editComment").modal("hide");
 }
 
 async function deleteComment() {
-    let response;
+  let response;
 
-    try {
-        response = await fetch(`http://localhost:3000/api/comments/${commentId}`, {
-            method: "DELETE",
-            headers: {
-                "Content-Type": "application/json",
-            }
-        });
+  try {
+    response = await fetch(`/api/comments/${commentId}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
 
-        if (response.ok) {
-            alert('Comment deleted!');
-        }
-    } catch (err) {
-        console.log(err);
-        alert('Error deleting comment');
-        return;
+    if (response.ok) {
+      alert("Comment deleted!");
     }
+  } catch (err) {
+    console.log(err);
+    alert("Error deleting comment");
+    return;
+  }
 
-    loadEvidences();
+  loadEvidences();
 }
 
-async function closeModalDelete(){
-    $('#deleteComment').modal('hide');
+async function closeModalDelete() {
+  $("#deleteComment").modal("hide");
 }
-    
-
-
-  
-
-
-
-
-
-
-
-
 
 loadEvidences();

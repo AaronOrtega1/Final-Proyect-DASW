@@ -42,7 +42,7 @@ let role = "admin";
 async function cargaAsignaturas() {
   console.log("cargando asignaturas:" + pagina + " " + limite);
   let asignaturas = await fetch(
-    `http://localhost:3000/api/asignaturas?pagina=${pagina}&limite=${limite}`,
+    `/api/asignaturas?pagina=${pagina}&limite=${limite}`,
     {
       method: "GET",
       headers: {
@@ -54,7 +54,7 @@ async function cargaAsignaturas() {
   console.log(datos);
   totalAsignaturas();
 
-  let listaCoordinadores = await fetch(`http://localhost:3000/api/users`, {
+  let listaCoordinadores = await fetch(`/api/users`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -73,8 +73,6 @@ async function cargaAsignaturas() {
     let btnAgregarAsignatura = document.getElementById("agregarElemento");
     btnAgregarAsignatura.style.display = "block";
   }
-
-  
 
   muestraAsignaturas(datos);
 }
@@ -160,15 +158,12 @@ function siguientePagina() {
 
 async function buscarAsignaturaXcodigo() {
   let codigo = searchBarNavBar.value;
-  let asignaturas = await fetch(
-    `http://localhost:3000/api/asignaturas/${codigo}`,
-    {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }
-  );
+  let asignaturas = await fetch(`/api/asignaturas/${codigo}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
   let datos = await asignaturas.json();
   if (asignaturasXmostrar.length == 0) {
     asignaturasXmostrar.push(datos);
@@ -195,7 +190,7 @@ async function buscarAsignaturaXfiltro() {
   }
   console.log(filtro + " " + filteredSearch.value);
   let asignaturas = await fetch(
-    `http://localhost:3000/api/asignaturas?${filtro}=${filteredSearch.value}`,
+    `/api/asignaturas?${filtro}=${filteredSearch.value}`,
     {
       method: "GET",
       headers: {
@@ -261,7 +256,7 @@ async function agregarAsignatura() {
 
     Metodo = "POST";
 
-    let response = await fetch("http://localhost:3000/api/asignaturas", {
+    let response = await fetch("/api/asignaturas", {
       method: "POST",
       headers: {
         "x-token": localStorage.getItem("token"),
@@ -310,7 +305,7 @@ function funcionPut(uuid) {
 }
 
 async function totalAsignaturas() {
-  let asignaturas = await fetch(`http://localhost:3000/api/asignaturas`, {
+  let asignaturas = await fetch(`/api/asignaturas`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -326,15 +321,12 @@ async function editarAsignatura(uuid) {
   deleteSubject.style.display = "block";
   codigoAsignatura.ariaReadOnly = true;
   console.log("entro a editar: " + uuid);
-  let asignatura = await fetch(
-    `http://localhost:3000/api/asignaturas/${uuid}`,
-    {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }
-  );
+  let asignatura = await fetch(`/api/asignaturas/${uuid}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
   let datos = await asignatura.json();
   console.log(datos);
   $("#nombreAsignatura").val(datos.nombre);
@@ -349,17 +341,14 @@ async function editarAsignatura(uuid) {
 }
 
 async function callPUT(newAsignatura) {
-  let response = await fetch(
-    `http://localhost:3000/api/asignaturas/${newAsignatura.codigo}`,
-    {
-      method: "PUT",
-      headers: {
-        "x-token": localStorage.getItem("token"),
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(newAsignatura),
-    }
-  )
+  let response = await fetch(`/api/asignaturas/${newAsignatura.codigo}`, {
+    method: "PUT",
+    headers: {
+      "x-token": localStorage.getItem("token"),
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(newAsignatura),
+  })
     .then((res) => {
       if (res.status == 200) {
         alert("Se ha editado la asignatura");
@@ -385,7 +374,7 @@ async function callPUT(newAsignatura) {
 
 async function eliminarAsignatura() {
   let uuid = Hanger;
-  let response = await fetch(`http://localhost:3000/api/asignaturas/${uuid}`, {
+  let response = await fetch(`/api/asignaturas/${uuid}`, {
     method: "DELETE",
     headers: {
       "x-token": localStorage.getItem("token"),
@@ -407,15 +396,12 @@ async function eliminarAsignatura() {
 
 async function cargaParametros() {
   try {
-    const response = await fetch(
-      "http://localhost:3000/api/asignaturas/areas",
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const response = await fetch("/api/asignaturas/areas", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
     const data = await response.json();
 
     areaAsignatura.innerHTML = data
