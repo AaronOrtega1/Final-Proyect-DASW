@@ -5,18 +5,15 @@ let userProfile = document.getElementById("profileUser");
 
 async function loadUsers(queryParams = "") {
   console.log("cargando usuario...");
-  let resp = await fetch(
-    "/api/users/myProfile" +
-      {
-        method: "GET",
-        headers: {
-          "Content-type": "application/json",
-          "x-token": token,
-        },
-      }
-  );
+  let resp = await fetch("/api/users/myProfile", {
+    method: "GET",
+    headers: {
+      "Content-type": "application/json",
+      "x-token": token,
+    },
+  });
   user = await resp.json();
-  console.log("🚀 ~ file: user-profile.js:9 ~ loadUsers ~ users:", users);
+  console.log("🚀 ~ file: user-profile.js:9 ~ loadUsers ~ user:", user);
   showProfile(user);
 }
 
@@ -209,6 +206,5 @@ function showProfile(user) {
     }
   }
 }
-console.log("🚀 ~ file: user-profile.js:212 ~ showProfile ~ user:", user);
 
 loadUsers();

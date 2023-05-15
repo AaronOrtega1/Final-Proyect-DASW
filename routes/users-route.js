@@ -57,6 +57,7 @@ router.get("/myProfile", validarToken, async (req, res) => {
   try {
     const userID = req.userID;
     const user = await User.findById(userID);
+    console.log("🚀 ~ file: users-route.js:60 ~ router.get ~ user:", user);
 
     res.status(200).send(user);
   } catch (error) {

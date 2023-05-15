@@ -2,7 +2,8 @@ const jwt = require("jsonwebtoken");
 const config = require("../config/config.js");
 const { User } = require("../db/users.js");
 const { Areas } = require("../db/areasAsig.js");
-const validAdmins = require("../JavaScript/Tokens/validAdmins.js");
+const validAdmins = require("../public/JavaScript/Tokens/validAdmins.js");
+const { decode } = require("punycode");
 
 function validateBodyUser(req, res, next) {
   let {
@@ -116,10 +117,9 @@ function validarToken(req, res, next) {
     }
 
     req.username = decoded.userName;
+    req.userID = decoded.userID;
     next();
   });
-
-  next();
 }
 
 function validateView(req, res, next) {

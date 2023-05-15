@@ -12,6 +12,7 @@ async function loadGroups() {
     },
   });
   groups = await resp.json();
+  console.log("🚀 ~ file: groupsInCharge.js:15 ~ loadGroups ~ groups:", groups);
   showGroups(groups);
 }
 

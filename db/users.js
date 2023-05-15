@@ -135,7 +135,11 @@ userSchema.statics.deleteUserById = async (userID) => {
 };
 
 userSchema.statics.findById = async (userID) => {
-  let currentUser = await User.findOne({ userID: userID }.select("-passWortd"));
+  console.log(
+    "🚀 ~ file: users.js:138 ~ userSchema.statics.findById= ~ userID:",
+    userID
+  );
+  let currentUser = await User.findOne({ userID: userID });
   console.log(
     "🚀 ~ file: users.js:139 ~ userSchema.statics.findById= ~ currentUser:",
     currentUser

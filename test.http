@@ -1,8 +1,7 @@
 @host = http://localhost:3000
 
 ##Recuerden que el token tiene duracion de 5 min
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InBydWViYSIsImlhdCI6MTY4NDEwNDEzMiwiZXhwIjoxNjg0MTExMzMyfQ.dvWQXtml0qzQj2ijCL6w0utj2oABqonhcEjDHJaL5E4
-
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImpwZXJleiIsInVzZXJJRCI6IjVVMFRrNFBrVWhmX1owQ2NkS0hXcCIsImlhdCI6MTY4NDExODUyMywiZXhwIjoxNjg0MTI1NzIzfQ.vXBjWM45oLxfUbUKCGIO1zEwM-8mEg7G20gFG9Rs0Nc
 
 ###
 POST {{host}}/api/teachers
@@ -123,8 +122,8 @@ POST {{host}}/api/login
 Content-Type: application/json
 
 {
-  "username": "prueba",
-  "password": "123456"
+  "username": "jperez",
+  "password": "$2a$10$NFZeyS31m46UIojRn/6R..O0fAcakzyrNj3qBBUnwApjViwIOAKH6"
 }
 
 ###
@@ -432,7 +431,9 @@ Content-Type: application/json
   "comment": []
   }
 
-
+###
+GET {{host}}/api/users/myProfile
+x-token:{{token}}
 
 
 
