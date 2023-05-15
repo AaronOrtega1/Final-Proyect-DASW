@@ -21,9 +21,18 @@ route.post("/", async (req, res) => {
     return;
   }
 
-  let token = jwt.sign({ username: user.userName }, config.jwtSecret, {
-    expiresIn: 60 * 120,
-  });
+  let token = jwt.sign(
+    {
+      username: user.userName,
+      userID: user.userID,
+      isAdmin: user.isAdmin,
+      isCoord: user.isCoord,
+    },
+    config.jwtSecret,
+    {
+      expiresIn: 60 * 120,
+    }
+  );
   res.status(201).send(token);
 
   // if (user.isAdmin) {
@@ -33,7 +42,6 @@ route.post("/", async (req, res) => {
   //   res.send({ token, role });
   //   return;
   // }
-
 });
 
 module.exports = route;

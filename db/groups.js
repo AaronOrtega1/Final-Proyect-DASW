@@ -46,7 +46,7 @@ groupSchema.statics.getGroup = async (filters) => {
 groupSchema.statics.getGroupByID = async (groupID) => {
   let groups = await Groups.findOne({ groupID });
   console.log(
-    "🚀 ~ file: groups.js:42 ~ groupSchema.static.getGroupByID= ~ groups:",
+    "🚀 ~ file: groups.js:49 ~ groupSchema.static.getGroupByID= ~ groups:",
     groups
   );
   return groups;

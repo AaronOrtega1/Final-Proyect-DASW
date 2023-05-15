@@ -134,6 +134,19 @@ userSchema.statics.deleteUserById = async (userID) => {
   return deletedUser;
 };
 
+userSchema.statics.findById = async (userID) => {
+  console.log(
+    "🚀 ~ file: users.js:138 ~ userSchema.statics.findById= ~ userID:",
+    userID
+  );
+  let currentUser = await User.findOne({ userID: userID });
+  console.log(
+    "🚀 ~ file: users.js:139 ~ userSchema.statics.findById= ~ currentUser:",
+    currentUser
+  );
+  return currentUser;
+};
+
 const User = mongoose.model("User", userSchema);
 // User.updateUserById("ktsz_kPIgivokRSGzOy4E",{
 //   userID: "borrar",
@@ -146,7 +159,6 @@ const User = mongoose.model("User", userSchema);
 //   isTeach: true,
 //   email: "jperez@iteso.mx"
 // })
-
 
 User.getUser();
 module.exports = { User };

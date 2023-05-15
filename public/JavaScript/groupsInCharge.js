@@ -4,7 +4,8 @@ let groupsList = document.getElementById("tbody-Groups");
 let token = localStorage.getItem("token");
 
 async function loadGroups() {
-  let resp = await fetch("http://localhost:3000/api/groups", {
+  console.log("cargando grupos...");
+  let resp = await fetch("/api/groups/myGroups", {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -12,6 +13,7 @@ async function loadGroups() {
     },
   });
   groups = await resp.json();
+  console.log("🚀 ~ file: groupsInCharge.js:15 ~ loadGroups ~ groups:", groups);
   showGroups(groups);
 }
 
@@ -77,7 +79,7 @@ async function addGroup() {
 
     Metodo = "POST";
 
-    let response = await fetch("http://localhost:3000/api/groups", {
+    let response = await fetch("/api/groups", {
       method: "POST",
       headers: {
         "x-token": sessionStorage.getItem("token"),
@@ -110,17 +112,14 @@ async function addGroup() {
 }
 
 async function callPUT(newAsignatura) {
-  let response = await fetch(
-    `http://localhost:3000/api/groups/${newAsignatura.codigo}`,
-    {
-      method: "PUT",
-      headers: {
-        "x-token": sessionStorage.getItem("token"),
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(newAsignatura),
-    }
-  )
+  let response = await fetch(`/api/groups/${newAsignatura.codigo}`, {
+    method: "PUT",
+    headers: {
+      "x-token": sessionStorage.getItem("token"),
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(newAsignatura),
+  })
     .then((res) => {
       if (res.status == 200) {
         alert("Se ha editado la group");

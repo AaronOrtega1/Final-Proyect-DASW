@@ -4,25 +4,23 @@ let token = localStorage.getItem("token");
 let userProfile = document.getElementById("profileUser");
 
 async function loadUsers(queryParams = "") {
-  console.log("cargando usuarios...");
-  let resp = await fetch(
-    "http://localhost:3000/api/users" +
-      {
-        method: "GET",
-        headers: {
-          "Content-type": "application/json",
-          "x-token": token,
-        },
-      }
-  );
-  users = await resp.json();
-  console.log("🚀 ~ file: user-profile.js:9 ~ loadUsers ~ users:", users);
-  showProfile(users);
+  console.log("cargando usuario...");
+  let resp = await fetch("/api/users/myProfile", {
+    method: "GET",
+    headers: {
+      "Content-type": "application/json",
+      "x-token": token,
+    },
+  });
+  user = await resp.json();
+  console.log("🚀 ~ file: user-profile.js:9 ~ loadUsers ~ user:", user);
+  showProfile(user);
 }
 
 /* const currentUser = (user) => user.userID === userID; */
 
 function showProfile(user) {
+  console.log("🚀 ~ file: user-profile.js:26 ~ showProfile ~ user:", user);
   userProfile.innerHTML = /*HTML*/ `
   <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
   <a class="navbar-brand" href="./profesorPerfil.html">DASW</a>

@@ -53,8 +53,21 @@ router.get("/", validarToken, async (req, res) => {
   res.send(user);
 });
 
+router.get("/myProfile", validarToken, async (req, res) => {
+  try {
+    const userID = req.userID;
+    const user = await User.findById(userID);
+    console.log("🚀 ~ file: users-route.js:60 ~ router.get ~ user:", user);
+
+    res.status(200).send(user);
+  } catch (error) {
+    console.log("🚀 ~ file: users-route.js:146 ~ router.get ~ error:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
 router.post("/", validarToken, validateBodyUser, async (req, res) => {
-  console.log("Este es el reqbody 1: ",req.body);
+  console.log("Este es el reqbody 1: ", req.body);
   let {
     fullName,
     department,

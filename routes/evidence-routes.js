@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const e = require("express");
 const { Evidence } = require("../db/evidence.js");
+const { validateEvidence } = require("../middleware/validateData.js");
 
 const nanoid = require("nanoid");
 
@@ -25,7 +26,7 @@ router.get("/", async(req, res) => {
 });
 
 
-router.post("/", async(req, res) => {
+router.post("/", validateEvidence,async(req, res) => {
     let evidenceData = req.body;
     let date = new Date().toLocaleDateString();
 
