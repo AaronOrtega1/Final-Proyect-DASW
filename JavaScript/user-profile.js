@@ -6,7 +6,7 @@ let userProfile = document.getElementById("profileUser");
 async function loadUsers(queryParams = "") {
   console.log("cargando usuarios...");
   let resp = await fetch(
-    "http://localhost:3000/api/users" +
+    "/api/users/myProfile" +
       {
         method: "GET",
         headers: {
@@ -15,9 +15,9 @@ async function loadUsers(queryParams = "") {
         },
       }
   );
-  users = await resp.json();
+  user = await resp.json();
   console.log("🚀 ~ file: user-profile.js:9 ~ loadUsers ~ users:", users);
-  showProfile(users);
+  showProfile(user);
 }
 
 /* const currentUser = (user) => user.userID === userID; */
