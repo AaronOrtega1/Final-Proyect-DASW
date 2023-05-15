@@ -4,7 +4,7 @@ let token = localStorage.getItem("token");
 let userProfile = document.getElementById("profileUser");
 
 async function loadUsers(queryParams = "") {
-  console.log("cargando usuarios...");
+  console.log("cargando usuario...");
   let resp = await fetch(
     "/api/users/myProfile" +
       {
@@ -23,6 +23,7 @@ async function loadUsers(queryParams = "") {
 /* const currentUser = (user) => user.userID === userID; */
 
 function showProfile(user) {
+  console.log("🚀 ~ file: user-profile.js:26 ~ showProfile ~ user:", user);
   userProfile.innerHTML = /*HTML*/ `
   <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
   <a class="navbar-brand" href="./profesorPerfil.html">DASW</a>
@@ -208,5 +209,6 @@ function showProfile(user) {
     }
   }
 }
+console.log("🚀 ~ file: user-profile.js:212 ~ showProfile ~ user:", user);
 
 loadUsers();
