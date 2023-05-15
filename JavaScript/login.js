@@ -1,7 +1,7 @@
 //Status lo mandare como un true por defecto cuando se cree la cuenta
 //ImageURL tambien se enviara por defecto
 
-const { response } = require("express");
+// const { response } = require("express");
 
 async function login(){
     event.preventDefault();
@@ -16,11 +16,6 @@ async function login(){
     let newUser = {username, password};
     // let newUser = {fullName, passWord, userName, email, department, isAdmin, isCoord};
     console.log(newUser);
-    // const registar = document.getElementById("registrar");
-    // registar.addEventListener('click', async () =>{
-    //     console.log('Le picaste al boton de registar');
-    //     console.log(newUser);
-    // })
     let resp = await fetch("http://localhost:3000/api/login",{
         method: "POST",
         headers: {

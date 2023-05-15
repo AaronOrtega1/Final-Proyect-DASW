@@ -1,12 +1,8 @@
 @host = http://localhost:3000
 
 ##Recuerden que el token tiene duracion de 5 min
-<<<<<<< HEAD
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImpwZXJleiIsImlhdCI6MTY4NDA5MzkwOCwiZXhwIjoxNjg0MTAxMTA4fQ.Hx2XyxFcck55SrPdDqh7aBRKpl-1S6QKllAMsSj3iNI
-=======
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRvcnJlcyIsImlhdCI6MTY4NDA3NDMwMSwiZXhwIjoxNjg0MDgxNTAxfQ.U-QrXPUTJ7NUe12gwIET4MVNEmt5f56JKHuKdhCmAk8
->>>>>>> origin
-x-token: {{token}}
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InBydWViYSIsImlhdCI6MTY4NDEwNDEzMiwiZXhwIjoxNjg0MTExMzMyfQ.dvWQXtml0qzQj2ijCL6w0utj2oABqonhcEjDHJaL5E4
+
 
 ###
 POST {{host}}/api/teachers
