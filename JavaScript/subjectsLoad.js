@@ -37,7 +37,7 @@ deleteSubject.style.display = "none";
 
 let coordinadores = [];
 
-let role = sessionStorage.getItem("role");
+let role = localStorage.getItem("role");
 
 async function cargaAsignaturas() {
   console.log("cargando asignaturas:" + pagina + " " + limite);
@@ -58,7 +58,7 @@ async function cargaAsignaturas() {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      "x-token": sessionStorage.token,
+      "x-token": localStorage.token,
     },
   });
   let datosCoordinadores = await listaCoordinadores.json();
@@ -262,7 +262,7 @@ async function agregarAsignatura() {
     let response = await fetch("http://localhost:3000/api/asignaturas", {
       method: "POST",
       headers: {
-        "x-token": sessionStorage.getItem("token"),
+        "x-token": localStorage.getItem("token"),
         "Content-Type": "application/json",
       },
       body: JSON.stringify(asignatura),
@@ -352,7 +352,7 @@ async function callPUT(newAsignatura) {
     {
       method: "PUT",
       headers: {
-        "x-token": sessionStorage.getItem("token"),
+        "x-token": localStorage.getItem("token"),
         "Content-Type": "application/json",
       },
       body: JSON.stringify(newAsignatura),
@@ -386,7 +386,7 @@ async function eliminarAsignatura() {
   let response = await fetch(`http://localhost:3000/api/asignaturas/${uuid}`, {
     method: "DELETE",
     headers: {
-      "x-token": sessionStorage.getItem("token"),
+      "x-token": localStorage.getItem("token"),
       "Content-Type": "application/json",
     },
   })
